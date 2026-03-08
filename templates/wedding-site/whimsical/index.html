@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding Website · Whimsical Template</title>
+  <link rel="icon" href="../../../assets/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fffef9;
+      --surface: #fff8f0;
+      --pink: #ff6b9d;
+      --yellow: #ffd166;
+      --mint: #06d6a0;
+      --sky: #4ecdc4;
+      --lavender: #c7b8ea;
+      --text: #2d2035;
+      --muted: #7a6b85;
+      --border: rgba(199,184,234,0.45);
+      --accent: #ff6b9d;
+      --font-h: 'Caveat', cursive;
+      --font-b: 'Nunito', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-b); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ---- Top Bar / Back / Badge ---- */
+    .top-bar { position: fixed; top: 0; left: 0; width: 100%; height: 34px; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; background: rgba(255,254,249,0.97); border-bottom: 2px dashed var(--border); z-index: 200; }
+    .back { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 5px; transition: color .2s; }
+    .back:hover { color: var(--pink); }
+    .back::before { content: '←'; }
+    .badge { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--pink); background: rgba(255,107,157,0.08); border: 1px solid rgba(255,107,157,0.25); border-radius: 20px; padding: 4px 14px; }
+
+    /* ---- NAV ---- */
+    .nav { position: fixed; width: 100%; top: 34px; left: 0; background: rgba(255,254,249,0.93); backdrop-filter: blur(10px); border-bottom: 2px dashed var(--border); height: 60px; display: flex; align-items: center; justify-content: center; z-index: 100; }
+    .nav__name { font-family: var(--font-h); font-size: 1.4rem; font-weight: 600; color: var(--pink); position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; }
+    .nav__links { display: flex; gap: 24px; margin-left: auto; padding-right: 28px; }
+    .nav__links a { font-family: var(--font-b); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); transition: color .2s; }
+    .nav__links a:hover { color: var(--pink); }
+
+    /* ---- Buttons ---- */
+    .btn { display: inline-flex; align-items: center; padding: 13px 32px; font-family: var(--font-b); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: background .2s, color .2s, transform .15s, box-shadow .2s; border-radius: 40px; border: 2px solid transparent; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--pink); color: #fff; border-color: var(--pink); box-shadow: 0 4px 16px rgba(255,107,157,0.3); }
+    .btn-primary:hover { background: #ff4d8d; box-shadow: 0 6px 22px rgba(255,107,157,0.45); }
+    .btn-outline { background: transparent; color: var(--pink); border-color: var(--pink); }
+    .btn-outline:hover { background: rgba(255,107,157,0.06); }
+
+    /* ---- Sections ---- */
+    section { padding: 88px 24px; }
+    .container { max-width: 920px; margin: 0 auto; }
+    .sec-label { font-family: var(--font-b); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mint); display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+    .sec-label--pink { color: var(--pink); }
+    .sec-title { font-family: var(--font-h); font-size: clamp(2.4rem, 5.5vw, 3.6rem); font-weight: 700; color: var(--text); margin-bottom: 20px; line-height: 1.15; }
+    .sec-text { font-size: 0.95rem; color: var(--muted); line-height: 1.85; max-width: 560px; }
+
+    /* ---- HERO ---- */
+    .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 100px 24px 80px; position: relative; overflow: hidden; }
+    .hero__star { position: absolute; pointer-events: none; font-style: normal; line-height: 1; }
+    .hero__star--1 { top: 14%; left: 8%;  font-size: 2rem;   color: var(--yellow); opacity: 0.5; }
+    .hero__star--2 { top: 22%; right: 7%; font-size: 1.5rem; color: var(--mint);   opacity: 0.5; transform: rotate(18deg); }
+    .hero__star--3 { bottom: 20%; left: 6%; font-size: 1.7rem; color: var(--pink); opacity: 0.5; transform: rotate(-12deg); }
+    .hero__star--4 { bottom: 16%; right: 8%; font-size: 2rem; color: var(--yellow); opacity: 0.5; transform: rotate(30deg); }
+    .hero__star--5 { top: 50%; left: 3%;  font-size: 1.2rem; color: var(--lavender); opacity: 0.45; }
+    .hero__star--6 { top: 40%; right: 4%; font-size: 1.3rem; color: var(--sky);    opacity: 0.4; transform: rotate(-20deg); }
+
+    .hero__eyebrow { font-family: var(--font-b); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mint); margin-bottom: 20px; position: relative; z-index: 2; }
+    .hero__names { font-family: var(--font-h); font-size: clamp(4rem, 12vw, 8rem); font-weight: 700; line-height: 1; color: var(--text); position: relative; z-index: 2; }
+    .hero__names .hero__amp { display: block; font-size: 0.38em; color: var(--pink); font-weight: 600; margin: 6px 0; line-height: 1; }
+    .hero__rule { width: 0; height: 0; border-top: 2px dashed rgba(199,184,234,0.7); width: 80px; margin: 24px auto; position: relative; z-index: 2; }
+    .hero__date { font-family: var(--font-b); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.18em; color: var(--muted); margin-bottom: 6px; position: relative; z-index: 2; }
+    .hero__venue { font-family: var(--font-h); font-size: 1.15rem; font-weight: 500; color: var(--muted); position: relative; z-index: 2; }
+    .hero__cta { margin-top: 40px; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 2; }
+    .hero__heart { font-size: 1.4rem; color: var(--pink); opacity: 0.7; display: block; margin-bottom: 18px; position: relative; z-index: 2; }
+
+    /* ---- Confetti strip ---- */
+    .confetti-strip {
+      height: 16px;
+      background: repeating-linear-gradient(
+        90deg,
+        #ff6b9d 0, #ff6b9d 4px,
+        transparent 4px, transparent 12px,
+        #ffd166 12px, #ffd166 16px,
+        transparent 16px, transparent 28px,
+        #06d6a0 28px, #06d6a0 32px,
+        transparent 32px, transparent 44px
+      );
+    }
+
+    /* ---- Story ---- */
+    .story { background: var(--surface); border-top: 2px dashed var(--border); border-bottom: 2px dashed var(--border); }
+    .story__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .story__img-wrap { position: relative; }
+    .story__img { aspect-ratio: 3/4; border-radius: 16px; overflow: hidden; background: #f5e6f0; box-shadow: 6px 6px 0 var(--yellow); }
+    .story__img img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 16px; }
+
+    /* ---- Style section ---- */
+    .style-sec { background: var(--bg); border-top: 2px dashed var(--border); }
+    .style-sec__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 40px; }
+    .style-sec__sub { font-family: var(--font-b); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--pink); margin-bottom: 20px; }
+    .color-swatches { display: flex; gap: 20px; flex-wrap: wrap; }
+    .color-swatch { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .color-swatch__dot { width: 52px; height: 52px; border-radius: 12px; border: 2px solid var(--border); flex-shrink: 0; }
+    .color-swatch__name { font-family: var(--font-b); font-size: 0.7rem; font-weight: 600; color: var(--text); text-align: center; }
+    .color-swatch__hex { font-family: var(--font-b); font-size: 0.6rem; color: var(--muted); text-align: center; letter-spacing: 0.06em; }
+    .style-sec__dress-text { font-family: var(--font-h); font-size: 1.2rem; font-weight: 500; color: var(--muted); line-height: 1.65; }
+
+    /* ---- Details ---- */
+    .details { background: var(--pink); }
+    .details .sec-label { color: rgba(255,255,255,0.7); }
+    .details .sec-title { color: #fff; }
+    .details__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; margin-top: 48px; border-radius: 20px; overflow: hidden; border: 2px solid rgba(255,255,255,0.25); }
+    .detail-card { padding: 40px 32px; position: relative; overflow: hidden; background: rgba(255,255,255,0.12); }
+    .detail-card + .detail-card { border-left: 2px dashed rgba(255,255,255,0.22); }
+    .detail-card__num { position: absolute; top: 10px; right: 16px; font-family: var(--font-h); font-size: 4rem; font-weight: 700; color: rgba(255,255,255,0.15); line-height: 1; pointer-events: none; user-select: none; }
+    .detail-card__step { font-family: var(--font-b); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 14px; }
+    .detail-card__step::before { content: '★ '; color: var(--yellow); font-style: normal; }
+    .detail-card__title { font-family: var(--font-h); font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.2; }
+    .detail-card__text { font-family: var(--font-b); font-size: 0.85rem; color: rgba(255,255,255,0.75); line-height: 1.7; }
+    .detail-card__time { display: inline-block; margin-top: 14px; font-family: var(--font-b); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; color: var(--yellow); background: rgba(0,0,0,0.12); border-radius: 20px; padding: 4px 14px; }
+
+    /* ---- Map ---- */
+    .map-sec { background: var(--surface); border-top: 2px dashed var(--border); }
+    .map-sec__iframe { width: 100%; height: 420px; border: none; display: block; margin-top: 40px; border-radius: 16px; overflow: hidden; }
+    .map-sec__link { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; font-family: var(--font-b); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--pink); border: 2px solid var(--pink); border-radius: 40px; padding: 10px 24px; transition: background .2s, color .2s; }
+    .map-sec__link:hover { background: var(--pink); color: #fff; }
+
+    /* ---- Gallery ---- */
+    .gallery { background: var(--bg); border-top: 2px dashed var(--border); }
+    .gallery__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 48px; }
+    .gallery__item { aspect-ratio: 1; border-radius: 14px; overflow: hidden; background: #f0e6f5; transition: transform .25s, box-shadow .25s; }
+    .gallery__item:hover { transform: scale(1.03) rotate(0deg) !important; box-shadow: 0 8px 28px rgba(45,32,53,0.15); }
+    .gallery__item:nth-child(odd)  { transform: rotate(-1.5deg); }
+    .gallery__item:nth-child(even) { transform: rotate(1.5deg); }
+    .gallery__item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* ---- Gifts ---- */
+    .gifts-sec { background: var(--yellow); border-top: 2px dashed rgba(255,209,102,0.4); }
+    .gifts-sec .sec-label { color: rgba(45,32,53,0.55); }
+    .gifts-sec .sec-title { color: var(--text); }
+    .gifts-sec .sec-text { color: rgba(45,32,53,0.75); max-width: 580px; font-family: var(--font-h); font-size: 1.15rem; font-weight: 500; line-height: 1.7; }
+    .registry-links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+    .registry-link { display: inline-flex; align-items: center; padding: 13px 30px; border: 2px solid var(--text); border-radius: 40px; font-family: var(--font-b); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text); transition: background .2s, color .2s, border-color .2s; }
+    .registry-link:hover { background: var(--text); color: var(--yellow); }
+
+    /* ---- Note bar ---- */
+    .note-bar { background: var(--mint); padding: 24px; text-align: center; }
+    .note-bar p { font-family: var(--font-h); font-style: italic; font-size: 1.15rem; font-weight: 500; color: rgba(45,32,53,0.82); line-height: 1.65; max-width: 680px; margin: 0 auto; }
+
+    /* ---- RSVP ---- */
+    .rsvp { background: var(--surface); border-top: 2px dashed var(--border); }
+    .rsvp__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+    .rsvp__info-date { font-family: var(--font-h); font-size: 1.05rem; font-weight: 500; color: var(--muted); margin-top: 12px; }
+    .rsvp__form { display: flex; flex-direction: column; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 7px; }
+    .form-label { font-family: var(--font-b); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+    .form-input, .form-select, .form-textarea { background: var(--bg); border: 2px solid var(--lavender); border-radius: 12px; padding: 12px 16px; font-family: var(--font-b); font-size: 0.9rem; color: var(--text); outline: none; width: 100%; transition: border-color .2s, box-shadow .2s; resize: vertical; }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(255,107,157,0.12); }
+    .form-input::placeholder, .form-textarea::placeholder { color: rgba(122,107,133,0.35); }
+    .form-select { appearance: none; cursor: pointer; }
+
+    /* ---- Entourage ---- */
+    .entourage-sec { background: var(--bg); border-top: 2px dashed var(--border); }
+    .entourage-sec__sub { font-family: var(--font-b); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mint); margin: 40px 0 16px; display: flex; align-items: center; gap: 8px; }
+    .entourage-primary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 0; }
+    .entourage-secondary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 14px; }
+    .entourage-card { background: var(--surface); border: 2px dashed var(--border); border-radius: 16px; padding: 22px 18px; text-align: center; }
+    .entourage-card--primary { background: var(--bg); border: 2px solid var(--lavender); border-radius: 16px; padding: 28px 22px; }
+    .entourage-name { font-family: var(--font-h); font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: 5px; }
+    .entourage-role { font-family: var(--font-b); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+
+    /* ---- Sponsors ---- */
+    .sponsors-sec { background: var(--surface); border-top: 2px dashed var(--border); }
+    .sponsors-primary { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 40px; margin-bottom: 14px; }
+    .sponsor-card--primary { padding: 28px 40px; text-align: center; flex: 1; background: var(--bg); border: 2px solid var(--lavender); border-radius: 16px; }
+    .sponsors-secondary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .sponsor-card { padding: 22px 18px; background: var(--bg); border: 2px dashed var(--border); border-radius: 14px; }
+    .sponsor-name { font-family: var(--font-h); font-size: 1.05rem; font-weight: 600; color: var(--text); margin-bottom: 5px; }
+    .sponsor-role { font-family: var(--font-b); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+
+    /* ---- Footer ---- */
+    footer { background: var(--text); padding: 60px 24px; text-align: center; }
+    .f-names { font-family: var(--font-h); font-size: 2.4rem; font-weight: 700; color: var(--pink); margin-bottom: 8px; }
+    .f-date { font-family: var(--font-b); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,254,249,0.35); margin-bottom: 18px; }
+    .f-email a { font-family: var(--font-b); font-size: 0.78rem; color: rgba(255,254,249,0.5); transition: color .2s; }
+    .f-email a:hover { color: var(--pink); }
+    .f-hearts { font-size: 1.1rem; color: rgba(255,107,157,0.3); letter-spacing: 0.4em; display: block; margin: 28px 0 6px; }
+    .f-credit { margin-top: 20px; font-family: var(--font-b); font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,254,249,0.15); }
+    .f-credit a { color: inherit; }
+    .f-credit a:hover { color: rgba(255,254,249,0.4); }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 768px) {
+      .story__grid, .rsvp__grid, .style-sec__grid { grid-template-columns: 1fr; gap: 40px; }
+      .details__grid { grid-template-columns: 1fr; border-radius: 16px; }
+      .detail-card + .detail-card { border-left: none; border-top: 2px dashed rgba(255,255,255,0.22); }
+      .gallery__grid { grid-template-columns: repeat(2, 1fr); }
+      .entourage-primary { grid-template-columns: 1fr; }
+      .entourage-secondary { grid-template-columns: repeat(2, 1fr); }
+      .sponsors-secondary { grid-template-columns: repeat(2, 1fr); }
+      .nav__links { display: none; }
+      .nav__name { font-size: 1.2rem; }
+      .hero__names { font-size: clamp(3.2rem, 14vw, 6rem); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <a id="backLink" href="#" class="back" style="display:none">Templates</a>
+    <span class="badge">Whimsical · Wedding Site</span>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <span class="nav__name" data-field="couple">Loading…</span>
+    <div class="nav__links">
+      <a href="#story">Our Story</a>
+      <a href="#details">Details</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#rsvp">RSVP</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <!-- Scattered decorative stars -->
+    <span class="hero__star hero__star--1" aria-hidden="true">✦</span>
+    <span class="hero__star hero__star--2" aria-hidden="true">★</span>
+    <span class="hero__star hero__star--3" aria-hidden="true">✦</span>
+    <span class="hero__star hero__star--4" aria-hidden="true">★</span>
+    <span class="hero__star hero__star--5" aria-hidden="true">✦</span>
+    <span class="hero__star hero__star--6" aria-hidden="true">★</span>
+
+    <span class="hero__heart" aria-hidden="true">♡</span>
+    <p class="hero__eyebrow">✦ You are warmly invited to celebrate ✦</p>
+    <h1 class="hero__names">
+      <span data-field="partner1">—</span>
+      <em class="hero__amp">&amp;</em>
+      <span data-field="partner2">—</span>
+    </h1>
+    <div class="hero__rule"></div>
+    <p class="hero__date" data-field="date">—</p>
+    <p class="hero__venue"><span data-field="venue">—</span> · <span data-field="location">—</span></p>
+    <div class="hero__cta">
+      <a href="#rsvp" class="btn btn-primary">RSVP Now</a>
+      <a href="#story" class="btn btn-outline">Our Story</a>
+    </div>
+  </section>
+
+  <!-- Confetti strip divider -->
+  <div class="confetti-strip" aria-hidden="true"></div>
+
+  <!-- STORY -->
+  <section class="story" id="story">
+    <div class="container">
+      <div class="story__grid">
+        <div>
+          <span class="sec-label">✦ Our Story</span>
+          <h2 class="sec-title">How it all began</h2>
+          <p class="sec-text" data-field="story">—</p>
+        </div>
+        <div class="story__img-wrap">
+          <div class="story__img">
+            <img data-img="images.couple" src="" alt="Lily &amp; Jack" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Confetti strip divider -->
+  <div class="confetti-strip" aria-hidden="true"></div>
+
+  <!-- STYLE: COLOURS + DRESS CODE -->
+  <section class="style-sec" id="style">
+    <div class="container">
+      <span class="sec-label sec-label--pink">★ Style Guide</span>
+      <h2 class="sec-title">Colour &amp; Dress</h2>
+      <div class="style-sec__grid">
+        <div>
+          <p class="style-sec__sub">Wedding Palette</p>
+          <div class="color-swatches" id="colorSwatches"></div>
+        </div>
+        <div>
+          <p class="style-sec__sub">Dress Code</p>
+          <p class="style-sec__dress-text" data-field="dressCode">—</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAILS -->
+  <section class="details" id="details">
+    <div class="container">
+      <span class="sec-label">✦ The Big Day</span>
+      <h2 class="sec-title">Details &amp; schedule</h2>
+      <div class="details__grid">
+        <div class="detail-card">
+          <span class="detail-card__num" aria-hidden="true">1</span>
+          <p class="detail-card__step" data-field="ceremony.label">Ceremony</p>
+          <h3 class="detail-card__title" data-field="venue">—</h3>
+          <p class="detail-card__text" data-field="ceremony.location">—</p>
+          <span class="detail-card__time" data-field="ceremony.time">—</span>
+        </div>
+        <div class="detail-card">
+          <span class="detail-card__num" aria-hidden="true">2</span>
+          <p class="detail-card__step" data-field="cocktails.label">Cocktail Hour</p>
+          <h3 class="detail-card__title">Celebrate &amp; Mingle</h3>
+          <p class="detail-card__text" data-field="cocktails.location">—</p>
+          <span class="detail-card__time" data-field="cocktails.time">—</span>
+        </div>
+        <div class="detail-card">
+          <span class="detail-card__num" aria-hidden="true">3</span>
+          <p class="detail-card__step" data-field="reception.label">Reception</p>
+          <h3 class="detail-card__title">Feast &amp; Dance</h3>
+          <p class="detail-card__text" data-field="reception.location">—</p>
+          <span class="detail-card__time" data-field="reception.time">—</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section class="map-sec" id="venue-map">
+    <div class="container">
+      <span class="sec-label">✦ Getting Here</span>
+      <h2 class="sec-title">The Venue</h2>
+      <iframe id="venueMap" class="map-sec__iframe" src="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Venue location map"></iframe>
+      <a id="venueMapLink" href="#" target="_blank" rel="noopener" class="map-sec__link">Open in Google Maps ↗</a>
+    </div>
+  </section>
+
+  <!-- Confetti strip divider -->
+  <div class="confetti-strip" aria-hidden="true"></div>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="gallery">
+    <div class="container">
+      <span class="sec-label sec-label--pink">★ Gallery</span>
+      <h2 class="sec-title">Our favourite moments</h2>
+      <div class="gallery__grid">
+        <div class="gallery__item"><img data-img="images.gallery.0" alt="" /></div>
+        <div class="gallery__item"><img data-img="images.gallery.1" alt="" /></div>
+        <div class="gallery__item"><img data-img="images.gallery.2" alt="" /></div>
+        <div class="gallery__item"><img data-img="images.gallery.3" alt="" /></div>
+        <div class="gallery__item"><img data-img="images.gallery.4" alt="" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Confetti strip divider -->
+  <div class="confetti-strip" aria-hidden="true"></div>
+
+  <!-- GIFTS -->
+  <section class="gifts-sec" id="gifts">
+    <div class="container">
+      <span class="sec-label">✦ Gifts &amp; Registry</span>
+      <h2 class="sec-title">A Gift of Love</h2>
+      <p class="sec-text" data-field="gifts.message">—</p>
+      <div class="registry-links" id="giftsRegistry"></div>
+    </div>
+  </section>
+
+  <!-- NOTE BAR -->
+  <div class="note-bar">
+    <p data-field="note">—</p>
+  </div>
+
+  <!-- RSVP -->
+  <section class="rsvp" id="rsvp">
+    <div class="container">
+      <div class="rsvp__grid">
+        <div>
+          <span class="sec-label sec-label--pink">★ RSVP</span>
+          <h2 class="sec-title">Will you join us?</h2>
+          <p class="sec-text">We'd love to celebrate with you! Please let us know by <strong data-field="rsvpDeadline">—</strong>.</p>
+          <p class="rsvp__info-date" style="margin-top:14px;">Dress code: <span data-field="dressCode">—</span></p>
+          <p class="sec-text" style="margin-top:14px;">Questions? Reach us at <a data-field="email">—</a></p>
+        </div>
+        <form class="rsvp__form" onsubmit="return false">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input class="form-input" type="text" placeholder="Your name" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input class="form-input" type="email" placeholder="your@email.com" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Attendance</label>
+            <select class="form-select">
+              <option>Joyfully accepts!</option>
+              <option>Regretfully declines</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Dietary Requirements</label>
+            <input class="form-input" type="text" placeholder="Any dietary needs?" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message for the couple (optional)</label>
+            <textarea class="form-textarea" rows="3" placeholder="Share some love…"></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">Send RSVP ★</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Confetti strip divider -->
+  <div class="confetti-strip" aria-hidden="true"></div>
+
+  <!-- ENTOURAGE -->
+  <section class="entourage-sec" id="entourage">
+    <div class="container">
+      <span class="sec-label">✦ Wedding Party</span>
+      <h2 class="sec-title">Our Entourage</h2>
+      <p class="entourage-sec__sub">Principal Sponsors</p>
+      <div class="entourage-primary" id="entouragePrimary"></div>
+      <p class="entourage-sec__sub">Wedding Party</p>
+      <div class="entourage-secondary" id="entourageSecondary"></div>
+    </div>
+  </section>
+
+  <!-- SPONSORS -->
+  <section class="sponsors-sec" id="sponsors">
+    <div class="container">
+      <span class="sec-label sec-label--pink">★ With Thanks To</span>
+      <h2 class="sec-title">Our Partners</h2>
+      <div class="sponsors-primary" id="sponsorsPrimary"></div>
+      <div class="sponsors-secondary" id="sponsorsSecondary"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="f-hearts" aria-hidden="true">♡ · ♡ · ♡</span>
+    <p class="f-names" data-field="couple">—</p>
+    <p class="f-date" data-field="dateShort">—</p>
+    <p class="f-email"><a data-field="email">—</a></p>
+    <p class="f-credit">Wedding website by <a href="../../../index.html">ONCE</a></p>
+  </footer>
+
+  <script>
+    // Load config.json and populate all [data-field] elements
+    fetch('./config.json')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        // Back link
+        var backLinkEl = document.getElementById('backLink');
+        if (backLinkEl && data.backLink) { backLinkEl.href = data.backLink; backLinkEl.style.display = ''; }
+
+        // Populate [data-field] elements
+        document.querySelectorAll('[data-field]').forEach(function(el) {
+          var keys = el.getAttribute('data-field').split('.');
+          var val = data;
+          keys.forEach(function(k) { val = val && val[k]; });
+          if (val !== undefined && val !== null) {
+            el.textContent = val;
+            if (el.tagName === 'A' && keys.includes('email')) {
+              el.href = 'mailto:' + val;
+            }
+          }
+        });
+
+        // Populate [data-img] elements
+        document.querySelectorAll('[data-img]').forEach(function(el) {
+          var keys = el.getAttribute('data-img').split('.');
+          var val = data;
+          keys.forEach(function(k) { val = val && val[isNaN(k) ? k : +k]; });
+          if (val) { el.src = val; }
+        });
+
+        // Hero background image with warm overlay
+        if (data.images && data.images.hero) {
+          var heroEl = document.querySelector('.hero');
+          if (heroEl) {
+            heroEl.style.background = 'linear-gradient(rgba(255,254,249,0.62), rgba(255,254,249,0.62)), url("' + data.images.hero + '") center/cover no-repeat';
+          }
+        }
+
+        // Colour swatches (rounded squares)
+        if (data.colorPalette) {
+          var swatchEl = document.getElementById('colorSwatches');
+          if (swatchEl) data.colorPalette.forEach(function(c) {
+            var d = document.createElement('div'); d.className = 'color-swatch';
+            d.innerHTML = '<div class="color-swatch__dot" style="background:' + c.hex + '"></div><p class="color-swatch__name">' + c.name + '</p><p class="color-swatch__hex">' + c.hex + '</p>';
+            swatchEl.appendChild(d);
+          });
+        }
+
+        // Gift registry links
+        if (data.gifts && data.gifts.registry) {
+          var regEl = document.getElementById('giftsRegistry');
+          if (regEl) data.gifts.registry.forEach(function(item) {
+            var a = document.createElement('a'); a.href = item.url; a.target = '_blank'; a.rel = 'noopener';
+            a.textContent = item.name; a.className = 'registry-link'; regEl.appendChild(a);
+          });
+        }
+
+        // Sponsors
+        if (data.sponsors) {
+          var priEl = document.getElementById('sponsorsPrimary');
+          if (priEl && data.sponsors.primary) data.sponsors.primary.forEach(function(s) {
+            var d = document.createElement('div'); d.className = 'sponsor-card sponsor-card--primary';
+            d.innerHTML = '<p class="sponsor-name">' + s.name + '</p><p class="sponsor-role">' + s.role + '</p>';
+            priEl.appendChild(d);
+          });
+          var secEl = document.getElementById('sponsorsSecondary');
+          if (secEl && data.sponsors.secondary) data.sponsors.secondary.forEach(function(s) {
+            var d = document.createElement('div'); d.className = 'sponsor-card';
+            d.innerHTML = '<p class="sponsor-name">' + s.name + '</p><p class="sponsor-role">' + s.role + '</p>';
+            secEl.appendChild(d);
+          });
+        }
+
+        // Entourage
+        if (data.entourage) {
+          var priEntEl = document.getElementById('entouragePrimary');
+          if (priEntEl && data.entourage.primary) data.entourage.primary.forEach(function(p) {
+            var d = document.createElement('div'); d.className = 'entourage-card entourage-card--primary';
+            d.innerHTML = '<p class="entourage-name">' + p.name + '</p><p class="entourage-role">' + p.role + '</p>';
+            priEntEl.appendChild(d);
+          });
+          var secEntEl = document.getElementById('entourageSecondary');
+          if (secEntEl && data.entourage.secondary) data.entourage.secondary.forEach(function(p) {
+            var d = document.createElement('div'); d.className = 'entourage-card';
+            d.innerHTML = '<p class="entourage-name">' + p.name + '</p><p class="entourage-role">' + p.role + '</p>';
+            secEntEl.appendChild(d);
+          });
+        }
+
+        // Venue map
+        var mapEl = document.getElementById('venueMap');
+        var mapLinkEl = document.getElementById('venueMapLink');
+        if (mapEl && data.mapUrl) { mapEl.src = data.mapUrl; }
+        if (mapLinkEl && data.mapDirectionsUrl) { mapLinkEl.href = data.mapDirectionsUrl; }
+
+        // Page title
+        document.title = (data.couple || '') + ' — Our Wedding';
+      })
+      .catch(function() {
+        console.warn('ONCE: config.json not found or invalid. Edit config.json to populate this template.');
+      });
+  </script>
+</body>
+</html>

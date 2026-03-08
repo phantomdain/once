@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Priya &amp; Arjun — Digital Invitation · Ethereal Template</title>
+  <link rel="icon" href="../../assets/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --eth-bg: #fefefe;
+      --eth-text: #1a1a1a;
+      --eth-muted: #8a8a8a;
+      --eth-border: #e4e4e4;
+      --eth-accent: #1a1a1a;
+      --font-heading: 'Cormorant Garamond', serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      min-height: 100vh;
+      background-color: var(--eth-bg);
+      color: var(--eth-text);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .back {
+      position: fixed;
+      top: 24px;
+      left: 28px;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--eth-muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+      z-index: 10;
+    }
+    .back:hover { color: var(--eth-text); }
+    .back::before { content: '←'; }
+
+    .badge {
+      position: fixed;
+      top: 24px;
+      right: 28px;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--eth-muted);
+      background-color: var(--eth-bg);
+      border: 1px solid var(--eth-border);
+      padding: 6px 14px;
+      border-radius: 2px;
+      z-index: 10;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 24px;
+    }
+
+    .card {
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      animation: fadeIn 1s ease both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .eyebrow {
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--eth-muted);
+      margin-bottom: 40px;
+    }
+
+    .rule {
+      width: 1px;
+      height: 40px;
+      background-color: var(--eth-border);
+      margin: 0 auto 40px;
+    }
+
+    .names {
+      font-family: var(--font-heading);
+      font-size: clamp(3rem, 10vw, 4.2rem);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.01em;
+      color: var(--eth-text);
+      margin-bottom: 12px;
+    }
+
+    .names-amp {
+      display: block;
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: 0.38em;
+      font-weight: 300;
+      color: var(--eth-muted);
+      letter-spacing: 0.05em;
+      margin: 10px 0;
+    }
+
+    .rule-h {
+      width: 32px;
+      height: 1px;
+      background-color: var(--eth-border);
+      margin: 32px auto;
+    }
+
+    .invite-text {
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--eth-muted);
+      line-height: 1.75;
+      margin-bottom: 40px;
+    }
+
+    .details {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .detail-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .detail-label {
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--eth-muted);
+    }
+
+    .detail-value {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--eth-text);
+      line-height: 1.4;
+    }
+
+    .rule-h-full {
+      width: 100%;
+      height: 1px;
+      background-color: var(--eth-border);
+      margin: 0 0 32px;
+    }
+
+    .rsvp-btn {
+      display: inline-block;
+      padding: 13px 36px;
+      border: 1px solid var(--eth-text);
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--eth-text);
+      text-decoration: none;
+      transition: background-color 0.2s, color 0.2s;
+    }
+    .rsvp-btn:hover {
+      background-color: var(--eth-text);
+      color: var(--eth-bg);
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      font-size: 0.7rem;
+      color: var(--eth-muted);
+      line-height: 1.7;
+    }
+
+    .once-credit {
+      margin-top: 40px;
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--eth-border);
+    }
+    .once-credit a { color: inherit; text-decoration: none; }
+    .once-credit a:hover { color: var(--eth-muted); }
+  </style>
+</head>
+<body>
+
+  <a href="../../index.html#templates" class="back">Templates</a>
+  <span class="badge">Ethereal · Digital Invite</span>
+
+  <div class="page">
+    <div class="card">
+
+      <p class="eyebrow">We joyfully invite you</p>
+
+      <div class="rule"></div>
+
+      <h1 class="names">
+        Priya
+        <span class="names-amp">&amp;</span>
+        Arjun
+      </h1>
+
+      <div class="rule-h"></div>
+
+      <p class="invite-text">
+        to share in the joy of their marriage<br>
+        and the celebration that follows
+      </p>
+
+      <div class="rule-h-full"></div>
+
+      <div class="details">
+        <div class="detail-item">
+          <p class="detail-label">Saturday, 22nd November 2025</p>
+          <p class="detail-value">Ceremony at 4:30 PM</p>
+        </div>
+        <div class="detail-item">
+          <p class="detail-label">Venue</p>
+          <p class="detail-value">The Rambagh Palace<br>Jaipur, Rajasthan</p>
+        </div>
+        <div class="detail-item">
+          <p class="detail-label">Dress Code</p>
+          <p class="detail-value">Formal · Indian attire welcome</p>
+        </div>
+      </div>
+
+      <a href="#rsvp" class="rsvp-btn">RSVP by October 15th</a>
+
+      <p class="footer-note">
+        Dinner &amp; dancing to follow<br>
+        Accommodation available on request
+      </p>
+
+      <div class="rule" style="margin: 40px auto 0; height: 28px;"></div>
+
+      <p class="once-credit">Designed by <a href="../../index.html">ONCE</a></p>
+
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding Website · Tropical Template</title>
+  <link rel="icon" href="../../../assets/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fefcf7;
+      --sand: #f5e6c8;
+      --surface: #fdf4e3;
+      --ocean: #2d7b8b;
+      --coral: #e8654a;
+      --palm: #4a7c59;
+      --text: #2c2016;
+      --muted: #8a6e52;
+      --border: rgba(45,123,139,0.2);
+      --font-h: 'Playfair Display', serif;
+      --font-b: 'Poppins', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-b); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ---- Top Bar / Back / Badge ---- */
+    .top-bar { position: fixed; top: 0; left: 0; width: 100%; height: 34px; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; background: rgba(254,252,247,0.97); border-bottom: 1px solid rgba(45,123,139,0.15); z-index: 200; }
+    .back { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 5px; transition: color .2s; }
+    .back:hover { color: var(--ocean); }
+    .back::before { content: '←'; }
+    .badge { font-size: 0.58rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ocean); background: rgba(45,123,139,0.08); border: 1px solid var(--border); padding: 4px 12px; border-radius: 20px; }
+
+    /* ---- NAV ---- */
+    .nav { position: fixed; width: 100%; top: 34px; left: 0; background: rgba(254,252,247,0.93); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(45,123,139,0.12); height: 58px; display: flex; align-items: center; justify-content: center; z-index: 100; }
+    .nav__name { font-family: var(--font-h); font-style: italic; font-size: 1.15rem; font-weight: 400; letter-spacing: 0.04em; color: var(--text); position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; }
+    .nav__links { display: flex; gap: 28px; margin-left: auto; padding-right: 28px; }
+    .nav__links a { font-family: var(--font-b); font-size: 0.6rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); transition: color .2s; }
+    .nav__links a:hover { color: var(--ocean); }
+
+    /* ---- HERO ---- */
+    .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 100px 24px 60px; position: relative; overflow: hidden; background: var(--sand); }
+    .hero__overlay { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+
+    /* Palm leaf SVG ornament — top-left */
+    .hero__palm-left {
+      position: absolute; top: 80px; left: -30px; z-index: 2; pointer-events: none;
+      opacity: 0.55; transform: rotate(-20deg);
+    }
+    .hero__palm-right {
+      position: absolute; bottom: 90px; right: -20px; z-index: 2; pointer-events: none;
+      opacity: 0.45; transform: rotate(160deg) scaleX(-1);
+    }
+    .hero > *:not(.hero__overlay):not(.hero__palm-left):not(.hero__palm-right) { position: relative; z-index: 3; }
+
+    .hero__eyebrow { font-family: var(--font-b); font-size: 0.6rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ocean); margin-bottom: 28px; }
+    .hero__names { font-family: var(--font-h); font-style: italic; font-size: clamp(3.4rem, 10vw, 6.5rem); font-weight: 400; line-height: 1; letter-spacing: -0.01em; color: var(--text); }
+    .hero__names em { display: block; font-style: normal; font-size: 0.28em; font-weight: 400; font-family: var(--font-b); color: var(--coral); letter-spacing: 0.22em; text-transform: uppercase; margin: 18px 0; }
+    .hero__rule { width: 56px; height: 2px; background: var(--coral); opacity: 0.5; margin: 28px auto; border-radius: 2px; }
+    .hero__date { font-family: var(--font-b); font-size: 0.72rem; font-weight: 400; letter-spacing: 0.22em; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; }
+    .hero__venue { font-family: var(--font-h); font-style: italic; font-size: 1rem; color: var(--muted); }
+    .hero__cta { margin-top: 44px; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+
+    /* ---- Buttons ---- */
+    .btn { display: inline-flex; padding: 13px 32px; font-family: var(--font-b); font-size: 0.62rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; transition: background .2s, color .2s, border-color .2s; border-radius: 40px; }
+    .btn-primary { background: var(--coral); color: #fefcf7; border: 1px solid var(--coral); }
+    .btn-primary:hover { background: transparent; color: var(--coral); }
+    .btn-outline { background: transparent; color: var(--coral); border: 1px solid var(--coral); }
+    .btn-outline:hover { background: var(--coral); color: #fefcf7; }
+
+    /* ---- Wave Divider ---- */
+    .wave-divider { line-height: 0; overflow: hidden; display: block; }
+    .wave-divider svg { display: block; width: 100%; }
+
+    /* ---- Sections ---- */
+    section { padding: 88px 24px; }
+    .container { max-width: 920px; margin: 0 auto; }
+    .sec-label { font-family: var(--font-b); font-size: 0.58rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ocean); display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .sec-label::before { content: ''; display: block; width: 20px; height: 1.5px; background: var(--ocean); opacity: 0.45; }
+    .sec-title { font-family: var(--font-h); font-style: italic; font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 400; color: var(--text); margin-bottom: 20px; line-height: 1.2; }
+    .sec-text { font-family: var(--font-b); font-size: 0.92rem; font-weight: 300; color: var(--muted); line-height: 1.9; max-width: 540px; }
+
+    /* ---- Story ---- */
+    .story { background: var(--sand); }
+    .story__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .story__img { aspect-ratio: 3/4; background: linear-gradient(145deg, #e5d4b0 0%, #d4c09a 100%); position: relative; overflow: hidden; border-radius: 8px; }
+    .story__img img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 8px; }
+
+    /* ---- Style (Colours + Dress Code) ---- */
+    .style-sec { background: var(--bg); }
+    .style-sec__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 40px; }
+    .style-sec__sub { font-family: var(--font-b); font-size: 0.58rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ocean); margin-bottom: 18px; }
+    .color-swatches { display: flex; gap: 22px; flex-wrap: wrap; }
+    .color-swatch { display: flex; flex-direction: column; align-items: center; gap: 7px; }
+    .color-swatch__dot { width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--border); flex-shrink: 0; }
+    .color-swatch__name { font-family: var(--font-b); font-size: 0.68rem; color: var(--text); text-align: center; font-weight: 400; }
+    .color-swatch__hex { font-family: var(--font-b); font-size: 0.58rem; color: var(--muted); text-align: center; letter-spacing: 0.06em; }
+    .style-sec__dress-text { font-family: var(--font-h); font-style: italic; font-size: 1.15rem; color: var(--muted); line-height: 1.7; }
+
+    /* ---- Details ---- */
+    .details { background: var(--ocean); padding: 88px 24px; }
+    .details .sec-label { color: rgba(255,255,255,0.65); }
+    .details .sec-label::before { background: rgba(255,255,255,0.4); }
+    .details .sec-title { color: #fff; }
+    .details__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; margin-top: 48px; }
+    .detail-card { padding: 40px 32px; position: relative; background: rgba(255,255,255,0.07); border-top: 3px solid var(--coral); }
+    .detail-card + .detail-card { border-left: 1px solid rgba(255,255,255,0.12); }
+    .detail-card__step { font-family: var(--font-b); font-size: 0.58rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 14px; }
+    .detail-card__title { font-family: var(--font-h); font-style: italic; font-size: 1.4rem; font-weight: 400; color: #fff; margin-bottom: 10px; }
+    .detail-card__text { font-family: var(--font-b); font-size: 0.82rem; font-weight: 300; color: rgba(255,255,255,0.7); line-height: 1.75; }
+    .detail-card__time { display: inline-block; margin-top: 14px; font-family: var(--font-b); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; color: var(--coral); }
+
+    /* ---- Map ---- */
+    .map-sec { background: var(--surface); }
+    .map-sec__iframe { width: 100%; height: 420px; border: none; display: block; margin-top: 40px; border-radius: 6px; }
+    .map-sec__link { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; font-family: var(--font-b); font-size: 0.62rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ocean); transition: color .2s; }
+    .map-sec__link:hover { color: var(--coral); }
+
+    /* ---- Gallery ---- */
+    .gallery { background: var(--bg); }
+    .gallery__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-top: 48px; }
+    .gallery__item { aspect-ratio: 1; border-radius: 4px; overflow: hidden; background: #e0d0b8; }
+    .gallery__item:nth-child(2) { grid-row: span 2; aspect-ratio: unset; }
+    .gallery__item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
+    .gallery__item:hover img { transform: scale(1.04); }
+
+    /* ---- Gifts ---- */
+    .gifts-sec { background: var(--sand); }
+    .registry-links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+    .registry-link { display: inline-flex; padding: 12px 28px; border: 1px solid var(--coral); border-radius: 40px; font-family: var(--font-b); font-size: 0.62rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--coral); transition: background .2s, color .2s; }
+    .registry-link:hover { background: var(--coral); color: #fefcf7; }
+
+    /* ---- Note Bar ---- */
+    .note-bar { background: var(--ocean); padding: 22px 24px; text-align: center; }
+    .note-bar::before { content: '~ ~ ~'; display: block; font-size: 0.8rem; color: rgba(255,255,255,0.3); margin-bottom: 8px; letter-spacing: 0.4em; }
+    .note-bar p { font-family: var(--font-h); font-style: italic; font-size: 0.88rem; color: rgba(255,255,255,0.88); line-height: 1.65; max-width: 640px; margin: 0 auto; }
+
+    /* ---- RSVP ---- */
+    .rsvp { background: var(--bg); }
+    .rsvp__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+    .rsvp__info-date { font-family: var(--font-h); font-size: 1rem; color: var(--muted); font-style: italic; margin-top: 12px; line-height: 1.5; }
+    .rsvp__form { display: flex; flex-direction: column; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-label { font-family: var(--font-b); font-size: 0.6rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+    .form-input, .form-select, .form-textarea { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 11px 14px; font-family: var(--font-b); font-size: 0.875rem; font-weight: 300; color: var(--text); outline: none; width: 100%; transition: border-color .2s; resize: vertical; }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--ocean); }
+    .form-input::placeholder, .form-textarea::placeholder { color: rgba(138,110,82,0.35); }
+
+    /* ---- Entourage ---- */
+    .entourage-sec { background: var(--surface); }
+    .entourage-sec__sub { font-family: var(--font-b); font-size: 0.58rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ocean); margin: 40px 0 16px; display: flex; align-items: center; gap: 10px; }
+    .entourage-sec__sub::before { content: ''; display: block; width: 18px; height: 1.5px; background: var(--ocean); opacity: 0.45; }
+    .entourage-primary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-bottom: 0; border-radius: 4px; overflow: hidden; }
+    .entourage-secondary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); margin-top: 1px; border-radius: 4px; overflow: hidden; }
+    .entourage-card { background: var(--bg); padding: 24px 20px; text-align: center; }
+    .entourage-card--primary { background: var(--sand); padding: 32px 24px; }
+    .entourage-name { font-family: var(--font-h); font-style: italic; font-size: 1.02rem; font-weight: 400; color: var(--text); margin-bottom: 5px; }
+    .entourage-role { font-family: var(--font-b); font-size: 0.58rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+
+    /* ---- Sponsors ---- */
+    .sponsors-sec { background: var(--bg); }
+    .sponsors-primary { display: flex; gap: 0; flex-wrap: wrap; margin-top: 40px; margin-bottom: 8px; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+    .sponsor-card--primary { padding: 28px 40px; text-align: center; flex: 1; background: var(--surface); }
+    .sponsors-secondary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border-radius: 4px; overflow: hidden; margin-top: 8px; }
+    .sponsor-card { padding: 24px 20px; background: var(--bg); }
+    .sponsor-name { font-family: var(--font-h); font-style: italic; font-size: 1.05rem; font-weight: 400; color: var(--text); margin-bottom: 4px; }
+    .sponsor-role { font-family: var(--font-b); font-size: 0.6rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+
+    /* ---- Footer ---- */
+    footer { background: #1a2e2e; padding: 64px 24px 48px; }
+    .footer__inner { max-width: 920px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .footer__left { text-align: left; }
+    .footer__right { text-align: right; }
+    .f-ornament { display: block; font-size: 1.1rem; color: rgba(245,230,200,0.2); letter-spacing: 0.5em; margin-bottom: 16px; }
+    .f-names { font-family: var(--font-h); font-style: italic; font-size: 2rem; font-weight: 400; color: var(--sand); margin-bottom: 6px; }
+    .f-date { font-family: var(--font-b); font-size: 0.62rem; font-weight: 300; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(245,230,200,0.35); margin-bottom: 0; }
+    .f-tagline { font-family: var(--font-h); font-style: italic; font-size: 0.9rem; color: rgba(245,230,200,0.45); line-height: 1.6; margin-bottom: 16px; }
+    .f-email a { font-family: var(--font-b); font-size: 0.75rem; font-weight: 300; color: rgba(245,230,200,0.5); transition: color .2s; }
+    .f-email a:hover { color: var(--sand); }
+    .f-credit { margin-top: 12px; font-family: var(--font-b); font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(245,230,200,0.15); }
+    .f-credit a { color: inherit; }
+    .f-credit a:hover { color: rgba(245,230,200,0.4); }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 768px) {
+      .story__grid, .rsvp__grid { grid-template-columns: 1fr; gap: 40px; }
+      .details__grid { grid-template-columns: 1fr; }
+      .detail-card + .detail-card { border-left: none; border-top: 1px solid rgba(255,255,255,0.12); }
+      .gallery__grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+      .gallery__item:nth-child(2) { grid-row: auto; aspect-ratio: 1; }
+      .nav__links { display: none; }
+      .style-sec__grid { grid-template-columns: 1fr; gap: 40px; }
+      .footer__inner { grid-template-columns: 1fr; gap: 24px; text-align: center; }
+      .footer__left, .footer__right { text-align: center; }
+      .entourage-secondary { grid-template-columns: repeat(2, 1fr); }
+      .sponsors-secondary { grid-template-columns: repeat(2, 1fr); }
+      .hero__palm-left, .hero__palm-right { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <a id="backLink" href="#" class="back" style="display:none">Templates</a>
+    <span class="badge">Tropical · Wedding Site</span>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <span class="nav__name" data-field="couple">Loading…</span>
+    <div class="nav__links">
+      <a href="#story">Our Story</a>
+      <a href="#details">Details</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#rsvp">RSVP</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero__overlay" aria-hidden="true"></div>
+
+    <!-- Palm leaf ornament left -->
+    <div class="hero__palm-left" aria-hidden="true">
+      <svg width="180" height="240" viewBox="0 0 180 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Main stem -->
+        <path d="M90 230 C88 200 80 160 70 120 C60 80 40 50 20 20" stroke="#4a7c59" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.7"/>
+        <!-- Left frond 1 -->
+        <path d="M70 120 C50 100 20 95 5 80 C30 82 55 90 70 120Z" fill="#4a7c59" opacity="0.65"/>
+        <!-- Left frond 2 -->
+        <path d="M60 145 C35 130 8 130 -5 115 C20 118 48 128 60 145Z" fill="#4a7c59" opacity="0.5"/>
+        <!-- Right frond 1 -->
+        <path d="M70 120 C90 95 115 88 135 72 C110 80 85 95 70 120Z" fill="#5a9268" opacity="0.6"/>
+        <!-- Right frond 2 -->
+        <path d="M62 150 C82 130 110 126 128 112 C104 120 78 136 62 150Z" fill="#5a9268" opacity="0.45"/>
+        <!-- Small top fronds -->
+        <path d="M46 62 C36 42 30 20 35 5 C42 22 46 44 46 62Z" fill="#4a7c59" opacity="0.55"/>
+        <path d="M46 62 C58 42 70 24 80 12 C68 28 56 46 46 62Z" fill="#5a9268" opacity="0.5"/>
+      </svg>
+    </div>
+
+    <!-- Palm leaf ornament right (mirrored) -->
+    <div class="hero__palm-right" aria-hidden="true">
+      <svg width="180" height="240" viewBox="0 0 180 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M90 230 C88 200 80 160 70 120 C60 80 40 50 20 20" stroke="#4a7c59" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.7"/>
+        <path d="M70 120 C50 100 20 95 5 80 C30 82 55 90 70 120Z" fill="#4a7c59" opacity="0.65"/>
+        <path d="M60 145 C35 130 8 130 -5 115 C20 118 48 128 60 145Z" fill="#4a7c59" opacity="0.5"/>
+        <path d="M70 120 C90 95 115 88 135 72 C110 80 85 95 70 120Z" fill="#5a9268" opacity="0.6"/>
+        <path d="M62 150 C82 130 110 126 128 112 C104 120 78 136 62 150Z" fill="#5a9268" opacity="0.45"/>
+        <path d="M46 62 C36 42 30 20 35 5 C42 22 46 44 46 62Z" fill="#4a7c59" opacity="0.55"/>
+        <path d="M46 62 C58 42 70 24 80 12 C68 28 56 46 46 62Z" fill="#5a9268" opacity="0.5"/>
+      </svg>
+    </div>
+
+    <p class="hero__eyebrow">You are joyfully invited to celebrate</p>
+    <h1 class="hero__names">
+      <span data-field="partner1">—</span>
+      <em>&amp;</em>
+      <span data-field="partner2">—</span>
+    </h1>
+    <div class="hero__rule"></div>
+    <p class="hero__date" data-field="date">—</p>
+    <p class="hero__venue"><span data-field="venue">—</span> · <span data-field="location">—</span></p>
+    <div class="hero__cta">
+      <a href="#rsvp" class="btn btn-primary">RSVP Now</a>
+      <a href="#story" class="btn btn-outline">Our Story</a>
+    </div>
+  </section>
+
+  <!-- WAVE DIVIDER -->
+  <div class="wave-divider" aria-hidden="true" style="background:var(--sand);">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:60px;">
+      <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#f5e6c8"/>
+    </svg>
+  </div>
+
+  <!-- STORY -->
+  <section class="story" id="story">
+    <div class="container">
+      <div class="story__grid">
+        <div>
+          <span class="sec-label">Our Story</span>
+          <h2 class="sec-title">How the tide brought us together</h2>
+          <p class="sec-text" data-field="story">—</p>
+        </div>
+        <div class="story__img">
+          <img data-img="images.couple" src="" alt="Mia & Rafael" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STYLE: COLOURS + DRESS CODE -->
+  <section class="style-sec" id="style">
+    <div class="container">
+      <span class="sec-label">Style Guide</span>
+      <h2 class="sec-title">Colour &amp; Dress</h2>
+      <div class="style-sec__grid">
+        <div>
+          <p class="style-sec__sub">Wedding Palette</p>
+          <div class="color-swatches" id="colorSwatches"></div>
+        </div>
+        <div>
+          <p class="style-sec__sub">Dress Code</p>
+          <p class="style-sec__dress-text" data-field="dressCode">—</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAILS -->
+  <section class="details" id="details">
+    <div class="container">
+      <span class="sec-label">The Day</span>
+      <h2 class="sec-title">Details &amp; schedule</h2>
+      <div class="details__grid">
+        <div class="detail-card">
+          <p class="detail-card__step" data-field="ceremony.label">Beach Ceremony</p>
+          <h3 class="detail-card__title" data-field="venue">—</h3>
+          <p class="detail-card__text" data-field="ceremony.location">—</p>
+          <span class="detail-card__time" data-field="ceremony.time">—</span>
+        </div>
+        <div class="detail-card">
+          <p class="detail-card__step" data-field="cocktails.label">Sunset Drinks</p>
+          <h3 class="detail-card__title">Celebrate &amp; Mingle</h3>
+          <p class="detail-card__text" data-field="cocktails.location">—</p>
+          <span class="detail-card__time" data-field="cocktails.time">—</span>
+        </div>
+        <div class="detail-card">
+          <p class="detail-card__step" data-field="reception.label">Feast &amp; Dancing</p>
+          <h3 class="detail-card__title">Dinner &amp; Dancing</h3>
+          <p class="detail-card__text" data-field="reception.location">—</p>
+          <span class="detail-card__time" data-field="reception.time">—</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section class="map-sec" id="venue-map">
+    <div class="container">
+      <span class="sec-label">Getting Here</span>
+      <h2 class="sec-title">The Venue</h2>
+      <iframe id="venueMap" class="map-sec__iframe" src="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Venue location map"></iframe>
+      <a id="venueMapLink" href="#" target="_blank" rel="noopener" class="map-sec__link">Open in Google Maps ↗</a>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="gallery">
+    <div class="container">
+      <span class="sec-label">Gallery</span>
+      <h2 class="sec-title">Our favourite moments</h2>
+      <div class="gallery__grid">
+        <div class="gallery__item"><img data-img="images.gallery.0" alt="" /></div>
+        <div class="gallery__item"><img data-img="images.gallery.1" alt="" /></div>
+        <div class="gallery__item"><img data-img="images.gallery.2" alt="" /></div>
+        <div class="gallery__item"><img data-img="images.gallery.3" alt="" /></div>
+        <div class="gallery__item"><img data-img="images.gallery.4" alt="" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GIFTS -->
+  <section class="gifts-sec" id="gifts">
+    <div class="container">
+      <span class="sec-label">Gifts &amp; Registry</span>
+      <h2 class="sec-title">A Gift of Love</h2>
+      <p class="sec-text" data-field="gifts.message">—</p>
+      <div class="registry-links" id="giftsRegistry"></div>
+    </div>
+  </section>
+
+  <!-- NOTE BAR -->
+  <div class="note-bar">
+    <p data-field="note">—</p>
+  </div>
+
+  <!-- RSVP -->
+  <section class="rsvp" id="rsvp">
+    <div class="container">
+      <div class="rsvp__grid">
+        <div>
+          <span class="sec-label">RSVP</span>
+          <h2 class="sec-title">Will you join us?</h2>
+          <p class="sec-text">We'd love to share this day with you. Please let us know by <strong data-field="rsvpDeadline">—</strong>.</p>
+          <p class="rsvp__info-date">Dress code: <span data-field="dressCode">—</span></p>
+          <p class="sec-text" style="margin-top:16px;">Questions? Reach us at <a data-field="email">—</a></p>
+        </div>
+        <form class="rsvp__form" onsubmit="return false">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input class="form-input" type="text" placeholder="Your name" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input class="form-input" type="email" placeholder="your@email.com" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Attendance</label>
+            <select class="form-select">
+              <option>Joyfully accepts</option>
+              <option>Regretfully declines</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Dietary Requirements</label>
+            <input class="form-input" type="text" placeholder="Any dietary needs?" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message for the couple (optional)</label>
+            <textarea class="form-textarea" rows="3" placeholder="Share a note…"></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">Send RSVP</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENTOURAGE -->
+  <section class="entourage-sec" id="entourage">
+    <div class="container">
+      <span class="sec-label">Wedding Party</span>
+      <h2 class="sec-title">Our Entourage</h2>
+      <p class="entourage-sec__sub">Principal Sponsors</p>
+      <div class="entourage-primary" id="entouragePrimary"></div>
+      <p class="entourage-sec__sub">Wedding Party</p>
+      <div class="entourage-secondary" id="entourageSecondary"></div>
+    </div>
+  </section>
+
+  <!-- SPONSORS -->
+  <section class="sponsors-sec" id="sponsors">
+    <div class="container">
+      <span class="sec-label">With Thanks To</span>
+      <h2 class="sec-title">Our Partners</h2>
+      <div class="sponsors-primary" id="sponsorsPrimary"></div>
+      <div class="sponsors-secondary" id="sponsorsSecondary"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer__inner">
+      <div class="footer__left">
+        <span class="f-ornament">~ * ~</span>
+        <p class="f-names" data-field="couple">—</p>
+        <p class="f-date" data-field="dateShort">—</p>
+      </div>
+      <div class="footer__right">
+        <p class="f-tagline">Under the sun, beside the sea,<br>forever begins today.</p>
+        <p class="f-email"><a data-field="email">—</a></p>
+        <p class="f-credit">Wedding website by <a href="../../../index.html">ONCE</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Load config.json and populate all [data-field] elements
+    fetch('./config.json')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        // Back link
+        var backLinkEl = document.getElementById('backLink');
+        if (backLinkEl && data.backLink) { backLinkEl.href = data.backLink; backLinkEl.style.display = ''; }
+        document.querySelectorAll('[data-field]').forEach(function(el) {
+          var keys = el.getAttribute('data-field').split('.');
+          var val = data;
+          keys.forEach(function(k) { val = val && val[k]; });
+          if (val !== undefined && val !== null) {
+            el.textContent = val;
+            if (el.tagName === 'A' && keys.includes('email')) {
+              el.href = 'mailto:' + val;
+            }
+          }
+        });
+        document.querySelectorAll('[data-img]').forEach(function(el) {
+          var keys = el.getAttribute('data-img').split('.');
+          var val = data;
+          keys.forEach(function(k) { val = val && val[isNaN(k) ? k : +k]; });
+          if (val) { el.src = val; }
+        });
+        // Hero background image with warm tropical overlay
+        if (data.images && data.images.hero) {
+          var heroEl = document.querySelector('.hero');
+          if (heroEl) {
+            heroEl.style.background = 'linear-gradient(rgba(252,244,227,0.5), rgba(252,244,227,0.5)), url("' + data.images.hero + '") center/cover no-repeat';
+          }
+        }
+        // Colour swatches
+        if (data.colorPalette) {
+          var swatchEl = document.getElementById('colorSwatches');
+          if (swatchEl) data.colorPalette.forEach(function(c) {
+            var d = document.createElement('div'); d.className = 'color-swatch';
+            d.innerHTML = '<div class="color-swatch__dot" style="background:' + c.hex + '"></div><p class="color-swatch__name">' + c.name + '</p><p class="color-swatch__hex">' + c.hex + '</p>';
+            swatchEl.appendChild(d);
+          });
+        }
+        // Gift registry links
+        if (data.gifts && data.gifts.registry) {
+          var regEl = document.getElementById('giftsRegistry');
+          if (regEl) data.gifts.registry.forEach(function(item) {
+            var a = document.createElement('a'); a.href = item.url; a.target = '_blank'; a.rel = 'noopener';
+            a.textContent = item.name; a.className = 'registry-link'; regEl.appendChild(a);
+          });
+        }
+        // Sponsors
+        if (data.sponsors) {
+          var priEl = document.getElementById('sponsorsPrimary');
+          if (priEl && data.sponsors.primary) data.sponsors.primary.forEach(function(s) {
+            var d = document.createElement('div'); d.className = 'sponsor-card sponsor-card--primary';
+            d.innerHTML = '<p class="sponsor-name">' + s.name + '</p><p class="sponsor-role">' + s.role + '</p>';
+            priEl.appendChild(d);
+          });
+          var secEl = document.getElementById('sponsorsSecondary');
+          if (secEl && data.sponsors.secondary) data.sponsors.secondary.forEach(function(s) {
+            var d = document.createElement('div'); d.className = 'sponsor-card';
+            d.innerHTML = '<p class="sponsor-name">' + s.name + '</p><p class="sponsor-role">' + s.role + '</p>';
+            secEl.appendChild(d);
+          });
+        }
+        // Entourage
+        if (data.entourage) {
+          var priEntEl = document.getElementById('entouragePrimary');
+          if (priEntEl && data.entourage.primary) data.entourage.primary.forEach(function(p) {
+            var d = document.createElement('div'); d.className = 'entourage-card entourage-card--primary';
+            d.innerHTML = '<p class="entourage-name">' + p.name + '</p><p class="entourage-role">' + p.role + '</p>';
+            priEntEl.appendChild(d);
+          });
+          var secEntEl = document.getElementById('entourageSecondary');
+          if (secEntEl && data.entourage.secondary) data.entourage.secondary.forEach(function(p) {
+            var d = document.createElement('div'); d.className = 'entourage-card';
+            d.innerHTML = '<p class="entourage-name">' + p.name + '</p><p class="entourage-role">' + p.role + '</p>';
+            secEntEl.appendChild(d);
+          });
+        }
+        // Venue map
+        var mapEl = document.getElementById('venueMap');
+        var mapLinkEl = document.getElementById('venueMapLink');
+        if (mapEl && data.mapUrl) { mapEl.src = data.mapUrl; }
+        if (mapLinkEl && data.mapDirectionsUrl) { mapLinkEl.href = data.mapDirectionsUrl; }
+        document.title = (data.couple || '') + ' — Our Wedding';
+      })
+      .catch(function() {
+        console.warn('ONCE: config.json not found or invalid. Edit config.json to populate this template.');
+      });
+  </script>
+</body>
+</html>

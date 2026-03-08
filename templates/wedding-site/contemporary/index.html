@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding Website · Contemporary Template</title>
+  <link rel="icon" href="../../../assets/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --ink: #000000;
+      --surface: #f2f2f2;
+      --muted: #888888;
+      --border: #e0e0e0;
+      --accent: #e3000f;
+      --font-h: 'Syne', sans-serif;
+      --font-b: 'Inter', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: var(--font-b); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ---- Top Bar / Back / Badge ---- */
+    .top-bar {
+      position: fixed; top: 0; left: 0; width: 100%; height: 34px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 22px; background: var(--bg);
+      border-bottom: 2px solid var(--accent); z-index: 200;
+    }
+    .back {
+      font-family: var(--font-b); font-size: 0.6rem; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); display: flex; align-items: center; gap: 5px;
+      transition: color .2s;
+    }
+    .back:hover { color: var(--ink); }
+    .back::before { content: '←'; }
+    .badge {
+      font-family: var(--font-b); font-size: 0.58rem; font-weight: 600;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--accent); background: var(--bg);
+      border: 2px solid var(--accent); padding: 4px 12px;
+    }
+
+    /* ---- NAV ---- */
+    .nav {
+      position: fixed; width: 100%; top: 34px; left: 0;
+      background: var(--bg); border-bottom: 2px solid var(--ink);
+      height: 56px; display: flex; align-items: center;
+      justify-content: center; z-index: 100;
+    }
+    .nav__name {
+      font-family: var(--font-h); font-size: 0.88rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink);
+    }
+    .nav__links {
+      position: absolute; right: 28px; top: 50%; transform: translateY(-50%);
+      display: flex; gap: 28px;
+    }
+    .nav__links a {
+      font-family: var(--font-b); font-size: 0.6rem; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+      transition: color .2s;
+    }
+    .nav__links a:hover { color: var(--accent); }
+
+    /* ---- HERO ---- */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; padding: 92px 64px 0;
+      background: var(--ink); position: relative; overflow: hidden;
+    }
+    .hero__overlay {
+      position: absolute; inset: 0; z-index: 0;
+      background: rgba(0, 0, 0, 0.55);
+    }
+    .hero__content {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column;
+    }
+    .hero__name {
+      font-family: var(--font-h); font-weight: 800;
+      font-size: clamp(5rem, 14vw, 11rem);
+      line-height: 0.9; letter-spacing: -0.03em;
+      color: #ffffff; text-transform: uppercase;
+      display: block;
+    }
+    .hero__rule {
+      width: 100%; height: 2px; background: var(--accent);
+      margin: 20px 0; opacity: 0.85;
+    }
+    .hero__meta {
+      position: absolute; bottom: 52px; left: 64px; right: 64px;
+      display: flex; justify-content: space-between; align-items: flex-end;
+      z-index: 1;
+    }
+    .hero__meta-date {
+      font-family: var(--font-b); font-size: 0.65rem; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.6);
+    }
+    .hero__meta-location {
+      font-family: var(--font-b); font-size: 0.65rem; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.6);
+      text-align: right;
+    }
+
+    /* ---- Buttons ---- */
+    .btn {
+      display: inline-flex; padding: 13px 32px;
+      font-family: var(--font-b); font-size: 0.62rem; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer;
+      transition: background .2s, color .2s, border-color .2s;
+      border-radius: 0;
+    }
+    .btn-primary {
+      background: var(--accent); color: var(--bg); border: 2px solid var(--accent);
+    }
+    .btn-primary:hover { background: var(--bg); color: var(--accent); border-color: var(--accent); }
+    .btn-outline {
+      background: transparent; color: var(--ink); border: 2px solid var(--ink);
+    }
+    .btn-outline:hover { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+    .btn-primary-inv {
+      background: var(--bg); color: var(--ink); border: 2px solid var(--bg);
+    }
+    .btn-primary-inv:hover { background: transparent; color: var(--bg); border-color: var(--bg); }
+
+    /* ---- Dark section variant ---- */
+    .section--dark {
+      background: var(--ink); color: var(--bg);
+    }
+    .section--dark .sec-label { color: rgba(255,255,255,0.4); }
+    .section--dark .sec-title { color: var(--bg); }
+    .section--dark .sec-text { color: rgba(255,255,255,0.6); }
+
+    /* ---- Sections ---- */
+    section { padding: 96px 24px; }
+    .container { max-width: 960px; margin: 0 auto; }
+    .sec-label {
+      font-family: var(--font-b); font-size: 0.58rem; font-weight: 600;
+      letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted);
+      display: block; margin-bottom: 14px;
+    }
+    .sec-title {
+      font-family: var(--font-h); font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 700; color: var(--ink); margin-bottom: 24px; line-height: 1.05;
+    }
+    .sec-text {
+      font-family: var(--font-b); font-size: 0.95rem; font-weight: 300;
+      color: var(--muted); line-height: 1.85; max-width: 560px;
+    }
+
+    /* ---- Story ---- */
+    .story { background: var(--bg); border-top: 2px solid var(--ink); }
+    .story__grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
+    }
+    .story__img {
+      aspect-ratio: 3/4; overflow: hidden; background: var(--surface);
+    }
+    .story__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* ---- Style (Colours + Dress Code) ---- */
+    .style-sec { background: var(--surface); border-top: 2px solid var(--ink); }
+    .style-sec__grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 40px;
+    }
+    .style-sec__sub {
+      font-family: var(--font-b); font-size: 0.58rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .color-swatches { display: flex; gap: 20px; flex-wrap: wrap; }
+    .color-swatch { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .color-swatch__dot {
+      width: 52px; height: 52px;
+      border: 1px solid var(--border); flex-shrink: 0;
+    }
+    /* White swatch gets a border so it's visible */
+    .color-swatch__dot--outlined { border: 1px solid #c0c0c0 !important; }
+    .color-swatch__name {
+      font-family: var(--font-b); font-size: 0.68rem; font-weight: 400;
+      color: var(--ink); text-align: center;
+    }
+    .color-swatch__hex {
+      font-family: var(--font-b); font-size: 0.58rem; font-weight: 300;
+      color: var(--muted); text-align: center; letter-spacing: 0.06em;
+    }
+    .style-sec__dress-text {
+      font-family: var(--font-h); font-size: 1.4rem; font-weight: 700;
+      color: var(--ink); line-height: 1.4;
+    }
+
+    /* ---- Details ---- */
+    .details { background: var(--ink); }
+    .details .sec-label { color: rgba(255,255,255,0.35); }
+    .details .sec-title { color: var(--bg); }
+    .details__grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      margin-top: 56px; border-top: 1px solid rgba(255,255,255,0.15);
+    }
+    .detail-card { padding: 40px 32px; position: relative; }
+    .detail-card + .detail-card { border-left: 1px solid rgba(255,255,255,0.12); }
+    .detail-card__bullet {
+      display: inline-block; width: 6px; height: 6px;
+      background: var(--accent); margin-bottom: 20px;
+    }
+    .detail-card__step {
+      font-family: var(--font-b); font-size: 0.58rem; font-weight: 600;
+      letter-spacing: 0.26em; text-transform: uppercase;
+      color: rgba(255,255,255,0.4); margin-bottom: 14px;
+    }
+    .detail-card__title {
+      font-family: var(--font-h); font-size: 1.35rem; font-weight: 700;
+      color: var(--bg); margin-bottom: 10px; line-height: 1.1;
+    }
+    .detail-card__text {
+      font-family: var(--font-b); font-size: 0.82rem; font-weight: 300;
+      color: rgba(255,255,255,0.5); line-height: 1.75;
+    }
+    .detail-card__time {
+      display: inline-block; margin-top: 18px;
+      font-family: var(--font-h); font-size: 1.1rem; font-weight: 700;
+      color: var(--bg);
+    }
+
+    /* ---- Map ---- */
+    .map-sec { background: var(--bg); border-top: 2px solid var(--ink); }
+    .map-sec__iframe {
+      width: 100%; height: 420px; border: 2px solid var(--ink);
+      display: block; margin-top: 48px;
+    }
+    .map-sec__link {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 16px;
+      font-family: var(--font-b); font-size: 0.62rem; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink);
+      border-bottom: 1px solid var(--ink); padding-bottom: 2px;
+      transition: opacity .2s;
+    }
+    .map-sec__link:hover { opacity: 0.5; }
+
+    /* ---- Gallery ---- */
+    .gallery { background: var(--bg); border-top: 2px solid var(--ink); }
+    .gallery__grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; margin-top: 48px;
+    }
+    .gallery__item { aspect-ratio: 1; overflow: hidden; background: var(--surface); }
+    .gallery__item:nth-child(2) { grid-row: span 2; aspect-ratio: unset; }
+    .gallery__item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* ---- Note bar ---- */
+    .note-bar { background: var(--ink); padding: 22px 24px; text-align: center; }
+    .note-bar p {
+      font-family: var(--font-b); font-size: 0.82rem; font-weight: 300;
+      color: rgba(255,255,255,0.65); line-height: 1.7; max-width: 680px; margin: 0 auto;
+    }
+
+    /* ---- Gifts ---- */
+    .gifts-sec { background: var(--ink); }
+    .gifts-sec .sec-label { color: rgba(255,255,255,0.35); }
+    .gifts-sec .sec-title { color: var(--bg); }
+    .gifts-sec .sec-text { color: rgba(255,255,255,0.55); }
+    .registry-links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+    .registry-link {
+      display: inline-flex; padding: 13px 32px;
+      border: 2px solid rgba(255,255,255,0.35);
+      font-family: var(--font-b); font-size: 0.62rem; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--bg);
+      transition: background .2s, color .2s, border-color .2s; border-radius: 0;
+    }
+    .registry-link:hover {
+      background: var(--bg); color: var(--ink); border-color: var(--bg);
+    }
+
+    /* ---- RSVP ---- */
+    .rsvp { background: var(--bg); border-top: 2px solid var(--ink); }
+    .rsvp__grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+    }
+    .rsvp__info-date {
+      font-family: var(--font-h); font-size: 0.95rem; font-weight: 600;
+      color: var(--muted); margin-top: 14px; letter-spacing: 0.02em;
+    }
+    .rsvp__form { display: flex; flex-direction: column; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-label {
+      font-family: var(--font-b); font-size: 0.58rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink);
+    }
+    .form-input, .form-select, .form-textarea {
+      background: var(--bg); border: 2px solid var(--ink);
+      padding: 12px 14px; font-family: var(--font-b); font-size: 0.875rem;
+      font-weight: 300; color: var(--ink); outline: none; width: 100%;
+      transition: border-color .2s; resize: vertical; appearance: none;
+      border-radius: 0;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--muted);
+    }
+    .form-input::placeholder, .form-textarea::placeholder {
+      color: rgba(0,0,0,0.25); font-weight: 300;
+    }
+
+    /* ---- Entourage ---- */
+    .entourage-sec { background: var(--surface); border-top: 2px solid var(--ink); }
+    .entourage-sec__sub {
+      font-family: var(--font-b); font-size: 0.58rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted);
+      margin: 40px 0 0;
+    }
+    .entourage-primary {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0; border: 2px solid var(--ink); margin-top: 20px;
+    }
+    .entourage-secondary {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0; border: 2px solid var(--ink); border-top: none; margin-top: 0;
+    }
+    .entourage-card {
+      background: var(--bg); padding: 28px 24px; text-align: center;
+      border-right: 2px solid var(--ink);
+    }
+    .entourage-card:last-child { border-right: none; }
+    .entourage-card--primary {
+      background: var(--bg); padding: 36px 24px; text-align: center;
+      border-right: 2px solid var(--ink);
+    }
+    .entourage-card--primary:last-child { border-right: none; }
+    .entourage-name {
+      font-family: var(--font-h); font-size: 1rem; font-weight: 700;
+      color: var(--ink); margin-bottom: 6px; line-height: 1.2;
+    }
+    .entourage-role {
+      font-family: var(--font-b); font-size: 0.58rem; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+    }
+    /* Row borders within entourage grids */
+    .entourage-primary .entourage-card--primary:nth-child(4),
+    .entourage-primary .entourage-card--primary:nth-child(5),
+    .entourage-primary .entourage-card--primary:nth-child(6) {
+      border-top: 2px solid var(--ink);
+    }
+    .entourage-secondary .entourage-card:nth-child(5),
+    .entourage-secondary .entourage-card:nth-child(6),
+    .entourage-secondary .entourage-card:nth-child(7),
+    .entourage-secondary .entourage-card:nth-child(8) {
+      border-top: 2px solid var(--ink);
+    }
+
+    /* ---- Sponsors ---- */
+    .sponsors-sec { background: var(--bg); border-top: 2px solid var(--ink); }
+    .sponsors-primary {
+      display: flex; flex-wrap: wrap;
+      border: 2px solid var(--ink); margin-top: 48px; margin-bottom: 0;
+    }
+    .sponsor-card--primary {
+      padding: 36px 48px; text-align: center; flex: 1;
+      border-right: 2px solid var(--ink);
+    }
+    .sponsor-card--primary:last-child { border-right: none; }
+    .sponsors-secondary {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border: 2px solid var(--ink); border-top: none;
+    }
+    .sponsor-card {
+      padding: 28px 24px; background: var(--bg);
+      border-right: 2px solid var(--ink);
+    }
+    .sponsor-card:last-child { border-right: none; }
+    .sponsor-name {
+      font-family: var(--font-h); font-size: 1.05rem; font-weight: 700;
+      color: var(--ink); margin-bottom: 5px;
+    }
+    .sponsor-role {
+      font-family: var(--font-b); font-size: 0.58rem; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+    }
+
+    /* ---- Footer ---- */
+    footer {
+      background: var(--ink); padding: 64px 24px 48px; color: var(--bg);
+    }
+    .footer__inner {
+      max-width: 960px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end;
+    }
+    .f-names {
+      font-family: var(--font-h); font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800; color: var(--bg); text-transform: uppercase;
+      letter-spacing: -0.02em; line-height: 1;
+    }
+    .f-date {
+      font-family: var(--font-b); font-size: 0.62rem; font-weight: 400;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3); margin-top: 12px;
+    }
+    .f-right { text-align: right; }
+    .f-email a {
+      font-family: var(--font-b); font-size: 0.75rem; font-weight: 300;
+      color: rgba(255,255,255,0.5); transition: color .2s;
+      border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 2px;
+    }
+    .f-email a:hover { color: var(--bg); border-color: var(--bg); }
+    .f-credit {
+      margin-top: 16px; font-family: var(--font-b); font-size: 0.58rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(255,255,255,0.15);
+    }
+    .f-credit a { color: inherit; transition: color .2s; }
+    .f-credit a:hover { color: rgba(255,255,255,0.4); }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 768px) {
+      .hero { padding: 80px 28px 60px; }
+      .hero__name { font-size: clamp(3.5rem, 18vw, 6rem); }
+      .hero__meta { left: 28px; right: 28px; bottom: 36px; flex-direction: column; gap: 6px; align-items: flex-start; }
+      .hero__meta-location { text-align: left; }
+
+      .story__grid { grid-template-columns: 1fr; gap: 40px; }
+      .style-sec__grid { grid-template-columns: 1fr; gap: 40px; }
+      .rsvp__grid { grid-template-columns: 1fr; gap: 52px; }
+
+      .details__grid { grid-template-columns: 1fr; border-top: 1px solid rgba(255,255,255,0.15); }
+      .detail-card + .detail-card { border-left: none; border-top: 1px solid rgba(255,255,255,0.12); }
+
+      .gallery__grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery__item:nth-child(2) { grid-row: auto; aspect-ratio: 1; }
+
+      .entourage-primary { grid-template-columns: 1fr; }
+      .entourage-secondary { grid-template-columns: repeat(2, 1fr); }
+      .entourage-card { border-right: none; border-bottom: 2px solid var(--ink); }
+      .entourage-card--primary { border-right: none; border-bottom: 2px solid var(--ink); }
+      .entourage-card:last-child { border-bottom: none; }
+      .entourage-card--primary:last-child { border-bottom: none; }
+
+      .sponsors-secondary { grid-template-columns: repeat(2, 1fr); }
+      .sponsor-card { border-right: none; border-bottom: 2px solid var(--ink); }
+      .sponsor-card:last-child { border-bottom: none; }
+      .sponsor-card--primary { border-right: none; border-bottom: 2px solid var(--ink); }
+      .sponsor-card--primary:last-child { border-bottom: none; }
+
+      .footer__inner { grid-template-columns: 1fr; gap: 32px; }
+      .f-right { text-align: left; }
+
+      .nav__links { display: none; }
+      .badge { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <a id="backLink" href="#" class="back" style="display:none">Templates</a>
+    <span class="badge">Contemporary · Wedding Site</span>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <span class="nav__name" data-field="couple">Loading…</span>
+    <div class="nav__links">
+      <a href="#story">Our Story</a>
+      <a href="#details">Details</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#rsvp">RSVP</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero section--dark" id="home">
+    <div class="hero__overlay" aria-hidden="true"></div>
+    <div class="hero__content">
+      <span class="hero__name" data-field="partner1">—</span>
+      <div class="hero__rule" aria-hidden="true"></div>
+      <span class="hero__name" data-field="partner2">—</span>
+    </div>
+    <div class="hero__meta">
+      <span class="hero__meta-date" data-field="dateShort">—</span>
+      <span class="hero__meta-location" data-field="location">—</span>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story" id="story">
+    <div class="container">
+      <div class="story__grid">
+        <div>
+          <span class="sec-label">Our Story</span>
+          <h2 class="sec-title">How it began</h2>
+          <p class="sec-text" data-field="story">—</p>
+          <div style="margin-top: 36px; display: flex; gap: 14px; flex-wrap: wrap;">
+            <a href="#rsvp" class="btn btn-primary">RSVP</a>
+            <a href="#details" class="btn btn-outline">View Details</a>
+          </div>
+        </div>
+        <div class="story__img">
+          <img data-img="images.couple" src="" alt="The couple" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STYLE: COLOURS + DRESS CODE -->
+  <section class="style-sec" id="style">
+    <div class="container">
+      <span class="sec-label">Style Guide</span>
+      <h2 class="sec-title">Colour &amp; Dress</h2>
+      <div class="style-sec__grid">
+        <div>
+          <p class="style-sec__sub">Wedding Palette</p>
+          <div class="color-swatches" id="colorSwatches"></div>
+        </div>
+        <div>
+          <p class="style-sec__sub">Dress Code</p>
+          <p class="style-sec__dress-text" data-field="dressCode">—</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAILS -->
+  <section class="details section--dark" id="details">
+    <div class="container">
+      <span class="sec-label">The Day</span>
+      <h2 class="sec-title">Schedule &amp; Details</h2>
+      <div class="details__grid">
+        <div class="detail-card">
+          <div class="detail-card__bullet" aria-hidden="true"></div>
+          <p class="detail-card__step" data-field="ceremony.label">Ceremony</p>
+          <h3 class="detail-card__title" data-field="venue">—</h3>
+          <p class="detail-card__text" data-field="ceremony.location">—</p>
+          <span class="detail-card__time" data-field="ceremony.time">—</span>
+        </div>
+        <div class="detail-card">
+          <div class="detail-card__bullet" aria-hidden="true"></div>
+          <p class="detail-card__step" data-field="cocktails.label">Cocktail Hour</p>
+          <h3 class="detail-card__title">Celebrate</h3>
+          <p class="detail-card__text" data-field="cocktails.location">—</p>
+          <span class="detail-card__time" data-field="cocktails.time">—</span>
+        </div>
+        <div class="detail-card">
+          <div class="detail-card__bullet" aria-hidden="true"></div>
+          <p class="detail-card__step" data-field="reception.label">Reception</p>
+          <h3 class="detail-card__title">Dinner &amp; Dancing</h3>
+          <p class="detail-card__text" data-field="reception.location">—</p>
+          <span class="detail-card__time" data-field="reception.time">—</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section class="map-sec" id="venue-map">
+    <div class="container">
+      <span class="sec-label">Getting Here</span>
+      <h2 class="sec-title">The Venue</h2>
+      <iframe id="venueMap" class="map-sec__iframe" src="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Venue location map"></iframe>
+      <a id="venueMapLink" href="#" target="_blank" rel="noopener" class="map-sec__link">Open in Google Maps ↗</a>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="gallery">
+    <div class="container">
+      <span class="sec-label">Gallery</span>
+      <h2 class="sec-title">Our favourite moments</h2>
+      <div class="gallery__grid">
+        <div class="gallery__item"><img data-img="images.gallery.0" alt="" /></div>
+        <div class="gallery__item"><img data-img="images.gallery.1" alt="" /></div>
+        <div class="gallery__item"><img data-img="images.gallery.2" alt="" /></div>
+        <div class="gallery__item"><img data-img="images.gallery.3" alt="" /></div>
+        <div class="gallery__item"><img data-img="images.gallery.4" alt="" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GIFTS -->
+  <section class="gifts-sec section--dark" id="gifts">
+    <div class="container">
+      <span class="sec-label">Gifts &amp; Registry</span>
+      <h2 class="sec-title">A Gift of Presence</h2>
+      <p class="sec-text" data-field="gifts.message">—</p>
+      <div class="registry-links" id="giftsRegistry"></div>
+    </div>
+  </section>
+
+  <!-- NOTE BAR -->
+  <div class="note-bar">
+    <p data-field="note">—</p>
+  </div>
+
+  <!-- RSVP -->
+  <section class="rsvp" id="rsvp">
+    <div class="container">
+      <div class="rsvp__grid">
+        <div>
+          <span class="sec-label">RSVP</span>
+          <h2 class="sec-title">Will you join us?</h2>
+          <p class="sec-text">We would love to share this day with you. Please let us know by <strong data-field="rsvpDeadline">—</strong>.</p>
+          <p class="rsvp__info-date" data-field="dressCode">—</p>
+          <p class="sec-text" style="margin-top: 18px;">Questions? <a data-field="email" style="border-bottom: 1px solid currentColor; padding-bottom: 1px;">—</a></p>
+        </div>
+        <form class="rsvp__form" onsubmit="return false">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input class="form-input" type="text" placeholder="Your name" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input class="form-input" type="email" placeholder="your@email.com" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Attendance</label>
+            <select class="form-select">
+              <option>Joyfully accepts</option>
+              <option>Regretfully declines</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Dietary Requirements</label>
+            <input class="form-input" type="text" placeholder="Any dietary needs?" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message for the couple (optional)</label>
+            <textarea class="form-textarea" rows="3" placeholder="Share a note…"></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">Send RSVP</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENTOURAGE -->
+  <section class="entourage-sec" id="entourage">
+    <div class="container">
+      <span class="sec-label">Wedding Party</span>
+      <h2 class="sec-title">Our Entourage</h2>
+      <p class="entourage-sec__sub">Principal Sponsors</p>
+      <div class="entourage-primary" id="entouragePrimary"></div>
+      <p class="entourage-sec__sub" style="margin-top: 40px;">Wedding Party</p>
+      <div class="entourage-secondary" id="entourageSecondary"></div>
+    </div>
+  </section>
+
+  <!-- SPONSORS -->
+  <section class="sponsors-sec" id="sponsors">
+    <div class="container">
+      <span class="sec-label">With Thanks To</span>
+      <h2 class="sec-title">Our Partners</h2>
+      <div class="sponsors-primary" id="sponsorsPrimary"></div>
+      <div class="sponsors-secondary" id="sponsorsSecondary"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer__inner">
+      <div class="f-left">
+        <p class="f-names" data-field="couple">—</p>
+        <p class="f-date" data-field="dateShort">—</p>
+      </div>
+      <div class="f-right">
+        <p class="f-email"><a data-field="email">—</a></p>
+        <p class="f-credit" style="margin-top: 14px;">Wedding website by <a href="../../../index.html">ONCE</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Load config.json and populate all [data-field] elements
+    fetch('./config.json')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        // Back link
+        var backLinkEl = document.getElementById('backLink');
+        if (backLinkEl && data.backLink) { backLinkEl.href = data.backLink; backLinkEl.style.display = ''; }
+        // Populate data-field attributes
+        document.querySelectorAll('[data-field]').forEach(function(el) {
+          var keys = el.getAttribute('data-field').split('.');
+          var val = data;
+          keys.forEach(function(k) { val = val && val[k]; });
+          if (val !== undefined && val !== null) {
+            el.textContent = val;
+            if (el.tagName === 'A' && keys.includes('email')) {
+              el.href = 'mailto:' + val;
+            }
+          }
+        });
+        // Populate data-img attributes
+        document.querySelectorAll('[data-img]').forEach(function(el) {
+          var keys = el.getAttribute('data-img').split('.');
+          var val = data;
+          keys.forEach(function(k) { val = val && val[isNaN(k) ? k : +k]; });
+          if (val) { el.src = val; }
+        });
+        // Hero background image with rgba(0,0,0,0.55) overlay
+        if (data.images && data.images.hero) {
+          var heroEl = document.querySelector('.hero');
+          if (heroEl) {
+            heroEl.style.backgroundImage = 'url("' + data.images.hero + '")';
+            heroEl.style.backgroundSize = 'cover';
+            heroEl.style.backgroundPosition = 'center';
+          }
+        }
+        // Colour swatches
+        if (data.colorPalette) {
+          var swatchEl = document.getElementById('colorSwatches');
+          if (swatchEl) {
+            data.colorPalette.forEach(function(c) {
+              var outlined = (c.hex.toLowerCase() === '#ffffff' || c.hex.toLowerCase() === '#fff') ? ' color-swatch__dot--outlined' : '';
+              var d = document.createElement('div');
+              d.className = 'color-swatch';
+              d.innerHTML =
+                '<div class="color-swatch__dot' + outlined + '" style="background:' + c.hex + '"></div>' +
+                '<p class="color-swatch__name">' + c.name + '</p>' +
+                '<p class="color-swatch__hex">' + c.hex + '</p>';
+              swatchEl.appendChild(d);
+            });
+          }
+        }
+        // Gift registry links
+        if (data.gifts && data.gifts.registry) {
+          var regEl = document.getElementById('giftsRegistry');
+          if (regEl) {
+            data.gifts.registry.forEach(function(item) {
+              var a = document.createElement('a');
+              a.href = item.url; a.target = '_blank'; a.rel = 'noopener';
+              a.textContent = item.name; a.className = 'registry-link';
+              regEl.appendChild(a);
+            });
+          }
+        }
+        // Sponsors
+        if (data.sponsors) {
+          var priEl = document.getElementById('sponsorsPrimary');
+          if (priEl && data.sponsors.primary) {
+            data.sponsors.primary.forEach(function(s) {
+              var d = document.createElement('div');
+              d.className = 'sponsor-card sponsor-card--primary';
+              d.innerHTML = '<p class="sponsor-name">' + s.name + '</p><p class="sponsor-role">' + s.role + '</p>';
+              priEl.appendChild(d);
+            });
+          }
+          var secEl = document.getElementById('sponsorsSecondary');
+          if (secEl && data.sponsors.secondary) {
+            data.sponsors.secondary.forEach(function(s) {
+              var d = document.createElement('div');
+              d.className = 'sponsor-card';
+              d.innerHTML = '<p class="sponsor-name">' + s.name + '</p><p class="sponsor-role">' + s.role + '</p>';
+              secEl.appendChild(d);
+            });
+          }
+        }
+        // Entourage
+        if (data.entourage) {
+          var priEntEl = document.getElementById('entouragePrimary');
+          if (priEntEl && data.entourage.primary) {
+            data.entourage.primary.forEach(function(p) {
+              var d = document.createElement('div');
+              d.className = 'entourage-card entourage-card--primary';
+              d.innerHTML = '<p class="entourage-name">' + p.name + '</p><p class="entourage-role">' + p.role + '</p>';
+              priEntEl.appendChild(d);
+            });
+          }
+          var secEntEl = document.getElementById('entourageSecondary');
+          if (secEntEl && data.entourage.secondary) {
+            data.entourage.secondary.forEach(function(p) {
+              var d = document.createElement('div');
+              d.className = 'entourage-card';
+              d.innerHTML = '<p class="entourage-name">' + p.name + '</p><p class="entourage-role">' + p.role + '</p>';
+              secEntEl.appendChild(d);
+            });
+          }
+        }
+        // Venue map
+        var mapEl = document.getElementById('venueMap');
+        var mapLinkEl = document.getElementById('venueMapLink');
+        if (mapEl && data.mapUrl) { mapEl.src = data.mapUrl; }
+        if (mapLinkEl && data.mapDirectionsUrl) { mapLinkEl.href = data.mapDirectionsUrl; }
+        // Document title
+        document.title = (data.couple || '') + ' — Our Wedding';
+      })
+      .catch(function() {
+        console.warn('ONCE: config.json not found or invalid. Edit config.json to populate this template.');
+      });
+  </script>
+</body>
+</html>

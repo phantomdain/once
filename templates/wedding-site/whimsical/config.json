@@ -1,0 +1,71 @@
+{
+  "backLink": "../../../index.html#templates",
+  "partner1": "Lily",
+  "partner2": "Jack",
+  "couple": "Lily & Jack",
+  "date": "June 21, 2025",
+  "dateShort": "21 · 06 · 2025",
+  "venue": "Ponderosa Events Place",
+  "location": "Portland, Oregon",
+  "story": "Lily showed up to the wrong birthday party. Jack was the birthday boy. She ate all the cake before realising her mistake, apologised by offering to bake a replacement, and somehow that turned into a three-hour kitchen disaster and the best evening of his life. Cake has been their thing ever since.",
+  "ceremony": { "time": "3:30 PM", "label": "The Big Yes!", "location": "Enchanted Garden Arch" },
+  "cocktails": { "time": "4:45 PM", "label": "Bubbles & Bites", "location": "The Flower Meadow" },
+  "reception": { "time": "6:30 PM", "label": "Feast & Festivities", "location": "The Fairground Hall" },
+  "rsvpDeadline": "May 15, 2025",
+  "email": "lily.jack2025@gmail.com",
+  "dressCode": "Garden Party Colours — bright, joyful, and comfortable shoes for dancing",
+  "note": "There will be a kids corner, a candy bar, and a photo booth with ridiculous props. This is a celebration — dress to have fun!",
+  "colorPalette": [
+    { "hex": "#FF6B9D", "name": "Bubblegum" },
+    { "hex": "#FFD166", "name": "Sunshine" },
+    { "hex": "#06D6A0", "name": "Mint" }
+  ],
+  "gifts": {
+    "message": "Honestly, just bring your dancing shoes. But if you want to spoil us, a little something for our home would be wonderful!",
+    "registry": [
+      { "name": "Our Wish List", "url": "https://example.com/lily-jack" },
+      { "name": "Home Fund", "url": "https://example.com/registry" }
+    ]
+  },
+  "entourage": {
+    "primary": [
+      { "name": "Mr. & Mrs. Baker", "role": "Principal Sponsor" },
+      { "name": "Mr. & Mrs. Finch", "role": "Principal Sponsor" },
+      { "name": "Mr. & Mrs. Lane", "role": "Principal Sponsor" }
+    ],
+    "secondary": [
+      { "name": "Toby Wells", "role": "Best Man" },
+      { "name": "Daisy Moon", "role": "Maid of Honor" },
+      { "name": "Ruby Hart", "role": "Bridesmaid" },
+      { "name": "Felix Gray", "role": "Groomsman" },
+      { "name": "Poppy Wren", "role": "Bridesmaid" },
+      { "name": "Archie Fox", "role": "Groomsman" },
+      { "name": "Bea Sparrow", "role": "Flower Girl" },
+      { "name": "Teddy Wild", "role": "Ring Bearer" }
+    ]
+  },
+  "sponsors": {
+    "primary": [
+      { "name": "The Enchanted Garden", "role": "Venue" }
+    ],
+    "secondary": [
+      { "name": "Petal & Whimsy", "role": "Floral Design" },
+      { "name": "Stardust Photography", "role": "Photography" },
+      { "name": "Sugarplum Catering", "role": "Catering" },
+      { "name": "Magic Coach", "role": "Transportation" }
+    ]
+  },
+  "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.4!2d121.1480!3d14.6091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397d01f34a857c1:0x8ef54ec376171ee!2sPonderosa+Events+Place!5e0!3m2!1sen!2sph!4v1714000000000!5m2!1sen!2sph",
+  "mapDirectionsUrl": "https://www.google.com/maps/place/Ponderosa+Events+Place/data=!4m2!3m1!1s0x0:0x8ef54ec376171ee?sa=X&ved=1t:2428&ictx=111",
+  "images": {
+    "hero": "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1600&h=900&fit=crop&q=80",
+    "couple": "https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600&h=800&fit=crop&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1502635385003-ee1e6a1a742d?w=600&h=900&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&h=600&fit=crop&q=80"
+    ]
+  }
+}

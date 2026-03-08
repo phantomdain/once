@@ -1,0 +1,81 @@
+{
+  "backLink": "../../../index.html#templates",
+  "partner1": "Clara",
+  "partner2": "Thomas",
+  "couple": "Clara & Thomas",
+  "date": "September 20, 2025",
+  "dateShort": "20 · 09 · 2025",
+  "venue": "Ponderosa Events Place",
+  "location": "Hudson Valley, New York",
+  "story": "We met at a farmers market on a crisp autumn morning — Thomas was selling honey, Clara was arguing that his bees were overrated. Two years of good-natured debate later, we decided we'd rather spend the rest of our lives disagreeing together.",
+  "ceremony": {
+    "time": "4:00 PM",
+    "label": "Ceremony",
+    "location": "The Old Oak Meadow"
+  },
+  "cocktails": {
+    "time": "5:30 PM",
+    "label": "Cocktail Hour",
+    "location": "Barn Courtyard"
+  },
+  "reception": {
+    "time": "7:00 PM",
+    "label": "Dinner & Dancing",
+    "location": "Sunrise Barn, Main Hall"
+  },
+  "rsvpDeadline": "August 15, 2025",
+  "email": "clara.thomas2025@gmail.com",
+  "dressCode": "Rustic Chic — think linen, florals, and boots welcome",
+  "note": "The evening will be held outdoors. We recommend layers as it may get cool after sundown.",
+  "colorPalette": [
+    { "hex": "#f4ede0", "name": "Warm Linen" },
+    { "hex": "#9b5c38", "name": "Terracotta" },
+    { "hex": "#6e8060", "name": "Sage Green" }
+  ],
+  "gifts": {
+    "message": "Your presence at our celebration is the greatest gift of all. For those who wish to contribute, a cash gift or contribution to our home fund would be deeply appreciated.",
+    "registry": [
+      { "name": "Our Home Fund", "url": "https://example.com/clara-thomas" }
+    ]
+  },
+  "entourage": {
+    "primary": [
+      { "name": "Mr. & Mrs. Harrison", "role": "Principal Sponsor" },
+      { "name": "Mr. & Mrs. Campbell", "role": "Principal Sponsor" },
+      { "name": "Mr. & Mrs. Morrison", "role": "Principal Sponsor" }
+    ],
+    "secondary": [
+      { "name": "James Cooper", "role": "Best Man" },
+      { "name": "Emma Sullivan", "role": "Maid of Honor" },
+      { "name": "Lily Brooks", "role": "Bridesmaid" },
+      { "name": "Noah Carter", "role": "Groomsman" },
+      { "name": "Ava Mitchell", "role": "Bridesmaid" },
+      { "name": "Ethan Parker", "role": "Groomsman" },
+      { "name": "Zoe Turner", "role": "Flower Girl" },
+      { "name": "Oliver Reed", "role": "Ring Bearer" }
+    ]
+  },
+  "sponsors": {
+    "primary": [
+      { "name": "Sunrise Barn", "role": "Venue Partner" }
+    ],
+    "secondary": [
+      { "name": "Wildflower & Co.", "role": "Floral Design" },
+      { "name": "The Barn Caterers", "role": "Catering" },
+      { "name": "Golden Hour Photography", "role": "Photography" }
+    ]
+  },
+  "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.4!2d121.1480!3d14.6091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397d01f34a857c1:0x8ef54ec376171ee!2sPonderosa+Events+Place!5e0!3m2!1sen!2sph!4v1714000000000!5m2!1sen!2sph",
+  "mapDirectionsUrl": "https://www.google.com/maps/place/Ponderosa+Events+Place/data=!4m2!3m1!1s0x0:0x8ef54ec376171ee?sa=X&ved=1t:2428&ictx=111",
+  "images": {
+    "hero": "https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=1600&h=900&fit=crop&q=80",
+    "couple": "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&h=800&fit=crop&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1510076857177-7470076d4098?w=600&h=900&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1502635385003-ee1e6a1a742d?w=600&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=600&fit=crop&q=80"
+    ]
+  }
+}

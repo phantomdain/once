@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding Website · Modern Template</title>
+  <link rel="icon" href="../../../assets/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f5f5f5;
+      --text: #111111;
+      --muted: #767676;
+      --border: #e0e0e0;
+      --accent: #111111;
+      --font-h: 'Cormorant Garamond', serif;
+      --font-b: 'Inter', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-b); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+
+    /* Back + Badge — live inside the top bar, not fixed independently */
+    .back { display: flex; align-items: center; gap: 5px; font-size: 0.56rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); transition: color .2s; }
+    .back:hover { color: var(--text); }
+    .back::before { content: '←'; }
+    .badge { font-size: 0.54rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+
+    /* Top utility bar */
+    .top-bar { position: fixed; top: 0; left: 0; width: 100%; height: 34px; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; background: var(--surface); border-bottom: 1px solid var(--border); z-index: 200; }
+
+    /* NAV — sits below the top bar */
+    .nav { position: fixed; width: 100%; top: 34px; left: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); height: 58px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; z-index: 100; }
+    .nav__name { font-family: var(--font-b); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text); }
+    .nav__links { display: flex; gap: 32px; }
+    .nav__links a { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); transition: color .2s; }
+    .nav__links a:hover { color: var(--text); }
+
+    /* HERO — full-bleed split layout */
+    .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
+    .hero__left { display: flex; flex-direction: column; justify-content: center; padding: 112px 60px 60px; }
+    .hero__right { background: var(--surface); position: relative; overflow: hidden; }
+    .hero__right img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .hero__overline { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+    .hero__names { font-family: var(--font-h); font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 300; line-height: 0.95; letter-spacing: -0.02em; color: var(--text); margin-bottom: 32px; }
+    .hero__names em { display: block; font-style: italic; font-size: 0.4em; font-weight: 300; color: var(--muted); letter-spacing: 0.04em; margin: 10px 0; }
+    .hero__meta { display: flex; flex-direction: column; gap: 4px; margin-bottom: 40px; }
+    .hero__meta-row { display: flex; align-items: center; gap: 10px; font-size: 0.78rem; font-weight: 400; color: var(--muted); }
+    .hero__meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border); flex-shrink: 0; }
+    .hero__meta-val { color: var(--text); font-weight: 500; }
+    .hero__actions { display: flex; gap: 12px; }
+
+    /* Buttons */
+    .btn { display: inline-flex; padding: 13px 28px; font-family: var(--font-b); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+    .btn-primary { background: var(--text); color: var(--bg); border: 1px solid var(--text); }
+    .btn-primary:hover { background: transparent; color: var(--text); }
+    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+    .btn-ghost:hover { border-color: var(--text); color: var(--text); }
+
+    /* Sections */
+    section { padding: 96px 40px; }
+    .container { max-width: 960px; margin: 0 auto; }
+    .sec-kicker { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 12px; }
+    .sec-title { font-family: var(--font-h); font-size: clamp(2rem, 5vw, 3rem); font-weight: 300; color: var(--text); margin-bottom: 20px; line-height: 1.1; }
+    .sec-text { font-size: 0.92rem; font-weight: 300; color: var(--muted); line-height: 1.85; max-width: 500px; }
+
+    /* Story */
+    .story { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .story__inner { display: grid; grid-template-columns: 2fr 3fr; gap: 80px; align-items: center; }
+    .story__num { font-family: var(--font-h); font-size: 8rem; font-weight: 300; color: var(--border); line-height: 1; margin-bottom: 24px; }
+
+    /* Details — horizontal timeline */
+    .details { background: var(--bg); }
+    .timeline { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 56px; position: relative; }
+    .timeline::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--border); }
+    .timeline__item { padding: 32px 28px 0 0; position: relative; }
+    .timeline__item::before { content: ''; position: absolute; top: -5px; left: 0; width: 9px; height: 9px; border: 1px solid var(--text); background: var(--bg); }
+    .timeline__time { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.16em; color: var(--text); margin-bottom: 10px; }
+    .timeline__label { font-family: var(--font-h); font-size: 1.4rem; font-weight: 400; margin-bottom: 8px; }
+    .timeline__text { font-size: 0.82rem; font-weight: 300; color: var(--muted); line-height: 1.65; }
+
+    /* Gallery */
+    .gallery { background: var(--surface); border-top: 1px solid var(--border); }
+    .gallery__grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: auto auto; gap: 4px; margin-top: 48px; }
+    .gallery__item { background: var(--border); aspect-ratio: 1; overflow: hidden; }
+    .gallery__item--wide { grid-column: span 2; aspect-ratio: 2/1; }
+    .gallery__item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* RSVP */
+    .rsvp { background: var(--bg); border-top: 1px solid var(--border); }
+    .rsvp__layout { display: grid; grid-template-columns: 1fr 1px 1fr; gap: 72px; align-items: start; }
+    .rsvp__sep { background: var(--border); }
+    .rsvp__deadline { font-family: var(--font-h); font-size: 1rem; font-style: italic; color: var(--muted); margin-top: 12px; }
+    .rsvp__form { display: flex; flex-direction: column; gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 5px; }
+    .form-label { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+    .form-input, .form-select, .form-textarea { background: var(--surface); border: 1px solid var(--border); padding: 11px 14px; font-family: var(--font-b); font-size: 0.875rem; color: var(--text); outline: none; width: 100%; transition: border-color .2s; resize: vertical; font-weight: 300; }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--text); }
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--border); }
+
+    /* Footer */
+    footer { background: var(--text); padding: 60px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .f-left .f-names { font-family: var(--font-h); font-size: 2.5rem; font-weight: 300; color: var(--bg); margin-bottom: 6px; }
+    .f-left .f-date { font-size: 0.62rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+    .f-right { text-align: right; }
+    .f-right .f-email { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+    .f-right .f-credit { margin-top: 10px; font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.18); }
+    .f-right .f-credit a { color: inherit; }
+    .f-right .f-credit a:hover { color: rgba(255,255,255,0.4); }
+
+    /* Style (Colours + Dress Code) */
+    .style-sec { background: var(--bg); border-top: 1px solid var(--border); }
+    .style-sec__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 48px; }
+    .style-sec__sub { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; display: block; }
+    .color-swatches { display: flex; gap: 24px; flex-wrap: wrap; }
+    .color-swatch { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .color-swatch__dot { width: 48px; height: 48px; border: 1px solid var(--border); flex-shrink: 0; }
+    .color-swatch__name { font-size: 0.68rem; font-weight: 400; color: var(--text); text-align: center; }
+    .color-swatch__hex { font-size: 0.58rem; font-weight: 300; color: var(--muted); text-align: center; letter-spacing: 0.06em; }
+    .style-sec__dress-text { font-family: var(--font-h); font-style: italic; font-size: 1.1rem; color: var(--muted); line-height: 1.65; }
+
+    /* Gifts */
+    .gifts-sec { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .registry-links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+    .registry-link { display: inline-flex; padding: 12px 28px; border: 1px solid var(--text); font-family: var(--font-b); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text); transition: background .2s, color .2s; }
+    .registry-link:hover { background: var(--text); color: var(--bg); }
+
+    /* Sponsors */
+    .sponsors-sec { background: var(--bg); border-top: 1px solid var(--border); }
+    .sponsors-primary { display: flex; gap: 0; flex-wrap: wrap; margin-top: 40px; margin-bottom: 24px; border: 1px solid var(--border); }
+    .sponsor-card--primary { padding: 28px 40px; text-align: center; flex: 1; }
+    .sponsors-secondary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
+    .sponsor-card { padding: 22px 20px; background: var(--bg); }
+    .sponsor-name { font-family: var(--font-h); font-size: 1.05rem; font-weight: 300; color: var(--text); margin-bottom: 4px; }
+    .sponsor-role { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+
+    /* Entourage */
+    .entourage-sec { background: var(--bg); border-top: 1px solid var(--border); }
+    .entourage-sec__sub { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); display: block; margin: 40px 0 16px; }
+    .entourage-primary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
+    .entourage-secondary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); margin-top: 1px; }
+    .entourage-card { background: var(--surface); padding: 24px 20px; }
+    .entourage-card--primary { background: var(--bg); padding: 32px 24px; }
+    .entourage-name { font-family: var(--font-h); font-size: 1.05rem; font-weight: 300; color: var(--text); margin-bottom: 5px; }
+    .entourage-role { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+
+    /* Map */
+    .map-sec { background: var(--surface); border-top: 1px solid var(--border); }
+    .map-sec__iframe { width: 100%; height: 420px; border: none; display: block; margin-top: 40px; }
+    .map-sec__link { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); transition: color .2s; }
+    .map-sec__link:hover { color: var(--text); }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero__right { display: none; }
+      .hero__left { padding: 110px 24px 60px; }
+      .story__inner { grid-template-columns: 1fr; gap: 40px; }
+      .timeline { grid-template-columns: 1fr; }
+      .timeline__item { padding: 24px 0 0; border-top: 1px solid var(--border); }
+      .timeline::before { display: none; }
+      .timeline__item::before { display: none; }
+      .rsvp__layout { grid-template-columns: 1fr; }
+      .rsvp__sep { display: none; }
+      .gallery__grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery__item--wide { grid-column: span 1; aspect-ratio: 1; }
+      footer { grid-template-columns: 1fr; }
+      .f-right { text-align: left; }
+      .nav { padding: 0 24px; }
+      .nav__links { display: none; }
+      section { padding: 72px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <a id="backLink" href="#" class="back" style="display:none">Templates</a>
+    <span class="badge">Modern · Wedding Site</span>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <span class="nav__name" data-field="couple">Loading…</span>
+    <div class="nav__links">
+      <a href="#story">Story</a>
+      <a href="#details">Details</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#rsvp">RSVP</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero__left">
+      <span class="hero__overline">You are invited to our wedding</span>
+      <h1 class="hero__names">
+        <span data-field="partner1">—</span>
+        <em>&amp;</em>
+        <span data-field="partner2">—</span>
+      </h1>
+      <div class="hero__meta">
+        <div class="hero__meta-row">
+          <span class="hero__meta-dot"></span>
+          <span class="hero__meta-val" data-field="date">—</span>
+        </div>
+        <div class="hero__meta-row">
+          <span class="hero__meta-dot"></span>
+          <span class="hero__meta-val" data-field="venue">—</span>
+          <span>·</span>
+          <span data-field="location">—</span>
+        </div>
+        <div class="hero__meta-row">
+          <span class="hero__meta-dot"></span>
+          <span data-field="dressCode">—</span>
+        </div>
+      </div>
+      <div class="hero__actions">
+        <a href="#rsvp" class="btn btn-primary">RSVP</a>
+        <a href="#details" class="btn btn-ghost">View Details</a>
+      </div>
+    </div>
+    <div class="hero__right">
+      <img data-img="images.hero" src="" alt="Venue" />
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story" id="story">
+    <div class="container">
+      <div class="story__inner">
+        <div>
+          <div class="story__num">01</div>
+          <span class="sec-kicker">Our Story</span>
+          <h2 class="sec-title">How we got here</h2>
+        </div>
+        <div>
+          <p class="sec-text" data-field="story">—</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAILS -->
+  <section class="details" id="details">
+    <div class="container">
+      <span class="sec-kicker">The Day</span>
+      <h2 class="sec-title">Schedule</h2>
+      <div class="timeline">
+        <div class="timeline__item">
+          <p class="timeline__time" data-field="ceremony.time">—</p>
+          <p class="timeline__label" data-field="ceremony.label">Ceremony</p>
+          <p class="timeline__text" data-field="ceremony.location">—</p>
+        </div>
+        <div class="timeline__item">
+          <p class="timeline__time" data-field="cocktails.time">—</p>
+          <p class="timeline__label" data-field="cocktails.label">Cocktails</p>
+          <p class="timeline__text" data-field="cocktails.location">—</p>
+        </div>
+        <div class="timeline__item">
+          <p class="timeline__time" data-field="reception.time">—</p>
+          <p class="timeline__label" data-field="reception.label">Reception</p>
+          <p class="timeline__text" data-field="reception.location">—</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section class="map-sec" id="venue-map">
+    <div class="container">
+      <span class="sec-kicker">Getting Here</span>
+      <h2 class="sec-title">The Venue</h2>
+      <iframe id="venueMap" class="map-sec__iframe" src="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Venue location map"></iframe>
+      <a id="venueMapLink" href="#" target="_blank" rel="noopener" class="map-sec__link">Open in Google Maps ↗</a>
+    </div>
+  </section>
+
+  <!-- STYLE: COLOURS + DRESS CODE -->
+  <section class="style-sec" id="style">
+    <div class="container">
+      <span class="sec-kicker">Style Guide</span>
+      <h2 class="sec-title">Colour &amp; Dress</h2>
+      <div class="style-sec__grid">
+        <div>
+          <span class="style-sec__sub">Wedding Palette</span>
+          <div class="color-swatches" id="colorSwatches"></div>
+        </div>
+        <div>
+          <span class="style-sec__sub">Dress Code</span>
+          <p class="style-sec__dress-text" data-field="dressCode">—</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="gallery">
+    <div class="container">
+      <span class="sec-kicker">Gallery</span>
+      <h2 class="sec-title">Our moments</h2>
+      <div class="gallery__grid">
+        <div class="gallery__item gallery__item--wide"><img data-img="images.gallery.0" alt="" /></div>
+        <div class="gallery__item"><img data-img="images.gallery.1" alt="" /></div>
+        <div class="gallery__item"><img data-img="images.gallery.2" alt="" /></div>
+        <div class="gallery__item"><img data-img="images.gallery.3" alt="" /></div>
+        <div class="gallery__item"><img data-img="images.gallery.4" alt="" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GIFTS -->
+  <section class="gifts-sec" id="gifts">
+    <div class="container">
+      <span class="sec-kicker">Gifts &amp; Registry</span>
+      <h2 class="sec-title">A Gift of Presence</h2>
+      <p class="sec-text" data-field="gifts.message">—</p>
+      <div class="registry-links" id="giftsRegistry"></div>
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <section class="rsvp" id="rsvp">
+    <div class="container">
+      <div class="rsvp__layout">
+        <div>
+          <span class="sec-kicker">RSVP</span>
+          <h2 class="sec-title">Kindly respond</h2>
+          <p class="sec-text">Please respond by <strong data-field="rsvpDeadline">—</strong>. We look forward to celebrating with you.</p>
+          <p class="rsvp__deadline" data-field="note">—</p>
+          <p class="sec-text" style="margin-top:20px;font-size:.8rem;">Questions: <a data-field="email" style="text-decoration:underline;text-underline-offset:3px;">—</a></p>
+        </div>
+        <div class="rsvp__sep"></div>
+        <form class="rsvp__form" onsubmit="return false">
+          <div class="form-group">
+            <label class="form-label">Name</label>
+            <input class="form-input" type="text" placeholder="Your full name" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input class="form-input" type="email" placeholder="your@email.com" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Attending?</label>
+            <select class="form-select">
+              <option>Yes — I'll be there</option>
+              <option>No — I can't make it</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Number of guests</label>
+            <input class="form-input" type="number" min="1" max="4" placeholder="1" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Dietary requirements</label>
+            <input class="form-input" type="text" placeholder="Any requirements?" />
+          </div>
+          <button class="btn btn-primary" type="submit">Submit RSVP</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENTOURAGE -->
+  <section class="entourage-sec" id="entourage">
+    <div class="container">
+      <span class="sec-kicker">Wedding Party</span>
+      <h2 class="sec-title">Our Entourage</h2>
+      <span class="entourage-sec__sub">Principal Sponsors</span>
+      <div class="entourage-primary" id="entouragePrimary"></div>
+      <span class="entourage-sec__sub">Wedding Party</span>
+      <div class="entourage-secondary" id="entourageSecondary"></div>
+    </div>
+  </section>
+
+  <!-- SPONSORS -->
+  <section class="sponsors-sec" id="sponsors">
+    <div class="container">
+      <span class="sec-kicker">With Thanks To</span>
+      <h2 class="sec-title">Our Partners</h2>
+      <div class="sponsors-primary" id="sponsorsPrimary"></div>
+      <div class="sponsors-secondary" id="sponsorsSecondary"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="f-left">
+      <p class="f-names" data-field="couple">—</p>
+      <p class="f-date" data-field="dateShort">—</p>
+    </div>
+    <div class="f-right">
+      <p class="f-email" data-field="email">—</p>
+      <p class="f-credit">Wedding website by <a href="../../../index.html">ONCE</a></p>
+    </div>
+  </footer>
+
+  <script>
+    fetch('./config.json')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        // Back link
+        var backLinkEl = document.getElementById('backLink');
+        if (backLinkEl && data.backLink) { backLinkEl.href = data.backLink; backLinkEl.style.display = ''; }
+        document.querySelectorAll('[data-field]').forEach(function(el) {
+          var keys = el.getAttribute('data-field').split('.');
+          var val = data;
+          keys.forEach(function(k) { val = val && val[k]; });
+          if (val !== undefined && val !== null) {
+            el.textContent = val;
+            if (el.tagName === 'A' && keys.includes('email')) {
+              el.href = 'mailto:' + val;
+            }
+          }
+        });
+        document.querySelectorAll('[data-img]').forEach(function(el) {
+          var keys = el.getAttribute('data-img').split('.');
+          var val = data;
+          keys.forEach(function(k) { val = val && val[isNaN(k) ? k : +k]; });
+          if (val) { el.src = val; }
+        });
+        if (data.colorPalette) {
+          var swatchEl = document.getElementById('colorSwatches');
+          if (swatchEl) data.colorPalette.forEach(function(c) {
+            var d = document.createElement('div'); d.className = 'color-swatch';
+            d.innerHTML = '<div class="color-swatch__dot" style="background:' + c.hex + '"></div><p class="color-swatch__name">' + c.name + '</p><p class="color-swatch__hex">' + c.hex + '</p>';
+            swatchEl.appendChild(d);
+          });
+        }
+        if (data.gifts && data.gifts.registry) {
+          var regEl = document.getElementById('giftsRegistry');
+          if (regEl) data.gifts.registry.forEach(function(item) {
+            var a = document.createElement('a'); a.href = item.url; a.target = '_blank'; a.rel = 'noopener';
+            a.textContent = item.name; a.className = 'registry-link'; regEl.appendChild(a);
+          });
+        }
+        if (data.sponsors) {
+          var priEl = document.getElementById('sponsorsPrimary');
+          if (priEl && data.sponsors.primary) data.sponsors.primary.forEach(function(s) {
+            var d = document.createElement('div'); d.className = 'sponsor-card sponsor-card--primary';
+            d.innerHTML = '<p class="sponsor-name">' + s.name + '</p><p class="sponsor-role">' + s.role + '</p>';
+            priEl.appendChild(d);
+          });
+          var secEl = document.getElementById('sponsorsSecondary');
+          if (secEl && data.sponsors.secondary) data.sponsors.secondary.forEach(function(s) {
+            var d = document.createElement('div'); d.className = 'sponsor-card';
+            d.innerHTML = '<p class="sponsor-name">' + s.name + '</p><p class="sponsor-role">' + s.role + '</p>';
+            secEl.appendChild(d);
+          });
+        }
+        // Entourage
+        if (data.entourage) {
+          var priEntEl = document.getElementById('entouragePrimary');
+          if (priEntEl && data.entourage.primary) data.entourage.primary.forEach(function(p) {
+            var d = document.createElement('div'); d.className = 'entourage-card entourage-card--primary';
+            d.innerHTML = '<p class="entourage-name">' + p.name + '</p><p class="entourage-role">' + p.role + '</p>';
+            priEntEl.appendChild(d);
+          });
+          var secEntEl = document.getElementById('entourageSecondary');
+          if (secEntEl && data.entourage.secondary) data.entourage.secondary.forEach(function(p) {
+            var d = document.createElement('div'); d.className = 'entourage-card';
+            d.innerHTML = '<p class="entourage-name">' + p.name + '</p><p class="entourage-role">' + p.role + '</p>';
+            secEntEl.appendChild(d);
+          });
+        }
+        // Venue map
+        var mapEl = document.getElementById('venueMap');
+        var mapLinkEl = document.getElementById('venueMapLink');
+        if (mapEl && data.mapUrl) { mapEl.src = data.mapUrl; }
+        if (mapLinkEl && data.mapDirectionsUrl) { mapLinkEl.href = data.mapDirectionsUrl; }
+        document.title = (data.couple || '') + ' — Our Wedding';
+      })
+      .catch(function() {
+        console.warn('ONCE: config.json not found. Edit config.json to populate this template.');
+      });
+  </script>
+</body>
+</html>

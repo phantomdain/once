@@ -1,0 +1,71 @@
+{
+  "backLink": "../../../index.html#templates",
+  "partner1": "Mia",
+  "partner2": "Rafael",
+  "couple": "Mia & Rafael",
+  "date": "April 19, 2026",
+  "dateShort": "19 · 04 · 2026",
+  "venue": "Ponderosa Events Place",
+  "location": "Boracay Island, Philippines",
+  "story": "Mia was on a solo trip to escape heartbreak. Rafael was leading a diving tour he almost cancelled. They ended up at the same beachside warung as the sun went down, talking until the stars came out. She missed her flight home. On purpose.",
+  "ceremony": { "time": "4:30 PM", "label": "Beach Ceremony", "location": "White Sand Shore" },
+  "cocktails": { "time": "5:45 PM", "label": "Sunset Drinks", "location": "Coral Deck" },
+  "reception": { "time": "7:30 PM", "label": "Feast & Dancing", "location": "The Palm Grove" },
+  "rsvpDeadline": "March 1, 2026",
+  "email": "mia.rafael2026@gmail.com",
+  "dressCode": "Resort Elegant — flowing fabrics, tropical prints, bare feet welcome",
+  "note": "The ceremony will be held on the beach. We recommend light, breathable fabrics. Sunscreen provided at the venue.",
+  "colorPalette": [
+    { "hex": "#F5E6C8", "name": "Sandy Beige" },
+    { "hex": "#2D7B8B", "name": "Ocean Teal" },
+    { "hex": "#E8654A", "name": "Coral" }
+  ],
+  "gifts": {
+    "message": "Being here with us under the sun is the greatest gift. For those who'd like to contribute, our honeymoon adventure fund would be treasured.",
+    "registry": [
+      { "name": "Honeymoon Fund", "url": "https://example.com/mia-rafael" },
+      { "name": "Experience Registry", "url": "https://example.com/registry" }
+    ]
+  },
+  "entourage": {
+    "primary": [
+      { "name": "Mr. & Mrs. Santos", "role": "Principal Sponsor" },
+      { "name": "Mr. & Mrs. Vega", "role": "Principal Sponsor" },
+      { "name": "Mr. & Mrs. Cruz", "role": "Principal Sponsor" }
+    ],
+    "secondary": [
+      { "name": "Diego Reyes", "role": "Best Man" },
+      { "name": "Luna Torres", "role": "Maid of Honor" },
+      { "name": "Sofia Diaz", "role": "Bridesmaid" },
+      { "name": "Marco Silva", "role": "Groomsman" },
+      { "name": "Isla Flores", "role": "Bridesmaid" },
+      { "name": "Carlos Mendez", "role": "Groomsman" },
+      { "name": "Rosa Jimenez", "role": "Flower Girl" },
+      { "name": "Pablo Ruiz", "role": "Ring Bearer" }
+    ]
+  },
+  "sponsors": {
+    "primary": [
+      { "name": "Coral Bay Resort", "role": "Venue & Accommodation" }
+    ],
+    "secondary": [
+      { "name": "Island Blooms", "role": "Floral Design" },
+      { "name": "Golden Light Photography", "role": "Photography" },
+      { "name": "Sea Salt Catering", "role": "Catering" },
+      { "name": "Island Transfers", "role": "Transportation" }
+    ]
+  },
+  "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.4!2d121.1480!3d14.6091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397d01f34a857c1:0x8ef54ec376171ee!2sPonderosa+Events+Place!5e0!3m2!1sen!2sph!4v1714000000000!5m2!1sen!2sph",
+  "mapDirectionsUrl": "https://www.google.com/maps/place/Ponderosa+Events+Place/data=!4m2!3m1!1s0x0:0x8ef54ec376171ee?sa=X&ved=1t:2428&ictx=111",
+  "images": {
+    "hero": "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=1600&h=900&fit=crop&q=80",
+    "couple": "https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=600&h=800&fit=crop&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=600&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1510076857177-7470076d4098?w=600&h=900&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1502635385003-ee1e6a1a742d?w=600&h=600&fit=crop&q=80"
+    ]
+  }
+}

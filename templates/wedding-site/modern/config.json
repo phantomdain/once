@@ -1,0 +1,80 @@
+{
+  "backLink": "../../../index.html#templates",
+  "partner1": "Kai",
+  "partner2": "Jordan",
+  "couple": "Kai & Jordan",
+  "date": "March 14, 2026",
+  "dateShort": "14 · 03 · 2026",
+  "venue": "Ponderosa Events Place",
+  "location": "Chicago, Illinois",
+  "story": "We matched on an app, went on a first date that lasted six hours, and spent the next three years building something neither of us planned for. Turns out the algorithm was right.",
+  "ceremony": {
+    "time": "5:00 PM",
+    "label": "Ceremony",
+    "location": "The Pavilion, Ground Floor"
+  },
+  "cocktails": {
+    "time": "6:15 PM",
+    "label": "Cocktails",
+    "location": "Rooftop Terrace"
+  },
+  "reception": {
+    "time": "7:30 PM",
+    "label": "Dinner & Dancing",
+    "location": "The Pavilion, Level 2"
+  },
+  "rsvpDeadline": "February 1, 2026",
+  "email": "kai.jordan2026@gmail.com",
+  "dressCode": "Black Tie Optional",
+  "note": "Parking is available at 225 N. Michigan Ave. Valet service provided from 4:30 PM.",
+  "colorPalette": [
+    { "hex": "#111111", "name": "Onyx" },
+    { "hex": "#ffffff", "name": "White" },
+    { "hex": "#c8c8c8", "name": "Silver" }
+  ],
+  "gifts": {
+    "message": "No gifts required — your presence is more than enough. Those wishing to contribute may do so to our travel fund.",
+    "registry": [
+      { "name": "Travel Fund", "url": "https://example.com/kai-jordan" }
+    ]
+  },
+  "entourage": {
+    "primary": [
+      { "name": "Mr. & Mrs. Nakamura", "role": "Principal Sponsor" },
+      { "name": "Mr. & Mrs. Williams", "role": "Principal Sponsor" },
+      { "name": "Mr. & Mrs. Chen", "role": "Principal Sponsor" }
+    ],
+    "secondary": [
+      { "name": "Alex Rivera", "role": "Best Man" },
+      { "name": "Priya Sharma", "role": "Maid of Honor" },
+      { "name": "Mia Johnson", "role": "Bridesmaid" },
+      { "name": "Sam Lee", "role": "Groomsman" },
+      { "name": "Chloe Kim", "role": "Bridesmaid" },
+      { "name": "Derek Patel", "role": "Groomsman" },
+      { "name": "Nora Walsh", "role": "Flower Girl" },
+      { "name": "Finn Murphy", "role": "Ring Bearer" }
+    ]
+  },
+  "sponsors": {
+    "primary": [
+      { "name": "The Pavilion Chicago", "role": "Venue" }
+    ],
+    "secondary": [
+      { "name": "Studio Minimal", "role": "Floral & Decor" },
+      { "name": "Aperture Film", "role": "Photography & Video" },
+      { "name": "The Tasting Room", "role": "Catering" }
+    ]
+  },
+  "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.4!2d121.1480!3d14.6091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397d01f34a857c1:0x8ef54ec376171ee!2sPonderosa+Events+Place!5e0!3m2!1sen!2sph!4v1714000000000!5m2!1sen!2sph",
+  "mapDirectionsUrl": "https://www.google.com/maps/place/Ponderosa+Events+Place/data=!4m2!3m1!1s0x0:0x8ef54ec376171ee?sa=X&ved=1t:2428&ictx=111",
+  "images": {
+    "hero": "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=900&h=1200&fit=crop&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=1000&h=500&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1502635385003-ee1e6a1a742d?w=600&h=600&fit=crop&q=80"
+    ]
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "backLink": "../../../index.html#templates",
+  "partner1": "Isabelle",
+  "partner2": "Ethan",
+  "couple": "Isabelle & Ethan",
+  "date": "May 9, 2026",
+  "dateShort": "09 · 05 · 2026",
+  "venue": "Ponderosa Events Place",
+  "location": "Napa Valley, California",
+  "story": "Ethan was lost in Paris. Isabelle gave him the wrong directions on purpose because she wanted to keep talking to him. He found out two years later and proposed the same night. We have been wonderfully lost together ever since.",
+  "ceremony": {
+    "time": "4:30 PM",
+    "label": "Ceremony",
+    "location": "Rose Garden, Château de Fleurs"
+  },
+  "cocktails": {
+    "time": "5:45 PM",
+    "label": "Champagne Hour",
+    "location": "The Orangerie"
+  },
+  "reception": {
+    "time": "7:30 PM",
+    "label": "Dinner & Celebration",
+    "location": "Grand Ballroom"
+  },
+  "rsvpDeadline": "April 1, 2026",
+  "email": "isabelle.ethan2026@gmail.com",
+  "dressCode": "Garden Romantic — florals, pastels, and your best dancing shoes",
+  "note": "Château de Fleurs is a working vineyard. Wine tasting available from 3:00 PM for early arrivals.",
+  "colorPalette": [
+    { "hex": "#e8b4b8", "name": "Blush Rose" },
+    { "hex": "#c9a05a", "name": "Antique Gold" },
+    { "hex": "#fdf8f5", "name": "Ivory" }
+  ],
+  "gifts": {
+    "message": "Sharing this day with you is the only gift we need. For those who wish to honour us further, a contribution to our honeymoon or a cash gift would be treasured with love.",
+    "registry": [
+      { "name": "Honeymoon Fund", "url": "https://example.com/isabelle-ethan" },
+      { "name": "Wish List", "url": "https://example.com/registry" }
+    ]
+  },
+  "entourage": {
+    "primary": [
+      { "name": "M. & Mme. Dubois", "role": "Principal Sponsor" },
+      { "name": "M. & Mme. Laurent", "role": "Principal Sponsor" },
+      { "name": "M. & Mme. Fontaine", "role": "Principal Sponsor" }
+    ],
+    "secondary": [
+      { "name": "Julien Morel", "role": "Best Man" },
+      { "name": "Camille Rousseau", "role": "Maid of Honor" },
+      { "name": "Sophie Bernard", "role": "Bridesmaid" },
+      { "name": "Antoine Lefèvre", "role": "Groomsman" },
+      { "name": "Léa Marchand", "role": "Bridesmaid" },
+      { "name": "Hugo Dupont", "role": "Groomsman" },
+      { "name": "Chloé Petit", "role": "Flower Girl" },
+      { "name": "Théo Martin", "role": "Ring Bearer" }
+    ]
+  },
+  "sponsors": {
+    "primary": [
+      { "name": "Château de Fleurs", "role": "Venue & Vineyard" }
+    ],
+    "secondary": [
+      { "name": "La Rose Atelier", "role": "Floral Design" },
+      { "name": "Lumière Photography", "role": "Photography" },
+      { "name": "Grand Cuisine Paris", "role": "Catering" },
+      { "name": "Amour Transport", "role": "Transportation" }
+    ]
+  },
+  "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.4!2d121.1480!3d14.6091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397d01f34a857c1:0x8ef54ec376171ee!2sPonderosa+Events+Place!5e0!3m2!1sen!2sph!4v1714000000000!5m2!1sen!2sph",
+  "mapDirectionsUrl": "https://www.google.com/maps/place/Ponderosa+Events+Place/data=!4m2!3m1!1s0x0:0x8ef54ec376171ee?sa=X&ved=1t:2428&ictx=111",
+  "images": {
+    "gallery": [
+      "https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=800&h=1200&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=800&h=400&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1502635385003-ee1e6a1a742d?w=800&h=400&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=400&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&h=400&fit=crop&q=80"
+    ]
+  }
+}

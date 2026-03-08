@@ -1,0 +1,70 @@
+{
+  "backLink": "../../../index.html#templates",
+  "partner1": "Alex",
+  "partner2": "Morgan",
+  "couple": "Alex & Morgan",
+  "date": "November 8, 2025",
+  "dateShort": "08 · 11 · 2025",
+  "venue": "Ponderosa Events Place",
+  "location": "New York City, New York",
+  "story": "We were both late to the same gallery opening. We arrived arguing with our respective friends, ended up arguing with each other over the same painting, and never really stopped. Three years later, here we are — still disagreeing, still together, still in love with that painting.",
+  "ceremony": { "time": "5:00 PM", "label": "Ceremony", "location": "The Grand Hall, Floor 42" },
+  "cocktails": { "time": "6:30 PM", "label": "Cocktail Hour", "location": "Sky Terrace" },
+  "reception": { "time": "8:00 PM", "label": "Dinner & Dancing", "location": "The Grand Hall" },
+  "rsvpDeadline": "October 1, 2025",
+  "email": "alex.morgan2025@gmail.com",
+  "dressCode": "Black Tie — monochrome encouraged",
+  "note": "The venue is located on the 42nd floor with panoramic views of the city. Valet parking available from 4:00 PM.",
+  "colorPalette": [
+    { "hex": "#000000", "name": "Onyx" },
+    { "hex": "#ffffff", "name": "White" },
+    { "hex": "#c8c8c8", "name": "Silver" }
+  ],
+  "gifts": {
+    "message": "Your presence is the only gift we need. Those who wish to contribute may donate to our travel fund.",
+    "registry": [
+      { "name": "Travel Fund", "url": "https://example.com/alex-morgan" }
+    ]
+  },
+  "entourage": {
+    "primary": [
+      { "name": "Mr. & Mrs. Reeves", "role": "Principal Sponsor" },
+      { "name": "Mr. & Mrs. Brooks", "role": "Principal Sponsor" },
+      { "name": "Mr. & Mrs. Tanaka", "role": "Principal Sponsor" }
+    ],
+    "secondary": [
+      { "name": "Dani Park", "role": "Best Man" },
+      { "name": "Sasha Cole", "role": "Maid of Honor" },
+      { "name": "Zara Hunt", "role": "Bridesmaid" },
+      { "name": "Miles Osei", "role": "Groomsman" },
+      { "name": "Priya Seth", "role": "Bridesmaid" },
+      { "name": "Luca Ferri", "role": "Groomsman" },
+      { "name": "Ava Stone", "role": "Flower Girl" },
+      { "name": "Eli Ross", "role": "Ring Bearer" }
+    ]
+  },
+  "sponsors": {
+    "primary": [
+      { "name": "The Grand NYC", "role": "Venue" }
+    ],
+    "secondary": [
+      { "name": "Studio Noir", "role": "Photography & Film" },
+      { "name": "Blanc Florals", "role": "Floral Design" },
+      { "name": "Onyx Catering", "role": "Catering" },
+      { "name": "Metro Car", "role": "Transportation" }
+    ]
+  },
+  "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.4!2d121.1480!3d14.6091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397d01f34a857c1:0x8ef54ec376171ee!2sPonderosa+Events+Place!5e0!3m2!1sen!2sph!4v1714000000000!5m2!1sen!2sph",
+  "mapDirectionsUrl": "https://www.google.com/maps/place/Ponderosa+Events+Place/data=!4m2!3m1!1s0x0:0x8ef54ec376171ee?sa=X&ved=1t:2428&ictx=111",
+  "images": {
+    "hero": "https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=1600&h=900&fit=crop&q=80",
+    "couple": "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=600&h=800&fit=crop&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600&h=900&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=600&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1502635385003-ee1e6a1a742d?w=600&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&h=600&fit=crop&q=80"
+    ]
+  }
+}
