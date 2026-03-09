@@ -3,61 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bloom · Edit — ONCE</title>
-  <link rel="icon" href="../../assets/favicon.ico" />
+  <title>Ethereal · Edit — ONCE</title>
+  <link rel="icon" href="../../../assets/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   <style>
     :root {
-      --accent:  #9b6b4b;
-      --sage:    #8a7060;
-      --bg:      #fdf9f4;
-      --surface: #f5ede3;
-      --text:    #3d2c1e;
-      --muted:   #8a7060;
-      --border:  rgba(155,107,75,0.22);
+      --accent:  #1a1a1a;
+      --sage:    #8a8a8a;
+      --bg:      #fefefe;
+      --surface: #f5f5f5;
+      --text:    #1a1a1a;
+      --muted:   #8a8a8a;
+      --border:  #e4e4e4;
       --font-h:  'Cormorant Garamond', serif;
       --font-b:  'Inter', sans-serif;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: var(--bg); color: var(--text); font-family: var(--font-b); font-size: 14px; -webkit-font-smoothing: antialiased; }
 
-    /* ── Header ───────────────────────────────────────────────────────────── */
     .top-bar { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 32px; height: 56px; gap: 16px; }
     .top-logo { font-family: var(--font-h); font-size: 1.35rem; font-weight: 400; letter-spacing: 0.06em; color: var(--text); text-decoration: none; flex-shrink: 0; }
     .top-badge { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--border); padding: 5px 12px; border-radius: 2px; }
     .top-spacer { flex: 1; }
 
-    /* ── Buttons ──────────────────────────────────────────────────────────── */
     .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 20px; font-family: var(--font-b); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--text); border-radius: 2px; text-decoration: none; transition: all .18s; white-space: nowrap; }
     .btn:hover { border-color: var(--text); }
     .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-    .btn-primary:hover { background: #7d5439; border-color: #7d5439; }
+    .btn-primary:hover { background: #333; border-color: #333; }
     .btn-danger { color: #c0392b; border-color: rgba(192,57,43,0.3); }
     .btn-danger:hover { background: rgba(192,57,43,0.06); border-color: #c0392b; }
 
-    /* ── Storage bar ──────────────────────────────────────────────────────── */
     .storage-bar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 9px 32px; display: flex; align-items: center; gap: 10px; font-size: 0.68rem; color: var(--muted); }
     .storage-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border); flex-shrink: 0; transition: background .3s; }
     .storage-dot--active { background: #5a9e6f; }
 
-    /* ── Actions bar ──────────────────────────────────────────────────────── */
     .actions-bar { padding: 14px 32px; border-bottom: 1px solid var(--border); display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
 
-    /* ── Main ─────────────────────────────────────────────────────────────── */
     .main { max-width: 860px; margin: 0 auto; padding: 40px 32px 80px; }
 
-    /* ── View Mode ────────────────────────────────────────────────────────── */
     .view-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .view-card { background: #fff; border: 1px solid var(--border); border-radius: 3px; padding: 18px 22px; }
     .view-card--full { grid-column: 1 / -1; }
     .view-card__label { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
     .view-val { font-size: 0.88rem; color: var(--text); line-height: 1.65; }
     .view-val .empty { color: var(--border); font-style: italic; font-size: 0.82rem; }
-    .view-names { font-family: var(--font-h); font-size: 2rem; font-weight: 300; color: var(--accent); }
+    .view-names { font-family: var(--font-h); font-size: 2rem; font-weight: 300; color: var(--text); }
+    .view-chip { display: inline-block; font-size: 0.65rem; background: var(--surface); border: 1px solid var(--border); border-radius: 2px; padding: 2px 8px; color: var(--muted); }
 
-    /* ── Edit Form ────────────────────────────────────────────────────────── */
     .form-section { background: #fff; border: 1px solid var(--border); border-radius: 3px; margin-bottom: 10px; overflow: hidden; }
     .form-section__head { display: flex; align-items: center; justify-content: space-between; padding: 13px 20px; cursor: pointer; user-select: none; }
     .form-section__head:hover { background: var(--surface); }
@@ -66,6 +61,10 @@
     .form-section.open .form-section__chevron { transform: rotate(180deg); }
     .form-section__body { padding: 0 20px 18px; display: none; }
     .form-section.open .form-section__body { display: block; }
+
+    .venue-block { padding: 14px; background: var(--surface); border-radius: 3px; margin-bottom: 8px; }
+    .venue-block__title { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+    .venue-block--secondary { border: 1px dashed var(--border); background: transparent; }
 
     .form-group { margin-bottom: 13px; }
     .form-group:last-child { margin-bottom: 0; }
@@ -77,7 +76,6 @@
     .form-hint { font-size: 0.64rem; color: var(--muted); margin-top: 4px; line-height: 1.4; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
-    /* ── Toast ────────────────────────────────────────────────────────────── */
     .toast { position: fixed; bottom: 28px; right: 28px; background: var(--text); color: var(--bg); font-size: 0.72rem; letter-spacing: 0.06em; padding: 12px 22px; border-radius: 3px; opacity: 0; transform: translateY(8px); transition: all .25s; pointer-events: none; z-index: 999; }
     .toast.show { opacity: 1; transform: translateY(0); }
   </style>
@@ -85,8 +83,8 @@
 <body>
 
   <div class="top-bar">
-    <a href="../../index.html" class="top-logo">ONCE</a>
-    <span class="top-badge">Bloom · Edit Config</span>
+    <a href="../../../index.html" class="top-logo">ONCE</a>
+    <span class="top-badge">Ethereal · Edit Config</span>
     <div class="top-spacer"></div>
   </div>
 
@@ -97,7 +95,7 @@
 
   <div class="actions-bar" id="actionsBar">
     <button class="btn btn-primary" onclick="enterEdit()">Edit</button>
-    <a href="./bloom.html" target="_blank" class="btn">Preview Invite ↗</a>
+    <a href="./index.html" target="_blank" class="btn">Preview Invite ↗</a>
   </div>
 
   <div class="main">
@@ -115,11 +113,11 @@
           <div class="form-row">
             <div class="form-group">
               <label>Partner 1</label>
-              <input class="form-input" data-field="partner1" placeholder="Emma" />
+              <input class="form-input" data-field="partner1" placeholder="Priya" />
             </div>
             <div class="form-group">
               <label>Partner 2</label>
-              <input class="form-input" data-field="partner2" placeholder="James" />
+              <input class="form-input" data-field="partner2" placeholder="Arjun" />
             </div>
           </div>
         </div>
@@ -134,11 +132,11 @@
         <div class="form-section__body">
           <div class="form-group">
             <label>Eyebrow (top line)</label>
-            <input class="form-input" data-field="eyebrow" placeholder="Together with their families" />
+            <input class="form-input" data-field="eyebrow" placeholder="We joyfully invite you" />
           </div>
           <div class="form-group">
             <label>Invite Body Text</label>
-            <textarea class="form-textarea" data-field="inviteText" placeholder="joyfully invite you to celebrate&#10;the beginning of their forever"></textarea>
+            <textarea class="form-textarea" data-field="inviteText" placeholder="to share in the joy of their marriage&#10;and the celebration that follows"></textarea>
             <p class="form-hint">Use new lines to break text across lines on the invite.</p>
           </div>
         </div>
@@ -153,19 +151,65 @@
         <div class="form-section__body">
           <div class="form-row">
             <div class="form-group">
-              <label>Date</label>
-              <textarea class="form-textarea" data-field="date" style="min-height:56px" placeholder="Saturday&#10;14th June, 2025"></textarea>
-              <p class="form-hint">Day on line 1, full date on line 2.</p>
+              <label>Date Line</label>
+              <input class="form-input" data-field="date" placeholder="Saturday, 22nd November 2025" />
+              <p class="form-hint">Shown as a label above the ceremony time.</p>
             </div>
             <div class="form-group">
-              <label>Venue</label>
-              <textarea class="form-textarea" data-field="venue" style="min-height:56px" placeholder="Villa Rosa&#10;Florence, Italy"></textarea>
-              <p class="form-hint">Venue name on line 1, location on line 2.</p>
+              <label>Ceremony Time</label>
+              <input class="form-input" data-field="ceremony" placeholder="Ceremony at 4:30 PM" />
             </div>
           </div>
-          <div class="form-group">
-            <label>Ceremony Time &amp; Details</label>
-            <input class="form-input" data-field="time" placeholder="4:00 PM · Followed by dinner &amp; dancing" />
+
+          <!-- Venue 1 -->
+          <div class="venue-block">
+            <p class="venue-block__title">Venue 1</p>
+            <div class="form-group">
+              <label>Label</label>
+              <input class="form-input" data-field="venueLabel" list="vl1" placeholder="Venue" />
+              <datalist id="vl1">
+                <option value="Ceremony">
+                <option value="Reception">
+                <option value="Ceremony &amp; Reception">
+              </datalist>
+            </div>
+            <div class="form-group">
+              <label>Venue Name &amp; Location</label>
+              <textarea class="form-textarea" data-field="venue" style="min-height:56px" placeholder="The Rambagh Palace&#10;Jaipur, Rajasthan"></textarea>
+              <p class="form-hint">Venue name on line 1, location on line 2.</p>
+            </div>
+            <div class="form-group">
+              <label>Maps Link (optional)</label>
+              <input class="form-input" data-field="venueMap" placeholder="https://maps.google.com/…" />
+              <p class="form-hint">Paste a Google Maps URL. Venue becomes tappable when filled.</p>
+            </div>
+          </div>
+
+          <!-- Venue 2 -->
+          <div class="venue-block venue-block--secondary">
+            <p class="venue-block__title">Venue 2 <span style="font-weight:400;opacity:0.55">(leave blank to hide)</span></p>
+            <div class="form-group">
+              <label>Label</label>
+              <input class="form-input" data-field="venue2Label" list="vl2" placeholder="Reception" />
+              <datalist id="vl2">
+                <option value="Ceremony">
+                <option value="Reception">
+                <option value="Ceremony &amp; Reception">
+              </datalist>
+            </div>
+            <div class="form-group">
+              <label>Venue Name &amp; Location</label>
+              <textarea class="form-textarea" data-field="venue2" style="min-height:56px" placeholder="Grand Ballroom&#10;Mumbai, India"></textarea>
+            </div>
+            <div class="form-group">
+              <label>Maps Link (optional)</label>
+              <input class="form-input" data-field="venue2Map" placeholder="https://maps.google.com/…" />
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top:12px">
+            <label>Dress Code</label>
+            <input class="form-input" data-field="dressCode" placeholder="Formal · Indian attire welcome" />
           </div>
         </div>
       </div>
@@ -180,7 +224,7 @@
           <div class="form-row">
             <div class="form-group">
               <label>Button Text</label>
-              <input class="form-input" data-field="rsvpText" placeholder="RSVP by May 1st" />
+              <input class="form-input" data-field="rsvpText" placeholder="RSVP by October 15th" />
             </div>
             <div class="form-group">
               <label>Button Link / URL</label>
@@ -199,8 +243,29 @@
         <div class="form-section__body">
           <div class="form-group">
             <label>Additional Details</label>
-            <textarea class="form-textarea" data-field="footerNote" placeholder="Dress code: Garden Formal&#10;Accommodation details enclosed"></textarea>
+            <textarea class="form-textarea" data-field="footerNote" placeholder="Dinner &amp; dancing to follow&#10;Accommodation available on request"></textarea>
             <p class="form-hint">Shown below the RSVP button. Use new lines to separate items.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- QR Code -->
+      <div class="form-section open" id="sec-qr">
+        <div class="form-section__head" onclick="toggleSec('sec-qr')">
+          <span class="form-section__title">QR Code</span>
+          <span class="form-section__chevron">▾</span>
+        </div>
+        <div class="form-section__body">
+          <div class="form-group">
+            <label>Wedding Website URL</label>
+            <input class="form-input" data-field="qrUrl" id="qrUrlInput" placeholder="https://your-wedding-website.com" />
+            <p class="form-hint">Paste your published wedding website URL. A QR code appears on the invite when filled. Leave blank to hide.</p>
+          </div>
+          <div style="margin-top: 14px; text-align: center; min-height: 40px;">
+            <div id="edit-qr-canvas" style="display:inline-block;"></div>
+          </div>
+          <div style="margin-top: 10px;">
+            <button type="button" class="btn" onclick="downloadQR()">Download QR PNG</button>
           </div>
         </div>
       </div>
@@ -211,18 +276,25 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    var STORAGE_KEY = 'once-bloom-override';
+    var STORAGE_KEY = 'once-ethereal-override';
     var DEFAULTS = {
-      partner1:   'Emma',
-      partner2:   'James',
-      eyebrow:    'Together with their families',
-      inviteText: 'joyfully invite you to celebrate\nthe beginning of their forever',
-      date:       'Saturday\n14th June, 2025',
-      venue:      'Villa Rosa\nFlorence, Italy',
-      time:       '4:00 PM · Followed by dinner & dancing',
-      rsvpText:   'RSVP by May 1st',
-      rsvpLink:   '#rsvp',
-      footerNote: 'Dress code: Garden Formal\nAccommodation details enclosed'
+      partner1:    'Priya',
+      partner2:    'Arjun',
+      eyebrow:     'We joyfully invite you',
+      inviteText:  'to share in the joy of their marriage\nand the celebration that follows',
+      date:        'Saturday, 22nd November 2025',
+      ceremony:    'Ceremony at 4:30 PM',
+      venueLabel:  'Venue',
+      venue:       'The Rambagh Palace\nJaipur, Rajasthan',
+      venueMap:    '',
+      venue2Label: 'Reception',
+      venue2:      '',
+      venue2Map:   '',
+      dressCode:   'Formal · Indian attire welcome',
+      rsvpText:    'RSVP by October 15th',
+      rsvpLink:    '#rsvp',
+      footerNote:  'Dinner & dancing to follow\nAccommodation available on request',
+      qrUrl:       ''
     };
 
     var currentData = null;
@@ -243,15 +315,13 @@
 
     function toggleSec(id) { document.getElementById(id).classList.toggle('open'); }
 
-    // ── Init ─────────────────────────────────────────────────────────────────
     window.addEventListener('DOMContentLoaded', function() {
       var stored = localStorage.getItem(STORAGE_KEY);
-      currentData = stored ? JSON.parse(stored) : clone(DEFAULTS);
+      currentData = stored ? Object.assign({}, DEFAULTS, JSON.parse(stored)) : clone(DEFAULTS);
       setStorageBar(!!stored);
       renderView(currentData);
     });
 
-    // ── View Mode ─────────────────────────────────────────────────────────────
     function renderView(data) {
       function v(k) { var x = data[k]; return (x !== undefined && x !== null && String(x).trim() !== '') ? String(x) : null; }
       function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
@@ -267,19 +337,38 @@
       h += '<p class="view-names">' + esc(v('partner1') || '—') + ' &amp; ' + esc(v('partner2') || '—') + '</p></div>';
       h += row('Eyebrow', v('eyebrow'));
       h += row('Invite Body Text', v('inviteText'));
-      h += row('Date', v('date'));
-      h += row('Venue', v('venue'));
-      h += row('Ceremony Time', v('time'), true);
+      h += row('Date Line', v('date'));
+      h += row('Ceremony Time', v('ceremony'));
+
+      var hasV2 = !!(v('venue2') && v('venue2').trim());
+      h += '<div class="view-card' + (hasV2 ? '' : ' view-card--full') + '">';
+      h += '<p class="view-card__label">Venue 1</p>';
+      if (v('venueLabel')) h += '<p class="view-chip" style="margin-bottom:6px">' + esc(v('venueLabel')) + '</p>';
+      h += v('venue') ? '<p class="view-val">' + nl(v('venue')) + '</p>' : '<p class="view-val"><span class="empty">—</span></p>';
+      if (v('venueMap')) h += '<p class="view-val" style="word-break:break-all;font-size:0.75rem;margin-top:4px;opacity:0.65">🗺 ' + esc(v('venueMap')) + '</p>';
+      h += '</div>';
+
+      if (hasV2) {
+        h += '<div class="view-card">';
+        h += '<p class="view-card__label">Venue 2</p>';
+        if (v('venue2Label')) h += '<p class="view-chip" style="margin-bottom:6px">' + esc(v('venue2Label')) + '</p>';
+        h += '<p class="view-val">' + nl(v('venue2')) + '</p>';
+        if (v('venue2Map')) h += '<p class="view-val" style="word-break:break-all;font-size:0.75rem;margin-top:4px;opacity:0.65">🗺 ' + esc(v('venue2Map')) + '</p>';
+        h += '</div>';
+      }
+
+      h += row('Dress Code', v('dressCode'));
       h += row('RSVP Button Text', v('rsvpText'));
       h += row('RSVP Link', v('rsvpLink'));
       h += row('Footer Note', v('footerNote'), true);
+      h += row('QR Code URL', v('qrUrl'), true);
       h += '</div>';
       document.getElementById('viewMode').innerHTML = h;
     }
 
-    // ── Edit Mode ─────────────────────────────────────────────────────────────
     function enterEdit() {
       populateForm(currentData);
+      refreshEditQR(currentData.qrUrl || '');
       document.getElementById('viewMode').style.display = 'none';
       document.getElementById('editForm').style.display = 'block';
       document.getElementById('actionsBar').innerHTML =
@@ -294,7 +383,7 @@
       document.getElementById('editForm').style.display = 'none';
       document.getElementById('actionsBar').innerHTML =
         '<button class="btn btn-primary" onclick="enterEdit()">Edit</button>' +
-        '<a href="./bloom.html" target="_blank" class="btn">Preview Invite ↗</a>';
+        '<a href="./index.html" target="_blank" class="btn">Preview Invite ↗</a>';
     }
 
     function populateForm(data) {
@@ -327,9 +416,9 @@
       var blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
       var url = URL.createObjectURL(blob);
       var a = document.createElement('a');
-      a.href = url; a.download = 'bloom-config.json'; a.click();
+      a.href = url; a.download = 'ethereal-config.json'; a.click();
       setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
-      showToast('bloom-config.json downloaded.');
+      showToast('ethereal-config.json downloaded.');
     }
 
     function resetConfig() {
@@ -341,6 +430,31 @@
       setStorageBar(false);
       showToast('Reset to defaults.');
     }
+
+    // ── QR Code ───────────────────────────────────────────────────────────────
+    function refreshEditQR(url) {
+      var w = document.getElementById('edit-qr-canvas');
+      if (!w) return;
+      w.innerHTML = '';
+      if (url && url.trim()) {
+        new QRCode(w, { text: url.trim(), width: 128, height: 128, colorDark: '#000000', colorLight: '#ffffff' });
+      }
+    }
+
+    function downloadQR() {
+      var wrap = document.getElementById('edit-qr-canvas');
+      var canvas = wrap ? wrap.querySelector('canvas') : null;
+      if (!canvas) { alert('Enter a URL above to generate a QR code first.'); return; }
+      var a = document.createElement('a');
+      a.href = canvas.toDataURL('image/png');
+      a.download = 'qr-code.png';
+      a.click();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var inp = document.getElementById('qrUrlInput');
+      if (inp) { inp.addEventListener('input', function() { refreshEditQR(this.value); }); }
+    });
   </script>
 </body>
 </html>

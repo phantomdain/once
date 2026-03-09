@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   <style>
     :root {
       --bg: #ffffff;
@@ -415,6 +416,9 @@
     }
     .f-credit a { color: inherit; transition: color .2s; }
     .f-credit a:hover { color: rgba(255,255,255,0.4); }
+    .f-qr { margin-top: 20px; }
+    .f-qr-inner { display: inline-block; padding: 12px 14px; background: #ffffff; line-height: 0; }
+    .f-qr-label { margin-top: 8px; display: block; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
 
     /* ---- Responsive ---- */
     @media (max-width: 768px) {
@@ -668,6 +672,10 @@
       </div>
       <div class="f-right">
         <p class="f-email"><a data-field="email">—</a></p>
+    <div class="f-qr" id="f-qr" style="display:none">
+      <div class="f-qr-inner"><div class="qr-canvas-wrap"></div></div>
+      <span class="f-qr-label">Scan to visit our website</span>
+    </div>
         <p class="f-credit" style="margin-top: 14px;">Wedding website by <a href="../../../index.html">ONCE</a></p>
       </div>
     </div>
@@ -791,6 +799,16 @@
         // Document title
         document.title = (data.couple || '') + ' — Our Wedding';
         applyVisibility(data);
+        // QR code
+        (function() {
+          var url = (data.qrCode && data.qrCode.url) ? data.qrCode.url.trim() : '';
+          var wrap = document.getElementById('f-qr');
+          if (!wrap) return;
+          if (url) {
+            wrap.style.display = '';
+            new QRCode(wrap.querySelector('.qr-canvas-wrap'), { text: url, width: 128, height: 128, colorDark: '#000000', colorLight: '#ffffff' });
+          } else { wrap.style.display = 'none'; }
+        })();
       })
       .catch(function() {
         console.warn('ONCE: config.json not found or invalid. Edit config.json to populate this template.');

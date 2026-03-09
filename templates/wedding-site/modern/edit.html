@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   <style>
     :root {
       --bg: #ffffff;
@@ -368,6 +369,27 @@
         </div>
       </div>
 
+      <!-- 11. QR Code -->
+      <div class="form-section" id="sec-qr">
+        <div class="form-section__head" onclick="toggleSec('sec-qr')">
+          <span class="form-section__title">QR Code</span>
+          <span class="form-section__toggle">▾</span>
+        </div>
+        <div class="form-section__body">
+          <div class="form-group">
+            <label>Wedding Website URL</label>
+            <input class="form-input" data-path="qrCode.url" id="qrUrlInput" placeholder="https://your-wedding-website.com" />
+            <p class="form-hint">Paste your published wedding website URL. A QR code appears in the footer when filled. Leave blank to hide.</p>
+          </div>
+          <div style="margin-top: 14px; text-align: center; min-height: 40px;">
+            <div id="edit-qr-canvas" style="display:inline-block;"></div>
+          </div>
+          <div style="margin-top: 10px;">
+            <button type="button" class="btn" onclick="downloadQR()">Download QR PNG</button>
+          </div>
+        </div>
+      </div>
+
       <div class="form-footer">
         <button type="button" class="btn btn-primary" onclick="saveConfig()">Save Changes</button>
         <button type="button" class="btn" onclick="downloadJson()">Download config.json</button>
@@ -563,6 +585,11 @@
       else { h += '<span class="view-row__val empty">—</span>'; }
       h += '</div>';
 
+      // QR Code
+      h += '<div class="view-card view-card--full"><p class="view-card__label">QR Code</p>';
+      h += vrow('URL', data, 'qrCode.url');
+      h += '</div>';
+
       h += '</div>';
       document.getElementById('viewMode').innerHTML = h;
     }
@@ -571,6 +598,7 @@
     function enterEdit() {
       buildArrayInputs(currentData);
       populateForm(currentData);
+      refreshEditQR((currentData.qrCode && currentData.qrCode.url) ? currentData.qrCode.url : '');
       setupAutoCouple();
       document.getElementById('viewMode').style.display = 'none';
       document.getElementById('editForm').style.display = 'block';
@@ -771,6 +799,31 @@
       t.classList.add('show');
       setTimeout(function() { t.classList.remove('show'); }, 3000);
     }
+
+    // ── QR Code ───────────────────────────────────────────────────────────────
+    function refreshEditQR(url) {
+      var w = document.getElementById('edit-qr-canvas');
+      if (!w) return;
+      w.innerHTML = '';
+      if (url && url.trim()) {
+        new QRCode(w, { text: url.trim(), width: 128, height: 128, colorDark: '#000000', colorLight: '#ffffff' });
+      }
+    }
+
+    function downloadQR() {
+      var wrap = document.getElementById('edit-qr-canvas');
+      var canvas = wrap ? wrap.querySelector('canvas') : null;
+      if (!canvas) { alert('Enter a URL above to generate a QR code first.'); return; }
+      var a = document.createElement('a');
+      a.href = canvas.toDataURL('image/png');
+      a.download = 'qr-code.png';
+      a.click();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var inp = document.getElementById('qrUrlInput');
+      if (inp) { inp.addEventListener('input', function() { refreshEditQR(this.value); }); }
+    });
 
     init();
   </script>

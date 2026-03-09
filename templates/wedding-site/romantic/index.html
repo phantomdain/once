@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   <style>
     :root {
       --bg: #fdf8f5;
@@ -618,6 +619,10 @@
 
     .footer__made a:hover { border-color: var(--gold); }
 
+    .f-qr { margin-top: 20px; }
+    .f-qr-inner { display: inline-block; padding: 12px 14px; background: #ffffff; line-height: 0; }
+    .f-qr-label { margin-top: 8px; display: block; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+
     /* ── Style (Colours + Dress Code) ───────────────────── */
     .style-sec { padding: 100px 32px; background: var(--surface); }
     .style-sec__inner { max-width: 900px; margin: 0 auto; }
@@ -958,6 +963,10 @@
     <p class="footer__monogram" data-field="couple">Isabelle &amp; Ethan</p>
     <p class="footer__date" data-field="dateShort">09 · 05 · 2026</p>
     <div class="footer__divider"></div>
+    <div class="f-qr" id="f-qr" style="display:none">
+      <div class="f-qr-inner"><div class="qr-canvas-wrap"></div></div>
+      <span class="f-qr-label">Scan to visit our website</span>
+    </div>
     <p class="footer__made">
       Website by <a href="../../../index.html" target="_blank">ONCE</a>
     </p>
@@ -1045,6 +1054,16 @@
           document.title = data.couple + ' — Our Wedding';
         applyVisibility(data);
         }
+        // QR code
+        (function() {
+          var url = (data.qrCode && data.qrCode.url) ? data.qrCode.url.trim() : '';
+          var wrap = document.getElementById('f-qr');
+          if (!wrap) return;
+          if (url) {
+            wrap.style.display = '';
+            new QRCode(wrap.querySelector('.qr-canvas-wrap'), { text: url, width: 128, height: 128, colorDark: '#000000', colorLight: '#ffffff' });
+          } else { wrap.style.display = 'none'; }
+        })();
       })
       .catch(function() {
         console.info('config.json not found — using placeholder content');

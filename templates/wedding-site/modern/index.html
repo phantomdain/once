@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   <style>
     :root {
       --bg: #ffffff;
@@ -112,6 +113,9 @@
     .f-right .f-credit { margin-top: 10px; font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.18); }
     .f-right .f-credit a { color: inherit; }
     .f-right .f-credit a:hover { color: rgba(255,255,255,0.4); }
+    .f-qr { margin-top: 20px; }
+    .f-qr-inner { display: inline-block; padding: 12px 14px; background: #ffffff; line-height: 0; }
+    .f-qr-label { margin-top: 8px; display: block; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
 
     /* Style (Colours + Dress Code) */
     .style-sec { background: var(--bg); border-top: 1px solid var(--border); }
@@ -396,6 +400,10 @@
     </div>
     <div class="f-right">
       <p class="f-email" data-field="email">—</p>
+    <div class="f-qr" id="f-qr" style="display:none">
+      <div class="f-qr-inner"><div class="qr-canvas-wrap"></div></div>
+      <span class="f-qr-label">Scan to visit our website</span>
+    </div>
       <p class="f-credit">Wedding website by <a href="../../../index.html">ONCE</a></p>
     </div>
   </footer>
@@ -479,6 +487,16 @@
         if (mapLinkEl && data.mapDirectionsUrl) { mapLinkEl.href = data.mapDirectionsUrl; }
         document.title = (data.couple || '') + ' — Our Wedding';
         applyVisibility(data);
+        // QR code
+        (function() {
+          var url = (data.qrCode && data.qrCode.url) ? data.qrCode.url.trim() : '';
+          var wrap = document.getElementById('f-qr');
+          if (!wrap) return;
+          if (url) {
+            wrap.style.display = '';
+            new QRCode(wrap.querySelector('.qr-canvas-wrap'), { text: url, width: 128, height: 128, colorDark: '#000000', colorLight: '#ffffff' });
+          } else { wrap.style.display = 'none'; }
+        })();
       })
       .catch(function() {
         console.warn('ONCE: config.json not found. Edit config.json to populate this template.');

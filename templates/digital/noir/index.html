@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sofia &amp; Luca — Digital Invitation · Noir Template</title>
+  <link rel="icon" href="../../../assets/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <style>
+    :root {
+      --noir-bg: #080808;
+      --noir-surface: #111111;
+      --noir-card: #131313;
+      --noir-text: #f0ece4;
+      --noir-muted: rgba(240,236,228,0.45);
+      --noir-gold: #c9a96e;
+      --noir-gold-dim: rgba(201,169,110,0.25);
+      --font-heading: 'Cormorant Garamond', serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      min-height: 100vh;
+      background-color: var(--noir-bg);
+      color: var(--noir-text);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .back {
+      position: fixed;
+      top: 24px; left: 28px;
+      font-size: 0.65rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--noir-muted); text-decoration: none;
+      display: flex; align-items: center; gap: 6px;
+      transition: color 0.2s; z-index: 10;
+    }
+    .back:hover { color: var(--noir-text); }
+    .back::before { content: '←'; }
+
+    .badge {
+      position: fixed;
+      top: 24px; right: 28px;
+      font-size: 0.6rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--noir-gold);
+      background-color: rgba(201,169,110,0.08);
+      border: 1px solid var(--noir-gold-dim);
+      padding: 6px 14px; border-radius: 2px; z-index: 10;
+    }
+
+    .edit-link {
+      position: fixed;
+      top: 56px; right: 28px;
+      font-size: 0.6rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--noir-gold);
+      background-color: rgba(201,169,110,0.06);
+      border: 1px solid var(--noir-gold-dim);
+      padding: 5px 12px; border-radius: 2px;
+      text-decoration: none; transition: background-color 0.2s; z-index: 10;
+    }
+    .edit-link:hover { background-color: rgba(201,169,110,0.14); }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none; opacity: 0.4;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 80px 24px;
+    }
+
+    .card {
+      background-color: var(--noir-card);
+      border: 1px solid rgba(201,169,110,0.18);
+      max-width: 480px; width: 100%;
+      padding: 64px 56px;
+      text-align: center; position: relative;
+      box-shadow: 0 0 0 1px rgba(201,169,110,0.06), 0 24px 80px rgba(0,0,0,0.6);
+      animation: fadeUp 0.8s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card::before, .card::after {
+      content: '';
+      position: absolute;
+      width: 28px; height: 28px;
+      border-color: var(--noir-gold); border-style: solid; opacity: 0.5;
+    }
+    .card::before { top: 14px; left: 14px; border-width: 1px 0 0 1px; }
+    .card::after  { bottom: 14px; right: 14px; border-width: 0 1px 1px 0; }
+
+    .eyebrow {
+      font-size: 0.6rem; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--noir-muted); margin-bottom: 28px;
+    }
+
+    .ornament {
+      display: flex; align-items: center; justify-content: center;
+      gap: 12px; margin-bottom: 24px;
+    }
+    .ornament-line {
+      height: 1px; width: 36px;
+      background: linear-gradient(to right, transparent, var(--noir-gold));
+    }
+    .ornament-line:last-child {
+      background: linear-gradient(to left, transparent, var(--noir-gold));
+    }
+    .ornament-diamond {
+      width: 4px; height: 4px;
+      background-color: var(--noir-gold); transform: rotate(45deg);
+    }
+
+    .names {
+      font-family: var(--font-heading);
+      font-size: clamp(2.6rem, 8vw, 3.4rem);
+      font-weight: 300; line-height: 1.1; letter-spacing: 0.02em;
+      color: var(--noir-text); margin-bottom: 8px;
+    }
+    .names em {
+      display: block; font-style: normal;
+      font-size: 0.45em; letter-spacing: 0.35em;
+      color: var(--noir-gold); margin: 8px 0;
+      font-weight: 300; text-transform: uppercase;
+    }
+
+    .divider {
+      width: 40px; height: 1px;
+      background: linear-gradient(to right, transparent, var(--noir-gold), transparent);
+      margin: 28px auto;
+    }
+
+    .invite-text {
+      font-family: var(--font-heading); font-style: italic;
+      font-size: 1rem; color: var(--noir-muted); line-height: 1.8;
+      margin-bottom: 32px; font-weight: 300;
+    }
+
+    .details-grid {
+      display: grid; grid-template-columns: 1fr 1px 1fr;
+      gap: 20px; margin-bottom: 32px;
+    }
+    .details-sep {
+      background: linear-gradient(to bottom, transparent, var(--noir-gold-dim), transparent);
+      width: 1px;
+    }
+
+    .detail-label {
+      font-size: 0.58rem; font-weight: 400; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--noir-gold); opacity: 0.7; margin-bottom: 8px;
+    }
+    .detail-value {
+      font-family: var(--font-heading);
+      font-size: 1rem; font-weight: 300; color: var(--noir-text); line-height: 1.5;
+    }
+
+    /* venue-link */
+    .venue-link {
+      color: inherit; text-decoration: underline;
+      text-decoration-style: dotted; text-underline-offset: 3px;
+      text-decoration-color: var(--noir-gold-dim);
+    }
+    .venue-link:hover { text-decoration-color: var(--noir-gold); }
+
+    .time-row { margin-bottom: 32px; }
+
+    .rsvp-btn {
+      display: inline-block; padding: 14px 40px;
+      border: 1px solid var(--noir-gold);
+      font-family: var(--font-body); font-size: 0.68rem; font-weight: 400;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--noir-gold); text-decoration: none;
+      transition: background-color 0.2s, color 0.2s;
+      background-color: transparent;
+    }
+    .rsvp-btn:hover { background-color: var(--noir-gold); color: var(--noir-bg); }
+
+    .footer-note { margin-top: 32px; font-size: 0.68rem; color: var(--noir-muted); line-height: 1.7; font-weight: 300; }
+
+    .once-credit {
+      margin-top: 20px; font-size: 0.58rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(201,169,110,0.2);
+    }
+    .once-credit a { color: inherit; text-decoration: none; }
+    .once-credit a:hover { color: rgba(201,169,110,0.5); }
+
+    /* QR code block */
+    .qr-block { margin-top: 32px; }
+    .qr-block-inner {
+      display: inline-block; padding: 16px 20px;
+      background: #1a1a1a; border: 1px solid var(--noir-gold-dim);
+    }
+    .qr-canvas-wrap { background: #ffffff; padding: 4px; line-height: 0; }
+    .qr-block-label {
+      margin-top: 10px;
+      font-size: 0.58rem; font-weight: 400; letter-spacing: 0.25em; text-transform: uppercase;
+      color: rgba(201,169,110,0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <a href="../../../index.html#templates" class="back">Templates</a>
+  <span class="badge">Noir · Digital Invite</span>
+  <a href="./edit.html" class="edit-link">Edit ✎</a>
+
+  <div class="page">
+    <div class="card">
+
+      <p class="eyebrow" id="f-eyebrow">The honour of your presence is requested</p>
+
+      <div class="ornament">
+        <div class="ornament-line"></div>
+        <div class="ornament-diamond"></div>
+        <div class="ornament-line"></div>
+      </div>
+
+      <h1 class="names">
+        <span id="f-partner1">Sofia</span>
+        <em>&amp;</em>
+        <span id="f-partner2">Luca</span>
+      </h1>
+
+      <div class="divider"></div>
+
+      <p class="invite-text" id="f-inviteText">invite you to witness their union<br>as they exchange vows in the city they love</p>
+
+      <!-- Details rendered by JS (date + venue/s) -->
+      <div id="f-details"></div>
+
+      <div class="time-row">
+        <p class="detail-label">Ceremony</p>
+        <p class="detail-value" id="f-ceremony">6:00 PM · Black Tie</p>
+      </div>
+
+      <div class="ornament">
+        <div class="ornament-line"></div>
+        <div class="ornament-diamond"></div>
+        <div class="ornament-line"></div>
+      </div>
+
+      <div style="margin-top: 28px;">
+        <a id="f-rsvpBtn" href="#rsvp" class="rsvp-btn">Kindly Respond by 1 August</a>
+      </div>
+
+      <!-- QR code — shown only when qrUrl is set -->
+      <div id="f-qr" class="qr-block" style="display:none">
+        <div class="qr-block-inner">
+          <div class="qr-canvas-wrap"></div>
+          <p class="qr-block-label">Scan to visit our website</p>
+        </div>
+      </div>
+
+      <p class="footer-note" id="f-footerNote">
+        Cocktail hour at 5:30 PM<br>
+        Dinner &amp; dancing to follow
+      </p>
+
+      <p class="once-credit">Designed by <a href="../../../index.html">ONCE</a></p>
+
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var STORAGE_KEY = 'once-noir-override';
+      var DEFAULTS = {
+        partner1:    'Sofia',
+        partner2:    'Luca',
+        eyebrow:     'The honour of your presence is requested',
+        inviteText:  'invite you to witness their union\nas they exchange vows in the city they love',
+        date:        'Sunday\n7th September, 2025',
+        venueLabel:  'Venue',
+        venue:       'Palazzo Parigi\nMilan, Italy',
+        venueMap:    '',
+        venue2Label: 'Reception',
+        venue2:      '',
+        venue2Map:   '',
+        ceremony:    '6:00 PM · Black Tie',
+        rsvpText:    'Kindly Respond by 1 August',
+        rsvpLink:    '#rsvp',
+        footerNote:  'Cocktail hour at 5:30 PM\nDinner & dancing to follow',
+        qrUrl:       ''
+      };
+      var stored = localStorage.getItem(STORAGE_KEY);
+      var data = stored ? Object.assign({}, DEFAULTS, JSON.parse(stored)) : DEFAULTS;
+
+      function setId(id, val, isHTML) {
+        var el = document.getElementById(id);
+        if (!el || val === undefined || val === null) return;
+        if (isHTML) el.innerHTML = String(val).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+        else el.textContent = String(val);
+      }
+
+      function _esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+      function _nl(s)  { return _esc(s).replace(/\n/g,'<br>'); }
+      function _vBlock(lbl, txt, url) {
+        var inner = _nl(txt || '');
+        if ((url||'').trim()) {
+          inner = '<a href="' + _esc(url.trim()) + '" target="_blank" rel="noopener" class="venue-link">' + inner + '</a>';
+        }
+        return '<div><p class="detail-label">' + _esc(lbl||'Venue') + '</p><p class="detail-value">' + inner + '</p></div>';
+      }
+
+      // Render date + venue(s)
+      var det = document.getElementById('f-details');
+      if (det) {
+        var v2 = (data.venue2 || '').trim();
+        if (!v2) {
+          det.className = 'details-grid';
+          det.innerHTML =
+            '<div><p class="detail-label">Date</p><p class="detail-value">' + _nl(data.date||'') + '</p></div>' +
+            '<div class="details-sep"></div>' +
+            _vBlock(data.venueLabel || 'Venue', data.venue, data.venueMap);
+        } else {
+          det.innerHTML =
+            '<div style="margin-bottom:24px;text-align:center"><p class="detail-label">Date</p><p class="detail-value">' + _nl(data.date||'') + '</p></div>' +
+            '<div class="details-grid" style="margin-bottom:0">' +
+              _vBlock(data.venueLabel || 'Ceremony', data.venue, data.venueMap) +
+              '<div class="details-sep"></div>' +
+              _vBlock(data.venue2Label || 'Reception', data.venue2, data.venue2Map) +
+            '</div>';
+        }
+      }
+
+      setId('f-eyebrow',    data.eyebrow);
+      setId('f-partner1',   data.partner1);
+      setId('f-partner2',   data.partner2);
+      setId('f-inviteText', data.inviteText, true);
+      setId('f-ceremony',   data.ceremony);
+
+      var rsvp = document.getElementById('f-rsvpBtn');
+      if (rsvp) { rsvp.textContent = data.rsvpText || ''; rsvp.href = data.rsvpLink || '#rsvp'; }
+
+      setId('f-footerNote', data.footerNote, true);
+
+      // QR code
+      (function() {
+        var url = (data.qrUrl || '').trim();
+        var wrap = document.getElementById('f-qr');
+        if (!wrap) return;
+        if (url) {
+          wrap.style.display = '';
+          new QRCode(wrap.querySelector('.qr-canvas-wrap'), {
+            text: url, width: 128, height: 128,
+            colorDark: '#000000', colorLight: '#ffffff'
+          });
+        } else {
+          wrap.style.display = 'none';
+        }
+      })();
+
+      document.title = (data.partner1 || 'Sofia') + ' & ' + (data.partner2 || 'Luca') + ' — Digital Invitation · Noir Template';
+    })();
+  </script>
+</body>
+</html>
