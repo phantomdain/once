@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ethereal · Edit — ONCE</title>
+  <link rel="icon" href="../../assets/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --accent:  #1a1a1a;
+      --sage:    #8a8a8a;
+      --bg:      #fefefe;
+      --surface: #f5f5f5;
+      --text:    #1a1a1a;
+      --muted:   #8a8a8a;
+      --border:  #e4e4e4;
+      --font-h:  'Cormorant Garamond', serif;
+      --font-b:  'Inter', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-b); font-size: 14px; -webkit-font-smoothing: antialiased; }
+
+    /* ── Header ───────────────────────────────────────────────────────────── */
+    .top-bar { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 32px; height: 56px; gap: 16px; }
+    .top-logo { font-family: var(--font-h); font-size: 1.35rem; font-weight: 400; letter-spacing: 0.06em; color: var(--text); text-decoration: none; flex-shrink: 0; }
+    .top-badge { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--border); padding: 5px 12px; border-radius: 2px; }
+    .top-spacer { flex: 1; }
+
+    /* ── Buttons ──────────────────────────────────────────────────────────── */
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 20px; font-family: var(--font-b); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--text); border-radius: 2px; text-decoration: none; transition: all .18s; white-space: nowrap; }
+    .btn:hover { border-color: var(--text); }
+    .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn-primary:hover { background: #333; border-color: #333; }
+    .btn-danger { color: #c0392b; border-color: rgba(192,57,43,0.3); }
+    .btn-danger:hover { background: rgba(192,57,43,0.06); border-color: #c0392b; }
+
+    /* ── Storage bar ──────────────────────────────────────────────────────── */
+    .storage-bar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 9px 32px; display: flex; align-items: center; gap: 10px; font-size: 0.68rem; color: var(--muted); }
+    .storage-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border); flex-shrink: 0; transition: background .3s; }
+    .storage-dot--active { background: #5a9e6f; }
+
+    /* ── Actions bar ──────────────────────────────────────────────────────── */
+    .actions-bar { padding: 14px 32px; border-bottom: 1px solid var(--border); display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+
+    /* ── Main ─────────────────────────────────────────────────────────────── */
+    .main { max-width: 860px; margin: 0 auto; padding: 40px 32px 80px; }
+
+    /* ── View Mode ────────────────────────────────────────────────────────── */
+    .view-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .view-card { background: #fff; border: 1px solid var(--border); border-radius: 3px; padding: 18px 22px; }
+    .view-card--full { grid-column: 1 / -1; }
+    .view-card__label { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .view-val { font-size: 0.88rem; color: var(--text); line-height: 1.65; }
+    .view-val .empty { color: var(--border); font-style: italic; font-size: 0.82rem; }
+    .view-names { font-family: var(--font-h); font-size: 2rem; font-weight: 300; color: var(--text); }
+
+    /* ── Edit Form ────────────────────────────────────────────────────────── */
+    .form-section { background: #fff; border: 1px solid var(--border); border-radius: 3px; margin-bottom: 10px; overflow: hidden; }
+    .form-section__head { display: flex; align-items: center; justify-content: space-between; padding: 13px 20px; cursor: pointer; user-select: none; }
+    .form-section__head:hover { background: var(--surface); }
+    .form-section__title { font-size: 0.64rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text); }
+    .form-section__chevron { font-size: 0.68rem; color: var(--muted); transition: transform .2s; }
+    .form-section.open .form-section__chevron { transform: rotate(180deg); }
+    .form-section__body { padding: 0 20px 18px; display: none; }
+    .form-section.open .form-section__body { display: block; }
+
+    .form-group { margin-bottom: 13px; }
+    .form-group:last-child { margin-bottom: 0; }
+    label { display: block; font-size: 0.61rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+    .form-input { width: 100%; padding: 9px 12px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-family: var(--font-b); font-size: 0.85rem; border-radius: 2px; transition: border-color .18s; }
+    .form-input:focus { outline: none; border-color: var(--accent); }
+    .form-textarea { width: 100%; padding: 9px 12px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-family: var(--font-b); font-size: 0.85rem; border-radius: 2px; transition: border-color .18s; resize: vertical; min-height: 70px; line-height: 1.5; }
+    .form-textarea:focus { outline: none; border-color: var(--accent); }
+    .form-hint { font-size: 0.64rem; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    /* ── Toast ────────────────────────────────────────────────────────────── */
+    .toast { position: fixed; bottom: 28px; right: 28px; background: var(--text); color: var(--bg); font-size: 0.72rem; letter-spacing: 0.06em; padding: 12px 22px; border-radius: 3px; opacity: 0; transform: translateY(8px); transition: all .25s; pointer-events: none; z-index: 999; }
+    .toast.show { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <a href="../../index.html" class="top-logo">ONCE</a>
+    <span class="top-badge">Ethereal · Edit Config</span>
+    <div class="top-spacer"></div>
+  </div>
+
+  <div class="storage-bar">
+    <div class="storage-dot" id="storageDot"></div>
+    <span id="storageLabel">Loading…</span>
+  </div>
+
+  <div class="actions-bar" id="actionsBar">
+    <button class="btn btn-primary" onclick="enterEdit()">Edit</button>
+    <a href="./ethereal.html" target="_blank" class="btn">Preview Invite ↗</a>
+  </div>
+
+  <div class="main">
+    <div id="viewMode"></div>
+
+    <form id="editForm" style="display:none" onsubmit="return false">
+
+      <!-- Names -->
+      <div class="form-section open" id="sec-names">
+        <div class="form-section__head" onclick="toggleSec('sec-names')">
+          <span class="form-section__title">Names</span>
+          <span class="form-section__chevron">▾</span>
+        </div>
+        <div class="form-section__body">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Partner 1</label>
+              <input class="form-input" data-field="partner1" placeholder="Priya" />
+            </div>
+            <div class="form-group">
+              <label>Partner 2</label>
+              <input class="form-input" data-field="partner2" placeholder="Arjun" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Invitation Text -->
+      <div class="form-section open" id="sec-text">
+        <div class="form-section__head" onclick="toggleSec('sec-text')">
+          <span class="form-section__title">Invitation Text</span>
+          <span class="form-section__chevron">▾</span>
+        </div>
+        <div class="form-section__body">
+          <div class="form-group">
+            <label>Eyebrow (top line)</label>
+            <input class="form-input" data-field="eyebrow" placeholder="We joyfully invite you" />
+          </div>
+          <div class="form-group">
+            <label>Invite Body Text</label>
+            <textarea class="form-textarea" data-field="inviteText" placeholder="to share in the joy of their marriage&#10;and the celebration that follows"></textarea>
+            <p class="form-hint">Use new lines to break text across lines on the invite.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Event Details -->
+      <div class="form-section open" id="sec-details">
+        <div class="form-section__head" onclick="toggleSec('sec-details')">
+          <span class="form-section__title">Event Details</span>
+          <span class="form-section__chevron">▾</span>
+        </div>
+        <div class="form-section__body">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Date Line</label>
+              <input class="form-input" data-field="date" placeholder="Saturday, 22nd November 2025" />
+              <p class="form-hint">Shown as a label above the ceremony time.</p>
+            </div>
+            <div class="form-group">
+              <label>Ceremony Time</label>
+              <input class="form-input" data-field="ceremony" placeholder="Ceremony at 4:30 PM" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Venue</label>
+              <textarea class="form-textarea" data-field="venue" style="min-height:56px" placeholder="The Rambagh Palace&#10;Jaipur, Rajasthan"></textarea>
+              <p class="form-hint">Venue name on line 1, location on line 2.</p>
+            </div>
+            <div class="form-group">
+              <label>Dress Code</label>
+              <input class="form-input" data-field="dressCode" placeholder="Formal · Indian attire welcome" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RSVP -->
+      <div class="form-section open" id="sec-rsvp">
+        <div class="form-section__head" onclick="toggleSec('sec-rsvp')">
+          <span class="form-section__title">RSVP Button</span>
+          <span class="form-section__chevron">▾</span>
+        </div>
+        <div class="form-section__body">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Button Text</label>
+              <input class="form-input" data-field="rsvpText" placeholder="RSVP by October 15th" />
+            </div>
+            <div class="form-group">
+              <label>Button Link / URL</label>
+              <input class="form-input" data-field="rsvpLink" placeholder="https://your-rsvp-form.com" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Note -->
+      <div class="form-section open" id="sec-footer">
+        <div class="form-section__head" onclick="toggleSec('sec-footer')">
+          <span class="form-section__title">Footer Note</span>
+          <span class="form-section__chevron">▾</span>
+        </div>
+        <div class="form-section__body">
+          <div class="form-group">
+            <label>Additional Details</label>
+            <textarea class="form-textarea" data-field="footerNote" placeholder="Dinner &amp; dancing to follow&#10;Accommodation available on request"></textarea>
+            <p class="form-hint">Shown below the RSVP button. Use new lines to separate items.</p>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    var STORAGE_KEY = 'once-ethereal-override';
+    var DEFAULTS = {
+      partner1:   'Priya',
+      partner2:   'Arjun',
+      eyebrow:    'We joyfully invite you',
+      inviteText: 'to share in the joy of their marriage\nand the celebration that follows',
+      date:       'Saturday, 22nd November 2025',
+      ceremony:   'Ceremony at 4:30 PM',
+      venue:      'The Rambagh Palace\nJaipur, Rajasthan',
+      dressCode:  'Formal · Indian attire welcome',
+      rsvpText:   'RSVP by October 15th',
+      rsvpLink:   '#rsvp',
+      footerNote: 'Dinner & dancing to follow\nAccommodation available on request'
+    };
+
+    var currentData = null;
+    function clone(o) { return JSON.parse(JSON.stringify(o)); }
+
+    function showToast(msg) {
+      var t = document.getElementById('toast');
+      t.textContent = msg; t.classList.add('show');
+      setTimeout(function() { t.classList.remove('show'); }, 2800);
+    }
+
+    function setStorageBar(hasOverride) {
+      document.getElementById('storageDot').className = 'storage-dot' + (hasOverride ? ' storage-dot--active' : '');
+      document.getElementById('storageLabel').textContent = hasOverride
+        ? 'Using saved overrides — changes reflected in the preview'
+        : 'Showing default sample content — click Edit to customise';
+    }
+
+    function toggleSec(id) { document.getElementById(id).classList.toggle('open'); }
+
+    // ── Init ─────────────────────────────────────────────────────────────────
+    window.addEventListener('DOMContentLoaded', function() {
+      var stored = localStorage.getItem(STORAGE_KEY);
+      currentData = stored ? JSON.parse(stored) : clone(DEFAULTS);
+      setStorageBar(!!stored);
+      renderView(currentData);
+    });
+
+    // ── View Mode ─────────────────────────────────────────────────────────────
+    function renderView(data) {
+      function v(k) { var x = data[k]; return (x !== undefined && x !== null && String(x).trim() !== '') ? String(x) : null; }
+      function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+      function nl(s)  { return esc(s).replace(/\n/g,'<br>'); }
+      function row(label, val, full) {
+        var cls = 'view-card' + (full ? ' view-card--full' : '');
+        var display = val ? '<p class="view-val">' + nl(val) + '</p>' : '<p class="view-val"><span class="empty">—</span></p>';
+        return '<div class="' + cls + '"><p class="view-card__label">' + label + '</p>' + display + '</div>';
+      }
+
+      var h = '<div class="view-grid">';
+      h += '<div class="view-card view-card--full"><p class="view-card__label">Names</p>';
+      h += '<p class="view-names">' + esc(v('partner1') || '—') + ' &amp; ' + esc(v('partner2') || '—') + '</p></div>';
+      h += row('Eyebrow', v('eyebrow'));
+      h += row('Invite Body Text', v('inviteText'));
+      h += row('Date Line', v('date'));
+      h += row('Ceremony Time', v('ceremony'));
+      h += row('Venue', v('venue'));
+      h += row('Dress Code', v('dressCode'));
+      h += row('RSVP Button Text', v('rsvpText'));
+      h += row('RSVP Link', v('rsvpLink'));
+      h += row('Footer Note', v('footerNote'), true);
+      h += '</div>';
+      document.getElementById('viewMode').innerHTML = h;
+    }
+
+    // ── Edit Mode ─────────────────────────────────────────────────────────────
+    function enterEdit() {
+      populateForm(currentData);
+      document.getElementById('viewMode').style.display = 'none';
+      document.getElementById('editForm').style.display = 'block';
+      document.getElementById('actionsBar').innerHTML =
+        '<button type="button" class="btn btn-primary" onclick="saveConfig()">Save Changes</button>' +
+        '<button type="button" class="btn" onclick="downloadJson()">Download JSON</button>' +
+        '<button type="button" class="btn" onclick="cancelEdit()">Cancel</button>' +
+        '<button type="button" class="btn btn-danger" onclick="resetConfig()">Reset to Default</button>';
+    }
+
+    function cancelEdit() {
+      document.getElementById('viewMode').style.display = '';
+      document.getElementById('editForm').style.display = 'none';
+      document.getElementById('actionsBar').innerHTML =
+        '<button class="btn btn-primary" onclick="enterEdit()">Edit</button>' +
+        '<a href="./ethereal.html" target="_blank" class="btn">Preview Invite ↗</a>';
+    }
+
+    function populateForm(data) {
+      document.querySelectorAll('[data-field]').forEach(function(el) {
+        var val = data[el.dataset.field];
+        el.value = (val !== undefined && val !== null) ? String(val) : '';
+      });
+    }
+
+    function collectForm() {
+      var result = {};
+      document.querySelectorAll('[data-field]').forEach(function(el) {
+        result[el.dataset.field] = el.value;
+      });
+      return result;
+    }
+
+    function saveConfig() {
+      var data = collectForm();
+      currentData = data;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      cancelEdit();
+      renderView(data);
+      setStorageBar(true);
+      showToast('Saved. Open the preview to see your changes.');
+    }
+
+    function downloadJson() {
+      var data = (document.getElementById('editForm').style.display !== 'none') ? collectForm() : currentData;
+      var blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url; a.download = 'ethereal-config.json'; a.click();
+      setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+      showToast('ethereal-config.json downloaded.');
+    }
+
+    function resetConfig() {
+      if (!confirm('Reset all edits and restore default sample content?')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      currentData = clone(DEFAULTS);
+      cancelEdit();
+      renderView(currentData);
+      setStorageBar(false);
+      showToast('Reset to defaults.');
+    }
+  </script>
+</body>
+</html>

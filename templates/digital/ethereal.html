@@ -208,29 +208,50 @@
     }
     .once-credit a { color: inherit; text-decoration: none; }
     .once-credit a:hover { color: var(--eth-muted); }
+
+    /* Edit link */
+    .edit-link {
+      position: fixed;
+      top: 56px;
+      right: 28px;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--eth-muted);
+      background-color: var(--eth-bg);
+      border: 1px solid var(--eth-border);
+      padding: 5px 12px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background-color 0.2s;
+      z-index: 10;
+    }
+    .edit-link:hover { background-color: var(--eth-border); color: var(--eth-text); }
   </style>
 </head>
 <body>
 
   <a href="../../index.html#templates" class="back">Templates</a>
   <span class="badge">Ethereal · Digital Invite</span>
+  <a href="./ethereal-edit.html" class="edit-link">Edit ✎</a>
 
   <div class="page">
     <div class="card">
 
-      <p class="eyebrow">We joyfully invite you</p>
+      <p class="eyebrow" id="f-eyebrow">We joyfully invite you</p>
 
       <div class="rule"></div>
 
       <h1 class="names">
-        Priya
+        <span id="f-partner1">Priya</span>
         <span class="names-amp">&amp;</span>
-        Arjun
+        <span id="f-partner2">Arjun</span>
       </h1>
 
       <div class="rule-h"></div>
 
-      <p class="invite-text">
+      <p class="invite-text" id="f-inviteText">
         to share in the joy of their marriage<br>
         and the celebration that follows
       </p>
@@ -239,22 +260,22 @@
 
       <div class="details">
         <div class="detail-item">
-          <p class="detail-label">Saturday, 22nd November 2025</p>
-          <p class="detail-value">Ceremony at 4:30 PM</p>
+          <p class="detail-label" id="f-date">Saturday, 22nd November 2025</p>
+          <p class="detail-value" id="f-ceremony">Ceremony at 4:30 PM</p>
         </div>
         <div class="detail-item">
           <p class="detail-label">Venue</p>
-          <p class="detail-value">The Rambagh Palace<br>Jaipur, Rajasthan</p>
+          <p class="detail-value" id="f-venue">The Rambagh Palace<br>Jaipur, Rajasthan</p>
         </div>
         <div class="detail-item">
           <p class="detail-label">Dress Code</p>
-          <p class="detail-value">Formal · Indian attire welcome</p>
+          <p class="detail-value" id="f-dressCode">Formal · Indian attire welcome</p>
         </div>
       </div>
 
-      <a href="#rsvp" class="rsvp-btn">RSVP by October 15th</a>
+      <a id="f-rsvpBtn" href="#rsvp" class="rsvp-btn">RSVP by October 15th</a>
 
-      <p class="footer-note">
+      <p class="footer-note" id="f-footerNote">
         Dinner &amp; dancing to follow<br>
         Accommodation available on request
       </p>
@@ -266,5 +287,48 @@
     </div>
   </div>
 
+  <script>
+    (function() {
+      var STORAGE_KEY = 'once-ethereal-override';
+      var DEFAULTS = {
+        partner1:   'Priya',
+        partner2:   'Arjun',
+        eyebrow:    'We joyfully invite you',
+        inviteText: 'to share in the joy of their marriage\nand the celebration that follows',
+        date:       'Saturday, 22nd November 2025',
+        ceremony:   'Ceremony at 4:30 PM',
+        venue:      'The Rambagh Palace\nJaipur, Rajasthan',
+        dressCode:  'Formal · Indian attire welcome',
+        rsvpText:   'RSVP by October 15th',
+        rsvpLink:   '#rsvp',
+        footerNote: 'Dinner & dancing to follow\nAccommodation available on request'
+      };
+      var stored = localStorage.getItem(STORAGE_KEY);
+      var data = stored ? Object.assign({}, DEFAULTS, JSON.parse(stored)) : DEFAULTS;
+
+      function setId(id, val, isHTML) {
+        var el = document.getElementById(id);
+        if (!el || val === undefined || val === null) return;
+        if (isHTML) el.innerHTML = String(val).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+        else el.textContent = String(val);
+      }
+
+      setId('f-eyebrow',    data.eyebrow);
+      setId('f-partner1',   data.partner1);
+      setId('f-partner2',   data.partner2);
+      setId('f-inviteText', data.inviteText, true);
+      setId('f-date',       data.date);
+      setId('f-ceremony',   data.ceremony);
+      setId('f-venue',      data.venue,      true);
+      setId('f-dressCode',  data.dressCode);
+
+      var rsvp = document.getElementById('f-rsvpBtn');
+      if (rsvp) { rsvp.textContent = data.rsvpText || ''; rsvp.href = data.rsvpLink || '#rsvp'; }
+
+      setId('f-footerNote', data.footerNote, true);
+
+      document.title = (data.partner1 || 'Priya') + ' & ' + (data.partner2 || 'Arjun') + ' — Digital Invitation · Ethereal Template';
+    })();
+  </script>
 </body>
 </html>

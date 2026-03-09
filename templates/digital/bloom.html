@@ -254,17 +254,38 @@
       text-decoration: none;
     }
     .once-credit a:hover { color: var(--bloom-muted); }
+
+    /* Edit link */
+    .edit-link {
+      position: fixed;
+      top: 56px;
+      right: 28px;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--bloom-muted);
+      background-color: rgba(157,120,90,0.1);
+      border: 1px solid var(--bloom-border);
+      padding: 5px 12px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background-color 0.2s;
+      z-index: 10;
+    }
+    .edit-link:hover { background-color: rgba(157,120,90,0.2); color: var(--bloom-text); }
   </style>
 </head>
 <body>
 
   <a href="../../index.html#templates" class="back">Templates</a>
   <span class="badge">Bloom · Digital Invite</span>
+  <a href="./bloom-edit.html" class="edit-link">Edit ✎</a>
 
   <div class="page">
     <div class="card">
 
-      <p class="eyebrow">Together with their families</p>
+      <p class="eyebrow" id="f-eyebrow">Together with their families</p>
 
       <div class="ornament">
         <div class="ornament-line"></div>
@@ -273,24 +294,24 @@
       </div>
 
       <h1 class="names">
-        Emma
+        <span id="f-partner1">Emma</span>
         <em>&amp;</em>
-        James
+        <span id="f-partner2">James</span>
       </h1>
 
       <div class="divider"></div>
 
-      <p class="invite-text">joyfully invite you to celebrate<br>the beginning of their forever</p>
+      <p class="invite-text" id="f-inviteText">joyfully invite you to celebrate<br>the beginning of their forever</p>
 
       <div class="details-grid">
         <div class="detail-block">
           <p class="detail-label">Date</p>
-          <p class="detail-value">Saturday<br>14th June, 2025</p>
+          <p class="detail-value" id="f-date">Saturday<br>14th June, 2025</p>
         </div>
         <div class="details-sep"></div>
         <div class="detail-block">
           <p class="detail-label">Venue</p>
-          <p class="detail-value">Villa Rosa<br>Florence, Italy</p>
+          <p class="detail-value" id="f-venue">Villa Rosa<br>Florence, Italy</p>
         </div>
       </div>
 
@@ -302,14 +323,14 @@
 
       <div style="margin-top: 28px;">
         <p class="detail-label" style="margin-bottom:6px;">Ceremony begins at</p>
-        <p class="detail-value">4:00 PM · Followed by dinner &amp; dancing</p>
+        <p class="detail-value" id="f-time">4:00 PM · Followed by dinner &amp; dancing</p>
       </div>
 
       <div class="divider"></div>
 
-      <a href="#rsvp" class="rsvp-btn">RSVP by May 1st</a>
+      <a id="f-rsvpBtn" href="#rsvp" class="rsvp-btn">RSVP by May 1st</a>
 
-      <p class="footer-note">
+      <p class="footer-note" id="f-footerNote">
         Dress code: Garden Formal<br>
         Accommodation details enclosed
       </p>
@@ -319,5 +340,47 @@
     </div>
   </div>
 
+  <script>
+    (function() {
+      var STORAGE_KEY = 'once-bloom-override';
+      var DEFAULTS = {
+        partner1:   'Emma',
+        partner2:   'James',
+        eyebrow:    'Together with their families',
+        inviteText: 'joyfully invite you to celebrate\nthe beginning of their forever',
+        date:       'Saturday\n14th June, 2025',
+        venue:      'Villa Rosa\nFlorence, Italy',
+        time:       '4:00 PM · Followed by dinner & dancing',
+        rsvpText:   'RSVP by May 1st',
+        rsvpLink:   '#rsvp',
+        footerNote: 'Dress code: Garden Formal\nAccommodation details enclosed'
+      };
+      var stored = localStorage.getItem(STORAGE_KEY);
+      var data = stored ? Object.assign({}, DEFAULTS, JSON.parse(stored)) : DEFAULTS;
+
+      function setId(id, val, isHTML) {
+        var el = document.getElementById(id);
+        if (!el || val === undefined || val === null) return;
+        if (isHTML) el.innerHTML = String(val).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+        else el.textContent = String(val);
+      }
+
+      setId('f-eyebrow',    data.eyebrow);
+      setId('f-partner1',   data.partner1);
+      setId('f-partner2',   data.partner2);
+      setId('f-inviteText', data.inviteText, true);
+      setId('f-date',       data.date,       true);
+      setId('f-venue',      data.venue,      true);
+      setId('f-time',       data.time);
+
+      var rsvp = document.getElementById('f-rsvpBtn');
+      if (rsvp) { rsvp.textContent = data.rsvpText || ''; rsvp.href = data.rsvpLink || '#rsvp'; }
+
+      setId('f-footerNote', data.footerNote, true);
+
+      // Update page title
+      document.title = (data.partner1 || 'Emma') + ' & ' + (data.partner2 || 'James') + ' — Digital Invitation · Bloom Template';
+    })();
+  </script>
 </body>
 </html>
