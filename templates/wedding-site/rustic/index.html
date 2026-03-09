@@ -512,9 +512,13 @@
   </footer>
 
   <script>
-    // Load config.json and populate all [data-field] elements
-    fetch('./config.json')
-      .then(function(r) { return r.json(); })
+    // Load config — prefer browser override (from edit.html), fall back to config.json
+    var _stored = localStorage.getItem('once-rustic-override');
+    var _dataPromise = _stored
+      ? Promise.resolve(JSON.parse(_stored))
+      : fetch('./config.json').then(function(r) { return r.json(); });
+
+    _dataPromise
       .then(function(data) {
         // Back link
         var backLinkEl = document.getElementById('backLink');
@@ -596,10 +600,82 @@
         if (mapEl && data.mapUrl) { mapEl.src = data.mapUrl; }
         if (mapLinkEl && data.mapDirectionsUrl) { mapLinkEl.href = data.mapDirectionsUrl; }
         document.title = (data.couple || '') + ' — Our Wedding';
+        applyVisibility(data);
       })
       .catch(function() {
         console.warn('ONCE: config.json not found or invalid. Edit config.json to populate this template.');
       });
+
+    function applyVisibility(data) {
+      function blank(v) { return v === undefined || v === null || String(v).trim() === ''; }
+      function gp(obj, path) {
+        return path.split('.').reduce(function(o, k) { return o != null ? o[isNaN(k) ? k : +k] : undefined; }, obj);
+      }
+      function hide(sel) { var el = document.querySelector(sel); if (el) el.style.display = 'none'; }
+
+      // Story section — hide if story text and couple image are both blank
+      if (blank(gp(data, 'story')) && blank(gp(data, 'images.couple'))) hide('#story');
+
+      // Style section — hide if dressCode blank and no palette
+      if (blank(gp(data, 'dressCode')) && (!data.colorPalette || !data.colorPalette.length)) hide('#style');
+
+      // Map section
+      if (blank(gp(data, 'mapUrl'))) hide('#venue-map');
+
+      // Note bar
+      if (blank(gp(data, 'note'))) hide('.note-bar');
+
+      // Gifts section
+      var noMsg = blank(gp(data, 'gifts.message'));
+      var noReg = !data.gifts || !data.gifts.registry || !data.gifts.registry.length;
+      if (noMsg && noReg) hide('#gifts');
+
+      // Individual detail cards
+      function hideCardIfBlank(nth, fields) {
+        var allBlank = fields.every(function(f) { return blank(gp(data, f)); });
+        if (allBlank) {
+          var card = document.querySelector('.details__grid .detail-card:nth-child(' + nth + ')');
+          if (card) card.style.display = 'none';
+        }
+      }
+      hideCardIfBlank(1, ['ceremony.time', 'ceremony.location', 'ceremony.label']);
+      hideCardIfBlank(2, ['cocktails.time', 'cocktails.location', 'cocktails.label']);
+      hideCardIfBlank(3, ['reception.time', 'reception.location', 'reception.label']);
+
+      // Hide whole details section if all cards hidden
+      var cards = document.querySelectorAll('.details__grid .detail-card');
+      var allHidden = Array.prototype.every.call(cards, function(c) { return c.style.display === 'none'; });
+      if (allHidden) hide('#details');
+
+      // Gallery — hide slots with no URL, hide section if all empty
+      var galUrls = (data.images && data.images.gallery) || [];
+      var visCount = 0;
+      document.querySelectorAll('.gallery__item').forEach(function(item, i) {
+        if (!galUrls[i] || String(galUrls[i]).trim() === '') {
+          item.style.display = 'none';
+        } else {
+          visCount++;
+        }
+      });
+      if (visCount === 0) hide('#gallery');
+
+      // Entourage section
+      var hasEnt = data.entourage && (
+        (data.entourage.primary && data.entourage.primary.length) ||
+        (data.entourage.secondary && data.entourage.secondary.length)
+      );
+      if (!hasEnt) hide('#entourage');
+
+      // Sponsors section
+      var hasSp = data.sponsors && (
+        (data.sponsors.primary && data.sponsors.primary.length) ||
+        (data.sponsors.secondary && data.sponsors.secondary.length)
+      );
+      if (!hasSp) hide('#sponsors');
+
+      // Hide botanical dividers adjacent to hidden sections
+      // (dividers are siblings, handled by cascading if adjacent sections both hide)
+    }
   </script>
 </body>
 </html>
