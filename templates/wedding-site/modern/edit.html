@@ -571,6 +571,7 @@
     function enterEdit() {
       buildArrayInputs(currentData);
       populateForm(currentData);
+      setupAutoCouple();
       document.getElementById('viewMode').style.display = 'none';
       document.getElementById('editForm').style.display = 'block';
       document.getElementById('actionsBar').innerHTML =
@@ -669,6 +670,23 @@
       });
     }
 
+    function setupAutoCouple() {
+      var _p1 = document.querySelector('[data-path="partner1"]');
+      var _p2 = document.querySelector('[data-path="partner2"]');
+      var _cp = document.querySelector('[data-path="couple"]');
+      if (!_p1 || !_p2 || !_cp) return;
+      var _lastAuto = _cp.value.trim();
+      function _sync() {
+        var auto = (_p1.value.trim() + ' & ' + _p2.value.trim()).replace(/^\s*&\s*$/, '');
+        if (_cp.value.trim() === _lastAuto) {
+          _cp.value = auto;
+          _lastAuto = auto;
+        }
+      }
+      _p1.addEventListener('input', _sync);
+      _p2.addEventListener('input', _sync);
+    }
+
     function collectForm() {
       var result = {};
       if (defaultData && defaultData.backLink) result.backLink = defaultData.backLink;
@@ -689,6 +707,12 @@
       if (result.sponsors) {
         if (result.sponsors.primary) result.sponsors.primary = result.sponsors.primary.filter(function(s) { return s && (s.name || '').trim(); });
         if (result.sponsors.secondary) result.sponsors.secondary = result.sponsors.secondary.filter(function(s) { return s && (s.name || '').trim(); });
+      }
+      // Auto-generate couple from partner names if blank
+      if (!(result.couple || '').trim()) {
+        var _cp1 = (result.partner1 || '').trim();
+        var _cp2 = (result.partner2 || '').trim();
+        if (_cp1 || _cp2) result.couple = _cp1 + ' & ' + _cp2;
       }
       return result;
     }
