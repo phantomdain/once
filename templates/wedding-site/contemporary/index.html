@@ -136,9 +136,9 @@
     .section--dark {
       background: var(--ink); color: var(--bg);
     }
-    .section--dark .sec-label { color: rgba(255,255,255,0.4); }
+    .section--dark .sec-label { color: rgba(255,255,255,0.72); }
     .section--dark .sec-title { color: var(--bg); }
-    .section--dark .sec-text { color: rgba(255,255,255,0.6); }
+    .section--dark .sec-text { color: rgba(255,255,255,0.85); }
 
     /* ---- Sections ---- */
     section { padding: 96px 24px; }
@@ -200,7 +200,7 @@
 
     /* ---- Details ---- */
     .details { background: var(--ink); }
-    .details .sec-label { color: rgba(255,255,255,0.35); }
+    .details .sec-label { color: rgba(255,255,255,0.72); }
     .details .sec-title { color: var(--bg); }
     .details__grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
@@ -215,7 +215,7 @@
     .detail-card__step {
       font-family: var(--font-b); font-size: 0.58rem; font-weight: 600;
       letter-spacing: 0.26em; text-transform: uppercase;
-      color: rgba(255,255,255,0.4); margin-bottom: 14px;
+      color: rgba(255,255,255,0.72); margin-bottom: 14px;
     }
     .detail-card__title {
       font-family: var(--font-h); font-size: 1.35rem; font-weight: 700;
@@ -223,7 +223,7 @@
     }
     .detail-card__text {
       font-family: var(--font-b); font-size: 0.82rem; font-weight: 300;
-      color: rgba(255,255,255,0.5); line-height: 1.75;
+      color: rgba(255,255,255,0.82); line-height: 1.75;
     }
     .detail-card__time {
       display: inline-block; margin-top: 18px;
@@ -265,9 +265,9 @@
 
     /* ---- Gifts ---- */
     .gifts-sec { background: var(--ink); }
-    .gifts-sec .sec-label { color: rgba(255,255,255,0.35); }
+    .gifts-sec .sec-label { color: rgba(255,255,255,0.72); }
     .gifts-sec .sec-title { color: var(--bg); }
-    .gifts-sec .sec-text { color: rgba(255,255,255,0.55); }
+    .gifts-sec .sec-text { color: rgba(255,255,255,0.85); }
     .registry-links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
     .registry-link {
       display: inline-flex; padding: 13px 32px;
@@ -306,7 +306,7 @@
       border-color: var(--muted);
     }
     .form-input::placeholder, .form-textarea::placeholder {
-      color: rgba(0,0,0,0.25); font-weight: 300;
+      color: rgba(0,0,0,0.5); font-weight: 300;
     }
 
     /* ---- Entourage ---- */
@@ -400,19 +400,19 @@
     .f-date {
       font-family: var(--font-b); font-size: 0.62rem; font-weight: 400;
       letter-spacing: 0.22em; text-transform: uppercase;
-      color: rgba(255,255,255,0.3); margin-top: 12px;
+      color: rgba(255,255,255,0.55); margin-top: 12px;
     }
     .f-right { text-align: right; }
     .f-email a {
       font-family: var(--font-b); font-size: 0.75rem; font-weight: 300;
-      color: rgba(255,255,255,0.5); transition: color .2s;
+      color: rgba(255,255,255,0.78); transition: color .2s;
       border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 2px;
     }
     .f-email a:hover { color: var(--bg); border-color: var(--bg); }
     .f-credit {
       margin-top: 16px; font-family: var(--font-b); font-size: 0.58rem;
       letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.5);
     }
     .f-credit a { color: inherit; transition: color .2s; }
     .f-credit a:hover { color: rgba(255,255,255,0.4); }
@@ -455,6 +455,14 @@
 
       .nav__links { display: none; }
       .badge { display: none; }
+      .sec-label, .form-label { font-size: 0.7rem; letter-spacing: 0.12em; }
+      .back { font-size: 0.7rem; }
+      .sec-text { font-weight: 400; }
+      .detail-card__text { font-weight: 400; }
+    }
+    @media (max-width: 480px) {
+      .hero { padding: 80px 20px 60px; }
+      section { padding: 60px 20px; }
     }
   </style>
 </head>

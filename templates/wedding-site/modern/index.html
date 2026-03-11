@@ -102,15 +102,15 @@
     .form-label { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
     .form-input, .form-select, .form-textarea { background: var(--surface); border: 1px solid var(--border); padding: 11px 14px; font-family: var(--font-b); font-size: 0.875rem; color: var(--text); outline: none; width: 100%; transition: border-color .2s; resize: vertical; font-weight: 300; }
     .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--text); }
-    .form-input::placeholder, .form-textarea::placeholder { color: var(--border); }
+    .form-input::placeholder, .form-textarea::placeholder { color: #aaaaaa; }
 
     /* Footer */
     footer { background: var(--text); padding: 60px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
     .f-left .f-names { font-family: var(--font-h); font-size: 2.5rem; font-weight: 300; color: var(--bg); margin-bottom: 6px; }
-    .f-left .f-date { font-size: 0.62rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+    .f-left .f-date { font-size: 0.62rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
     .f-right { text-align: right; }
-    .f-right .f-email { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
-    .f-right .f-credit { margin-top: 10px; font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.18); }
+    .f-right .f-email { font-size: 0.8rem; color: rgba(255,255,255,0.78); }
+    .f-right .f-credit { margin-top: 10px; font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
     .f-right .f-credit a { color: inherit; }
     .f-right .f-credit a:hover { color: rgba(255,255,255,0.4); }
     .f-qr { margin-top: 20px; }
@@ -177,6 +177,12 @@
       .nav { padding: 0 24px; }
       .nav__links { display: none; }
       section { padding: 72px 24px; }
+      .sec-label, .form-label { font-size: 0.7rem; letter-spacing: 0.12em; }
+      .back { font-size: 0.7rem; }
+      .sec-text, .timeline__text { font-weight: 400; }
+    }
+    @media (max-width: 480px) {
+      section { padding: 60px 20px; }
     }
   </style>
 </head>

@@ -114,16 +114,16 @@
 
     /* ---- Details ---- */
     .details { background: var(--pink); }
-    .details .sec-label { color: rgba(255,255,255,0.7); }
+    .details .sec-label { color: rgba(255,255,255,0.92); }
     .details .sec-title { color: #fff; }
     .details__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; margin-top: 48px; border-radius: 20px; overflow: hidden; border: 2px solid rgba(255,255,255,0.25); }
     .detail-card { padding: 40px 32px; position: relative; overflow: hidden; background: rgba(255,255,255,0.12); }
     .detail-card + .detail-card { border-left: 2px dashed rgba(255,255,255,0.22); }
     .detail-card__num { position: absolute; top: 10px; right: 16px; font-family: var(--font-h); font-size: 4rem; font-weight: 700; color: rgba(255,255,255,0.15); line-height: 1; pointer-events: none; user-select: none; }
-    .detail-card__step { font-family: var(--font-b); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 14px; }
+    .detail-card__step { font-family: var(--font-b); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.92); margin-bottom: 14px; }
     .detail-card__step::before { content: '★ '; color: var(--yellow); font-style: normal; }
     .detail-card__title { font-family: var(--font-h); font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.2; }
-    .detail-card__text { font-family: var(--font-b); font-size: 0.85rem; color: rgba(255,255,255,0.75); line-height: 1.7; }
+    .detail-card__text { font-family: var(--font-b); font-size: 0.85rem; color: rgba(255,255,255,0.92); line-height: 1.7; }
     .detail-card__time { display: inline-block; margin-top: 14px; font-family: var(--font-b); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; color: var(--yellow); background: rgba(0,0,0,0.12); border-radius: 20px; padding: 4px 14px; }
 
     /* ---- Map ---- */
@@ -143,9 +143,9 @@
 
     /* ---- Gifts ---- */
     .gifts-sec { background: var(--yellow); border-top: 2px dashed rgba(255,209,102,0.4); }
-    .gifts-sec .sec-label { color: rgba(45,32,53,0.55); }
+    .gifts-sec .sec-label { color: rgba(45,32,53,0.8); }
     .gifts-sec .sec-title { color: var(--text); }
-    .gifts-sec .sec-text { color: rgba(45,32,53,0.75); max-width: 580px; font-family: var(--font-h); font-size: 1.15rem; font-weight: 500; line-height: 1.7; }
+    .gifts-sec .sec-text { color: rgba(45,32,53,0.95); max-width: 580px; font-family: var(--font-h); font-size: 1.15rem; font-weight: 500; line-height: 1.7; }
     .registry-links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
     .registry-link { display: inline-flex; align-items: center; padding: 13px 30px; border: 2px solid var(--text); border-radius: 40px; font-family: var(--font-b); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text); transition: background .2s, color .2s, border-color .2s; }
     .registry-link:hover { background: var(--text); color: var(--yellow); }
@@ -163,7 +163,7 @@
     .form-label { font-family: var(--font-b); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
     .form-input, .form-select, .form-textarea { background: var(--bg); border: 2px solid var(--lavender); border-radius: 12px; padding: 12px 16px; font-family: var(--font-b); font-size: 0.9rem; color: var(--text); outline: none; width: 100%; transition: border-color .2s, box-shadow .2s; resize: vertical; }
     .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(255,107,157,0.12); }
-    .form-input::placeholder, .form-textarea::placeholder { color: rgba(122,107,133,0.35); }
+    .form-input::placeholder, .form-textarea::placeholder { color: rgba(122,107,133,0.55); }
     .form-select { appearance: none; cursor: pointer; }
 
     /* ---- Entourage ---- */
@@ -188,11 +188,11 @@
     /* ---- Footer ---- */
     footer { background: var(--text); padding: 60px 24px; text-align: center; }
     .f-names { font-family: var(--font-h); font-size: 2.4rem; font-weight: 700; color: var(--pink); margin-bottom: 8px; }
-    .f-date { font-family: var(--font-b); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,254,249,0.35); margin-bottom: 18px; }
-    .f-email a { font-family: var(--font-b); font-size: 0.78rem; color: rgba(255,254,249,0.5); transition: color .2s; }
+    .f-date { font-family: var(--font-b); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,254,249,0.65); margin-bottom: 18px; }
+    .f-email a { font-family: var(--font-b); font-size: 0.78rem; color: rgba(255,254,249,0.78); transition: color .2s; }
     .f-email a:hover { color: var(--pink); }
     .f-hearts { font-size: 1.1rem; color: rgba(255,107,157,0.3); letter-spacing: 0.4em; display: block; margin: 28px 0 6px; }
-    .f-credit { margin-top: 20px; font-family: var(--font-b); font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,254,249,0.15); }
+    .f-credit { margin-top: 20px; font-family: var(--font-b); font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,254,249,0.5); }
     .f-credit a { color: inherit; }
     .f-credit a:hover { color: rgba(255,254,249,0.4); }
     .f-qr { margin-top: 20px; }
@@ -211,6 +211,12 @@
       .nav__links { display: none; }
       .nav__name { font-size: 1.2rem; }
       .hero__names { font-size: clamp(3.2rem, 14vw, 6rem); }
+      .sec-label, .form-label { font-size: 0.7rem; letter-spacing: 0.12em; }
+      .back { font-size: 0.7rem; }
+    }
+    @media (max-width: 480px) {
+      .hero { padding: 80px 20px 60px; }
+      section { padding: 60px 20px; }
     }
   </style>
 </head>

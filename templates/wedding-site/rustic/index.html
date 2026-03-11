@@ -109,15 +109,15 @@
     .form-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
     .form-input, .form-select, .form-textarea { background: var(--surface); border: 1px solid var(--border); padding: 11px 14px; font-family: var(--font-b); font-size: 0.875rem; color: var(--text); outline: none; width: 100%; transition: border-color .2s; resize: vertical; }
     .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--accent); }
-    .form-input::placeholder, .form-textarea::placeholder { color: rgba(125,100,80,0.35); }
+    .form-input::placeholder, .form-textarea::placeholder { color: rgba(125,100,80,0.55); }
 
     /* ---- Footer ---- */
     footer { background: var(--text); padding: 52px 24px; text-align: center; }
     .f-names { font-family: var(--font-h); font-size: 2rem; font-weight: 300; color: var(--bg); margin-bottom: 8px; }
-    .f-date { font-size: 0.62rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(244,237,224,0.35); margin-bottom: 16px; }
-    .f-email a { font-size: 0.75rem; color: rgba(244,237,224,0.5); transition: color .2s; }
+    .f-date { font-size: 0.62rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(244,237,224,0.65); margin-bottom: 16px; }
+    .f-email a { font-size: 0.75rem; color: rgba(244,237,224,0.78); transition: color .2s; }
     .f-email a:hover { color: var(--bg); }
-    .f-credit { margin-top: 20px; font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(244,237,224,0.15); }
+    .f-credit { margin-top: 20px; font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(244,237,224,0.5); }
     .f-credit a { color: inherit; }
     .f-credit a:hover { color: rgba(244,237,224,0.4); }
     .f-qr { margin-top: 20px; }
@@ -255,6 +255,12 @@
       .gallery__grid { grid-template-columns: repeat(2, 1fr); }
       .gallery__item:nth-child(2) { grid-row: auto; aspect-ratio: 1; }
       .nav__links { display: none; }
+      .sec-label, .form-label { font-size: 0.7rem; letter-spacing: 0.12em; }
+      .back { font-size: 0.7rem; }
+    }
+    @media (max-width: 480px) {
+      .hero { padding: 80px 20px 60px; }
+      section { padding: 60px 20px; }
     }
   </style>
 </head>

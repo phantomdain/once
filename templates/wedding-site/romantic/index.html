@@ -576,7 +576,7 @@
     /* ── Footer ──────────────────────────────────────────── */
     .footer {
       background: var(--text);
-      color: rgba(253,248,245,0.5);
+      color: rgba(253,248,245,0.72);
       padding: 60px 32px 40px;
       text-align: center;
     }
@@ -596,6 +596,7 @@
       font-size: 12px;
       letter-spacing: 0.25em;
       text-transform: uppercase;
+      color: rgba(253,248,245,0.82);
       margin-bottom: 32px;
     }
 
@@ -719,11 +720,14 @@
       .gallery__item:first-child { grid-row: span 1; grid-column: span 2; }
       .rsvp__row { grid-template-columns: 1fr; }
       .hero__frame { inset: 12px; }
+      body { font-weight: 400; }
+      .back-link { font-size: 0.7rem; }
     }
 
     @media (max-width: 480px) {
       .gallery__grid { grid-template-columns: 1fr; grid-template-rows: repeat(5, 180px); }
       .gallery__item:first-child { grid-column: span 1; }
+      section { padding: 60px 20px; }
     }
   </style>
 </head>
